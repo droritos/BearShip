@@ -4,19 +4,19 @@ using UnityEngine.InputSystem;
 
 public class ThirdPersonController : MonoBehaviour
 {
-    [Header("Inputs")]
-    [SerializeField] ThirdPersonActionAsset _playerActionAssets;
+    [Header("Serialize Field")]
+    [SerializeField] Animator animator;
+    [SerializeField] Camera _mainCamera;
+    private ThirdPersonActionAsset _playerActionAssets;
     private InputAction _move;
 
     [Header("Movement")]
     [SerializeField] Rigidbody _rigidbody;
-    [SerializeField] private float movementForce = 1f;
-    [SerializeField] float jumpForce = 5f;
-    [SerializeField] float maxSpeed = 5f;
+    [SerializeField] CharacterData characterData;
     private Vector3 _forceDirection = Vector3.zero;
+    private Vector2 _moveInput; // Store input here
 
 
-    [SerializeField] Camera _mainCamera;
 
     private void Awake()
     {
@@ -26,21 +26,27 @@ public class ThirdPersonController : MonoBehaviour
     {
         // Subscribe to the Jump.started event
         _playerActionAssets.Player.Jump.started += DoJump;
+        //_playerActionAssets.Player.Action.started += DoAttack();
         _move = _playerActionAssets.Player.Move;
         _playerActionAssets.Player.Enable();
     }
+
 
     private void OnDisable()
     {
         // Unsubscribe from the Jump.started event
         _playerActionAssets.Player.Jump.started -= DoJump;
+        //_playerActionAssets.Player.Action.started -= DoAttack();
         _playerActionAssets.Player.Disable();
     }
-
+    private void Update()
+    {
+        _moveInput = _move.ReadValue<Vector2>(); // Poll input continuously
+    }
     private void FixedUpdate()
     {
-        _forceDirection += _move.ReadValue<Vector2>().x * GetCameraRight(_mainCamera) * movementForce;
-        _forceDirection += _move.ReadValue<Vector2>().y * GetCameraFoward(_mainCamera) * movementForce;
+        _forceDirection += _moveInput.x * GetCameraRight(_mainCamera) * characterData.MovementForce;
+        _forceDirection += _moveInput.y * GetCameraFoward(_mainCamera) * characterData.MovementForce;
 
         _rigidbody.AddForce(_forceDirection, ForceMode.Impulse);
         _forceDirection = Vector3.zero;
@@ -52,10 +58,10 @@ public class ThirdPersonController : MonoBehaviour
         }
 
         Vector3 horizontalVelocity = _rigidbody.linearVelocity;
-        horizontalVelocity.y = 0f;
-        if (horizontalVelocity.sqrMagnitude > maxSpeed * maxSpeed)
+        horizontalVelocity.y = 0f; // No need to y cuz no need for Vertically
+        if (horizontalVelocity.sqrMagnitude > characterData.MaxSpeed * characterData.MaxSpeed)
         {
-            _rigidbody.linearVelocity = horizontalVelocity.normalized * maxSpeed + Vector3.up * _rigidbody.linearVelocity.y;
+            _rigidbody.linearVelocity = horizontalVelocity.normalized * characterData.MaxSpeed + Vector3.up * _rigidbody.linearVelocity.y;
         }
 
         LookAt();
@@ -79,9 +85,14 @@ public class ThirdPersonController : MonoBehaviour
     {
         if (IsGrounded())
         {
-            _forceDirection = Vector3.up * jumpForce;
+            _forceDirection = Vector3.up * characterData.JumpForce;
         }
     }
+    //private void DoAttack(InputAction.CallbackContext context)
+    //{
+    //    animator.SetTrigger("Pick Up");
+    //}
+
     private bool IsGrounded()
     {
         Ray ray = new Ray(this.transform.position + Vector3.up * 0.25f, Vector3.down);

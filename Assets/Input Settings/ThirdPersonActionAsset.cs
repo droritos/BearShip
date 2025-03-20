@@ -79,7 +79,7 @@ public partial class @ThirdPersonActionAsset: IInputActionCollection2, IDisposab
                 {
                     ""name"": ""WASD"",
                     ""id"": ""fefd5a22-66e6-4258-aed1-bea5d2711b4f"",
-                    ""path"": ""2DVector"",
+                    ""path"": ""2DVector(mode=2)"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
