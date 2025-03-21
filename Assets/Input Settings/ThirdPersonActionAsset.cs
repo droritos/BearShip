@@ -55,7 +55,7 @@ public partial class @ThirdPersonActionAsset: IInputActionCollection2, IDisposab
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Look"",
+                    ""name"": ""New Look"",
                     ""type"": ""PassThrough"",
                     ""id"": ""093a3c28-f940-4c73-a571-0e05b8d6e603"",
                     ""expectedControlType"": ""Vector2"",
@@ -182,7 +182,7 @@ public partial class @ThirdPersonActionAsset: IInputActionCollection2, IDisposab
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Look"",
+                    ""action"": ""New Look"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -193,7 +193,7 @@ public partial class @ThirdPersonActionAsset: IInputActionCollection2, IDisposab
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Look"",
+                    ""action"": ""New Look"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -207,7 +207,7 @@ public partial class @ThirdPersonActionAsset: IInputActionCollection2, IDisposab
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_Action = m_Player.FindAction("Action", throwIfNotFound: true);
-        m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
+        m_Player_NewLook = m_Player.FindAction("New Look", throwIfNotFound: true);
     }
 
     ~@ThirdPersonActionAsset()
@@ -277,7 +277,7 @@ public partial class @ThirdPersonActionAsset: IInputActionCollection2, IDisposab
     private readonly InputAction m_Player_Move;
     private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_Action;
-    private readonly InputAction m_Player_Look;
+    private readonly InputAction m_Player_NewLook;
     public struct PlayerActions
     {
         private @ThirdPersonActionAsset m_Wrapper;
@@ -285,7 +285,7 @@ public partial class @ThirdPersonActionAsset: IInputActionCollection2, IDisposab
         public InputAction @Move => m_Wrapper.m_Player_Move;
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputAction @Action => m_Wrapper.m_Player_Action;
-        public InputAction @Look => m_Wrapper.m_Player_Look;
+        public InputAction @NewLook => m_Wrapper.m_Player_NewLook;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -304,9 +304,9 @@ public partial class @ThirdPersonActionAsset: IInputActionCollection2, IDisposab
             @Action.started += instance.OnAction;
             @Action.performed += instance.OnAction;
             @Action.canceled += instance.OnAction;
-            @Look.started += instance.OnLook;
-            @Look.performed += instance.OnLook;
-            @Look.canceled += instance.OnLook;
+            @NewLook.started += instance.OnNewLook;
+            @NewLook.performed += instance.OnNewLook;
+            @NewLook.canceled += instance.OnNewLook;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -320,9 +320,9 @@ public partial class @ThirdPersonActionAsset: IInputActionCollection2, IDisposab
             @Action.started -= instance.OnAction;
             @Action.performed -= instance.OnAction;
             @Action.canceled -= instance.OnAction;
-            @Look.started -= instance.OnLook;
-            @Look.performed -= instance.OnLook;
-            @Look.canceled -= instance.OnLook;
+            @NewLook.started -= instance.OnNewLook;
+            @NewLook.performed -= instance.OnNewLook;
+            @NewLook.canceled -= instance.OnNewLook;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -345,6 +345,6 @@ public partial class @ThirdPersonActionAsset: IInputActionCollection2, IDisposab
         void OnMove(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnAction(InputAction.CallbackContext context);
-        void OnLook(InputAction.CallbackContext context);
+        void OnNewLook(InputAction.CallbackContext context);
     }
 }

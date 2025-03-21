@@ -33,7 +33,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Look",
+                    "name": "New Look",
                     "type": "PassThrough",
                     "id": "093a3c28-f940-4c73-a571-0e05b8d6e603",
                     "expectedControlType": "Vector2",
@@ -160,7 +160,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Look",
+                    "action": "New Look",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -171,7 +171,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Look",
+                    "action": "New Look",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

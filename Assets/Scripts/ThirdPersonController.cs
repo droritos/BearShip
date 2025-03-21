@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 public class ThirdPersonController : MonoBehaviour
 {
     [Header("Serialize Field")]
-    [SerializeField] Animator animator;
+    [SerializeField] ThirdPersonAnimation animator;
     [SerializeField] Camera _mainCamera;
     private ThirdPersonActionAsset _playerActionAssets;
     private InputAction _move;
@@ -26,7 +26,7 @@ public class ThirdPersonController : MonoBehaviour
     {
         // Subscribe to the Jump.started event
         _playerActionAssets.Player.Jump.started += DoJump;
-        //_playerActionAssets.Player.Action.started += DoAttack();
+        _playerActionAssets.Player.Action.started += DoPickUp;
         _move = _playerActionAssets.Player.Move;
         _playerActionAssets.Player.Enable();
     }
@@ -36,7 +36,7 @@ public class ThirdPersonController : MonoBehaviour
     {
         // Unsubscribe from the Jump.started event
         _playerActionAssets.Player.Jump.started -= DoJump;
-        //_playerActionAssets.Player.Action.started -= DoAttack();
+        _playerActionAssets.Player.Action.started -= DoPickUp;
         _playerActionAssets.Player.Disable();
     }
     private void Update()
@@ -45,20 +45,23 @@ public class ThirdPersonController : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        _forceDirection += _moveInput.x * GetCameraRight(_mainCamera) * characterData.MovementForce;
-        _forceDirection += _moveInput.y * GetCameraFoward(_mainCamera) * characterData.MovementForce;
+        // Create force direction based on camera orientation and input
+        Vector3 movementForce = Vector3.zero;
+        movementForce += _moveInput.x * GetCameraRight(_mainCamera) * characterData.MovementForce;
+        movementForce += _moveInput.y * GetCameraFoward(_mainCamera) * characterData.MovementForce;
 
-        _rigidbody.AddForce(_forceDirection, ForceMode.Impulse);
-        _forceDirection = Vector3.zero;
+        // Apply force continuously, not as impulse
+        _rigidbody.AddForce(movementForce, ForceMode.Force);
 
-        
+        // Apply additional gravity
         if (_rigidbody.linearVelocity.y < 0f)
         {
-            _rigidbody.linearVelocity -= Vector3.down * Physics.gravity.y * Time.fixedDeltaTime;
+            _rigidbody.AddForce(Vector3.down * Physics.gravity.y * Time.fixedDeltaTime, ForceMode.Acceleration);
         }
 
+        // Speed limiting
         Vector3 horizontalVelocity = _rigidbody.linearVelocity;
-        horizontalVelocity.y = 0f; // No need to y cuz no need for Vertically
+        horizontalVelocity.y = 0f;
         if (horizontalVelocity.sqrMagnitude > characterData.MaxSpeed * characterData.MaxSpeed)
         {
             _rigidbody.linearVelocity = horizontalVelocity.normalized * characterData.MaxSpeed + Vector3.up * _rigidbody.linearVelocity.y;
@@ -88,10 +91,11 @@ public class ThirdPersonController : MonoBehaviour
             _forceDirection = Vector3.up * characterData.JumpForce;
         }
     }
-    //private void DoAttack(InputAction.CallbackContext context)
-    //{
-    //    animator.SetTrigger("Pick Up");
-    //}
+    private void DoPickUp(InputAction.CallbackContext context)
+    {
+        //Debug.Log("DoAttack");
+        animator.Animator.SetTrigger("PickUp");
+    }
 
     private bool IsGrounded()
     {
