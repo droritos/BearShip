@@ -14,8 +14,7 @@ public class ThirdPersonController : MonoBehaviour
     [SerializeField] Rigidbody _rigidbody;
     [SerializeField] CharacterData characterData;
     private Vector3 _forceDirection = Vector3.zero;
-    private Vector2 _moveInput; // Store input here
-
+    private Vector2 _moveInput;
 
 
     private void Awake()
@@ -25,9 +24,9 @@ public class ThirdPersonController : MonoBehaviour
     private void OnEnable()
     {
         // Subscribe to the Jump.started event
+        _playerActionAssets.Player.Move.performed += HandleMove;
         _playerActionAssets.Player.Jump.started += DoJump;
         _playerActionAssets.Player.Action.started += DoPickUp;
-        _move = _playerActionAssets.Player.Move;
         _playerActionAssets.Player.Enable();
     }
 
@@ -35,33 +34,30 @@ public class ThirdPersonController : MonoBehaviour
     private void OnDisable()
     {
         // Unsubscribe from the Jump.started event
+        _playerActionAssets.Player.Move.performed -= HandleMove;
         _playerActionAssets.Player.Jump.started -= DoJump;
         _playerActionAssets.Player.Action.started -= DoPickUp;
         _playerActionAssets.Player.Disable();
     }
-    private void Update()
-    {
-        _moveInput = _move.ReadValue<Vector2>(); // Poll input continuously
-    }
+    //private void Update()
+    //{
+    //    _moveInput = _move.ReadValue<Vector2>();
+    //    if (_moveInput != Vector2.zero)
+    //    {
+    //        Debug.Log("Move Input: " + _moveInput); // Check if this shows values when pressing WASD
+    //    }
+    //}
     private void FixedUpdate()
     {
-        // Create force direction based on camera orientation and input
-        Vector3 movementForce = Vector3.zero;
-        movementForce += _moveInput.x * GetCameraRight(_mainCamera) * characterData.MovementForce;
-        movementForce += _moveInput.y * GetCameraFoward(_mainCamera) * characterData.MovementForce;
+        //HandleMove();
 
-        // Apply force continuously, not as impulse
-        _rigidbody.AddForce(movementForce, ForceMode.Force);
-
-        // Apply additional gravity
         if (_rigidbody.linearVelocity.y < 0f)
         {
-            _rigidbody.AddForce(Vector3.down * Physics.gravity.y * Time.fixedDeltaTime, ForceMode.Acceleration);
+            _rigidbody.linearVelocity -= Vector3.down * Physics.gravity.y * Time.fixedDeltaTime;
         }
 
-        // Speed limiting
         Vector3 horizontalVelocity = _rigidbody.linearVelocity;
-        horizontalVelocity.y = 0f;
+        horizontalVelocity.y = 0f; // No need to y cuz no need for Vertically
         if (horizontalVelocity.sqrMagnitude > characterData.MaxSpeed * characterData.MaxSpeed)
         {
             _rigidbody.linearVelocity = horizontalVelocity.normalized * characterData.MaxSpeed + Vector3.up * _rigidbody.linearVelocity.y;
@@ -69,6 +65,17 @@ public class ThirdPersonController : MonoBehaviour
 
         LookAt();
     }
+
+    private void HandleMove(InputAction.CallbackContext context)
+    {
+        _moveInput = context.ReadValue<Vector2>();
+        _forceDirection += _moveInput.x * characterData.MovementForce * GetCameraRight(_mainCamera);
+        _forceDirection += _moveInput.y * characterData.MovementForce * GetCameraFoward(_mainCamera);
+
+        _rigidbody.AddForce(_forceDirection, ForceMode.Impulse);
+        _forceDirection = Vector3.zero;
+    }
+
     private Vector3 GetCameraFoward(Camera mainCamera)
     {
         Vector3 foward = mainCamera.transform.forward;
