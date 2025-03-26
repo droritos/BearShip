@@ -1,139 +1,150 @@
-using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class ThirdPersonController : MonoBehaviour
 {
-    [Header("Serialize Field")]
+    [Header("References")]
     [SerializeField] ThirdPersonAnimation animator;
     [SerializeField] Camera _mainCamera;
-    private ThirdPersonActionAsset _playerActionAssets;
-    private InputAction _move;
-
-    [Header("Movement")]
     [SerializeField] Rigidbody _rigidbody;
     [SerializeField] CharacterData characterData;
-    private Vector3 _forceDirection = Vector3.zero;
-    private Vector2 _moveInput;
 
+    private ThirdPersonActionAsset _playerActionAssets;
+    private InputAction _moveAction;
+
+    // Tracking input state more explicitly
+    private Vector2 _currentMoveInput;
+    private bool _isMoving = false;
 
     private void Awake()
     {
         _playerActionAssets = new ThirdPersonActionAsset();
     }
+
     private void OnEnable()
     {
-        // Subscribe to the Jump.started event
-        _move = _playerActionAssets.Player.Move;
-        //_playerActionAssets.Player.Move.performed += HandleMove;
+        // Get the move action
+        _moveAction = _playerActionAssets.Player.Move;
+
+        // Add explicit event handlers
+        _moveAction.performed += OnMovePerformed;
+        _moveAction.canceled += OnMoveCanceled;
+
         _playerActionAssets.Player.Jump.started += DoJump;
         _playerActionAssets.Player.Action.started += DoPickUp;
+
         _playerActionAssets.Player.Enable();
     }
 
-
     private void OnDisable()
     {
-        // Unsubscribe from the Jump.started event
-        //_playerActionAssets.Player.Move.performed -= HandleMove;
+        // Unsubscribe from events
+        _moveAction.performed -= OnMovePerformed;
+        _moveAction.canceled -= OnMoveCanceled;
         _playerActionAssets.Player.Jump.started -= DoJump;
         _playerActionAssets.Player.Action.started -= DoPickUp;
         _playerActionAssets.Player.Disable();
     }
+
+    // Explicit handlers to track input state
+    private void OnMovePerformed(InputAction.CallbackContext context)
+    {
+        _currentMoveInput = context.ReadValue<Vector2>();
+        _isMoving = true;
+    }
+
+    private void OnMoveCanceled(InputAction.CallbackContext context)
+    {
+        _currentMoveInput = Vector2.zero;
+        _isMoving = false;
+    }
+
     private void Update()
     {
-        _moveInput = _move.ReadValue<Vector2>();
-        if (_moveInput != Vector2.zero)
+        // Fallback input reading
+        // This ensures input is captured even if events fail
+        if (_moveAction != null)
         {
-            Debug.Log("Move Input: " + _moveInput); // Check if this shows values when pressing WASD
+            Vector2 input = _moveAction.ReadValue<Vector2>();
+            if (input != Vector2.zero)
+            {
+                _currentMoveInput = input;
+                _isMoving = true;
+            }
+            else
+            {
+                _isMoving = false;
+            }
         }
     }
+
     private void FixedUpdate()
     {
-        HandleMove();
-
-        if (_rigidbody.linearVelocity.y < 0f)
+        // Only process movement if there's input
+        if (_isMoving && _currentMoveInput != Vector2.zero)
         {
-            _rigidbody.linearVelocity -= Vector3.down * Physics.gravity.y * Time.fixedDeltaTime;
-        }
+            // Calculate camera-relative movement direction
+            Vector3 cameraForward = GetCameraForward(_mainCamera);
+            Vector3 cameraRight = GetCameraRight(_mainCamera);
 
-        Vector3 horizontalVelocity = _rigidbody.linearVelocity;
-        horizontalVelocity.y = 0f; // No need to y cuz no need for Vertically
-        if (horizontalVelocity.sqrMagnitude > characterData.MaxSpeed * characterData.MaxSpeed)
+            // Combine input with camera orientation
+            Vector3 moveDirection = (cameraForward * _currentMoveInput.y + cameraRight * _currentMoveInput.x).normalized;
+
+            // Set velocity directly
+            Vector3 targetVelocity = moveDirection * characterData.MaxSpeed;
+
+            // Preserve vertical velocity
+            targetVelocity.y = _rigidbody.linearVelocity.y;
+
+            // Set the new velocity
+            _rigidbody.linearVelocity = targetVelocity;
+
+            // Rotate to face movement direction
+            if (moveDirection != Vector3.zero)
+            {
+                transform.rotation = Quaternion.LookRotation(moveDirection, Vector3.up);
+            }
+        }
+        else
         {
-            _rigidbody.linearVelocity = horizontalVelocity.normalized * characterData.MaxSpeed + Vector3.up * _rigidbody.linearVelocity.y;
+            // Gradually reduce horizontal velocity when not moving
+            Vector3 velocity = _rigidbody.linearVelocity;
+            velocity.x = Mathf.Lerp(velocity.x, 0, Time.fixedDeltaTime * 10f);
+            velocity.z = Mathf.Lerp(velocity.z, 0, Time.fixedDeltaTime * 10f);
+            _rigidbody.linearVelocity = velocity;
         }
-
-        LookAt();
     }
-
-    private void HandleMove(InputAction.CallbackContext context)
-    {
-        _moveInput = context.ReadValue<Vector2>();
-        _forceDirection += _moveInput.x * characterData.MovementForce * GetCameraRight(_mainCamera);
-        _forceDirection += _moveInput.y * characterData.MovementForce * GetCameraForward(_mainCamera);
-
-        _rigidbody.AddForce(_forceDirection, ForceMode.Impulse);
-        _forceDirection = Vector3.zero;
-    }
-    private void HandleMove()
-    {
-        _forceDirection += _moveInput.x * characterData.MovementForce * GetCameraRight(_mainCamera);
-        _forceDirection += _moveInput.y * characterData.MovementForce * GetCameraForward(_mainCamera);
-
-        _rigidbody.AddForce(_forceDirection, ForceMode.Impulse);
-        _forceDirection = Vector3.zero;
-    }
-
 
     private Vector3 GetCameraForward(Camera mainCamera)
     {
-        Vector3 foward = mainCamera.transform.forward;
-        foward.y = 0;
-        return foward.normalized;
+        Vector3 forward = mainCamera.transform.forward;
+        forward.y = 0;
+        return forward.normalized;
     }
 
     private Vector3 GetCameraRight(Camera mainCamera)
     {
         Vector3 right = mainCamera.transform.right;
-        right.y = 0;    // Should be X? 
+        right.y = 0;
         return right.normalized;
     }
 
-    // Updated DoJump method to accept CallbackContext
     private void DoJump(InputAction.CallbackContext context)
     {
         if (IsGrounded())
         {
-            _forceDirection = Vector3.up * characterData.JumpForce;
+            _rigidbody.AddForce(Vector3.up * characterData.JumpForce, ForceMode.Impulse);
         }
     }
+
     private void DoPickUp(InputAction.CallbackContext context)
     {
-        //Debug.Log("DoAttack");
         animator.Animator.SetTrigger("PickUp");
     }
 
     private bool IsGrounded()
     {
-        Ray ray = new Ray(this.transform.position + Vector3.up * 0.25f, Vector3.down);
-        if (Physics.Raycast(ray, out RaycastHit hit, 0.3f))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-    private void LookAt()
-    {
-        Vector3 direction = _rigidbody.linearVelocity;
-        direction.y = 0;
-
-        if (_move.ReadValue<Vector2>().sqrMagnitude > 0.1f && direction.sqrMagnitude > 0.1f)
-            this._rigidbody.rotation = Quaternion.LookRotation(direction, Vector3.up);
-        else
-            _rigidbody.angularVelocity = Vector3.zero;
+        Ray ray = new Ray(transform.position + Vector3.up * 0.25f, Vector3.down);
+        return Physics.Raycast(ray, 0.3f);
     }
 }
