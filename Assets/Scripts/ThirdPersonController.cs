@@ -24,7 +24,8 @@ public class ThirdPersonController : MonoBehaviour
     private void OnEnable()
     {
         // Subscribe to the Jump.started event
-        _playerActionAssets.Player.Move.performed += HandleMove;
+        _move = _playerActionAssets.Player.Move;
+        //_playerActionAssets.Player.Move.performed += HandleMove;
         _playerActionAssets.Player.Jump.started += DoJump;
         _playerActionAssets.Player.Action.started += DoPickUp;
         _playerActionAssets.Player.Enable();
@@ -34,22 +35,22 @@ public class ThirdPersonController : MonoBehaviour
     private void OnDisable()
     {
         // Unsubscribe from the Jump.started event
-        _playerActionAssets.Player.Move.performed -= HandleMove;
+        //_playerActionAssets.Player.Move.performed -= HandleMove;
         _playerActionAssets.Player.Jump.started -= DoJump;
         _playerActionAssets.Player.Action.started -= DoPickUp;
         _playerActionAssets.Player.Disable();
     }
-    //private void Update()
-    //{
-    //    _moveInput = _move.ReadValue<Vector2>();
-    //    if (_moveInput != Vector2.zero)
-    //    {
-    //        Debug.Log("Move Input: " + _moveInput); // Check if this shows values when pressing WASD
-    //    }
-    //}
+    private void Update()
+    {
+        _moveInput = _move.ReadValue<Vector2>();
+        //if (_moveInput != Vector2.zero)
+        //{
+        //    Debug.Log("Move Input: " + _moveInput); // Check if this shows values when pressing WASD
+        //}
+    }
     private void FixedUpdate()
     {
-        //HandleMove();
+        HandleMove();
 
         if (_rigidbody.linearVelocity.y < 0f)
         {
@@ -75,6 +76,15 @@ public class ThirdPersonController : MonoBehaviour
         _rigidbody.AddForce(_forceDirection, ForceMode.Impulse);
         _forceDirection = Vector3.zero;
     }
+    private void HandleMove()
+    {
+        _forceDirection += _moveInput.x * characterData.MovementForce * GetCameraRight(_mainCamera);
+        _forceDirection += _moveInput.y * characterData.MovementForce * GetCameraFoward(_mainCamera);
+
+        _rigidbody.AddForce(_forceDirection, ForceMode.Impulse);
+        _forceDirection = Vector3.zero;
+    }
+
 
     private Vector3 GetCameraFoward(Camera mainCamera)
     {
