@@ -43,10 +43,10 @@ public class ThirdPersonController : MonoBehaviour
     private void Update()
     {
         _moveInput = _move.ReadValue<Vector2>();
-        //if (_moveInput != Vector2.zero)
-        //{
-        //    Debug.Log("Move Input: " + _moveInput); // Check if this shows values when pressing WASD
-        //}
+        if (_moveInput != Vector2.zero)
+        {
+            Debug.Log("Move Input: " + _moveInput); // Check if this shows values when pressing WASD
+        }
     }
     private void FixedUpdate()
     {
@@ -71,7 +71,7 @@ public class ThirdPersonController : MonoBehaviour
     {
         _moveInput = context.ReadValue<Vector2>();
         _forceDirection += _moveInput.x * characterData.MovementForce * GetCameraRight(_mainCamera);
-        _forceDirection += _moveInput.y * characterData.MovementForce * GetCameraFoward(_mainCamera);
+        _forceDirection += _moveInput.y * characterData.MovementForce * GetCameraForward(_mainCamera);
 
         _rigidbody.AddForce(_forceDirection, ForceMode.Impulse);
         _forceDirection = Vector3.zero;
@@ -79,14 +79,14 @@ public class ThirdPersonController : MonoBehaviour
     private void HandleMove()
     {
         _forceDirection += _moveInput.x * characterData.MovementForce * GetCameraRight(_mainCamera);
-        _forceDirection += _moveInput.y * characterData.MovementForce * GetCameraFoward(_mainCamera);
+        _forceDirection += _moveInput.y * characterData.MovementForce * GetCameraForward(_mainCamera);
 
         _rigidbody.AddForce(_forceDirection, ForceMode.Impulse);
         _forceDirection = Vector3.zero;
     }
 
 
-    private Vector3 GetCameraFoward(Camera mainCamera)
+    private Vector3 GetCameraForward(Camera mainCamera)
     {
         Vector3 foward = mainCamera.transform.forward;
         foward.y = 0;
