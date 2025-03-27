@@ -25,28 +25,16 @@ public class ThirdPersonController : MonoBehaviour
     {
         // Subscribe to the Jump.started event
         _move = _playerActionAssets.Player.Move;
-        //_playerActionAssets.Player.Move.performed += HandleMove;
         _playerActionAssets.Player.Jump.started += DoJump;
         _playerActionAssets.Player.Action.started += DoPickUp;
         _playerActionAssets.Player.Enable();
     }
-
-
     private void OnDisable()
     {
         // Unsubscribe from the Jump.started event
-        //_playerActionAssets.Player.Move.performed -= HandleMove;
         _playerActionAssets.Player.Jump.started -= DoJump;
         _playerActionAssets.Player.Action.started -= DoPickUp;
         _playerActionAssets.Player.Disable();
-    }
-    private void Update()
-    {
-        _moveInput = _move.ReadValue<Vector2>();
-        if (_moveInput != Vector2.zero)
-        {
-            Debug.Log("Move Input: " + _moveInput); // Check if this shows values when pressing WASD
-        }
     }
     private void FixedUpdate()
     {
@@ -66,25 +54,16 @@ public class ThirdPersonController : MonoBehaviour
 
         LookAt();
     }
-
-    private void HandleMove(InputAction.CallbackContext context)
-    {
-        _moveInput = context.ReadValue<Vector2>();
-        _forceDirection += _moveInput.x * characterData.MovementForce * GetCameraRight(_mainCamera);
-        _forceDirection += _moveInput.y * characterData.MovementForce * GetCameraForward(_mainCamera);
-
-        _rigidbody.AddForce(_forceDirection, ForceMode.Impulse);
-        _forceDirection = Vector3.zero;
-    }
     private void HandleMove()
     {
+        _moveInput = _move.ReadValue<Vector2>();
+
         _forceDirection += _moveInput.x * characterData.MovementForce * GetCameraRight(_mainCamera);
         _forceDirection += _moveInput.y * characterData.MovementForce * GetCameraForward(_mainCamera);
 
         _rigidbody.AddForce(_forceDirection, ForceMode.Impulse);
         _forceDirection = Vector3.zero;
-    }
-
+    } 
 
     private Vector3 GetCameraForward(Camera mainCamera)
     {
