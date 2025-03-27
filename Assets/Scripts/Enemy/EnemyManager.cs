@@ -21,8 +21,8 @@ public class EnemyManager : MonoBehaviour
         
     }
 
-    public void PushPlayer(float pushAmount)
+    public void PushPlayer(Vector3 direction)
     {
-        
+        playerMovement.AddForce(direction * 100);
     }
 }

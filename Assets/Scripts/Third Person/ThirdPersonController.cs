@@ -40,13 +40,16 @@ public class ThirdPersonController : MonoBehaviour
     {
         HandleMove();
 
-        if (_rigidbody.linearVelocity.y < 0f)
+        // Apply exponential gravity
+        if (_rigidbody.linearVelocity.y < 0) // Falling
         {
-            _rigidbody.linearVelocity -= Vector3.down * Physics.gravity.y * Time.fixedDeltaTime;
+            _rigidbody.linearVelocity += Vector3.up * Physics.gravity.y * 2 * Time.fixedDeltaTime;
         }
 
+        // Clamp velocity to prevent excessive speed
         Vector3 horizontalVelocity = _rigidbody.linearVelocity;
-        horizontalVelocity.y = 0f; // No need to y cuz no need for Vertically
+        horizontalVelocity.y = 0f;
+
         if (horizontalVelocity.sqrMagnitude > characterData.MaxSpeed * characterData.MaxSpeed)
         {
             _rigidbody.linearVelocity = horizontalVelocity.normalized * characterData.MaxSpeed + Vector3.up * _rigidbody.linearVelocity.y;
@@ -84,7 +87,7 @@ public class ThirdPersonController : MonoBehaviour
     {
         if (IsGrounded())
         {
-            _forceDirection = Vector3.up * characterData.JumpForce;
+            _rigidbody.AddForce(Vector3.up * characterData.JumpForce, ForceMode.Impulse);
         }
     }
     private void DoPickUp(InputAction.CallbackContext context)
@@ -115,4 +118,10 @@ public class ThirdPersonController : MonoBehaviour
         else
             _rigidbody.angularVelocity = Vector3.zero;
     }
+
+    public void AddForce(Vector3 direction)
+    {
+        _rigidbody.AddForce(direction * 5, ForceMode.Impulse);
+    }
+    
 }
