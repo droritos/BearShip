@@ -11,7 +11,7 @@ public class EnemyManager : MonoBehaviour
     {
         foreach (EnemyBehavior enemy in enemies)
         {
-            enemy.onCollisionEventAction += PushPlayer;
+            enemy.OnCollisionEventAction += PushPlayer;
         }
     }
 
