@@ -8,7 +8,7 @@ public class EnemyBehavior : MonoBehaviour
 {
     [SerializeField] private EnemyData data;
     [SerializeField] private NavMeshAgent agent;
-    public event UnityAction<Vector3> onCollisionEventAction; 
+    public event UnityAction<Vector3> OnCollisionEventAction; 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -26,6 +26,6 @@ public class EnemyBehavior : MonoBehaviour
     {
         Vector3 destinationDirection = new Vector3(agent.destination.x - transform.position.x, 1, agent.destination.z - transform.position.z);
         destinationDirection.Normalize();
-        onCollisionEventAction?.Invoke(destinationDirection);
+        OnCollisionEventAction?.Invoke(destinationDirection);
     }
 }
