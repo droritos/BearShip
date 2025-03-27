@@ -4,7 +4,7 @@ using UnityEngine;
 public class EnemyManager : MonoBehaviour
 {
     [SerializeField] private List<EnemyBehavior> enemies;
-    [SerializeField] private ThirdPersonController playerMovement;
+    
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -23,6 +23,6 @@ public class EnemyManager : MonoBehaviour
 
     public void PushPlayer(Vector3 direction)
     {
-        playerMovement.AddForce(direction * 100);
+        GameManager.Instance.PlayerMovement.AddForce(direction * 100);
     }
 }
