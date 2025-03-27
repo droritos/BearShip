@@ -25,40 +25,31 @@ public class ThirdPersonController : MonoBehaviour
     {
         // Subscribe to the Jump.started event
         _move = _playerActionAssets.Player.Move;
-        //_playerActionAssets.Player.Move.performed += HandleMove;
         _playerActionAssets.Player.Jump.started += DoJump;
         _playerActionAssets.Player.Action.started += DoPickUp;
         _playerActionAssets.Player.Enable();
     }
-
-
     private void OnDisable()
     {
         // Unsubscribe from the Jump.started event
-        //_playerActionAssets.Player.Move.performed -= HandleMove;
         _playerActionAssets.Player.Jump.started -= DoJump;
         _playerActionAssets.Player.Action.started -= DoPickUp;
         _playerActionAssets.Player.Disable();
-    }
-    private void Update()
-    {
-        _moveInput = _move.ReadValue<Vector2>();
-        if (_moveInput != Vector2.zero)
-        {
-            Debug.Log("Move Input: " + _moveInput); // Check if this shows values when pressing WASD
-        }
     }
     private void FixedUpdate()
     {
         HandleMove();
 
-        if (_rigidbody.linearVelocity.y < 0f)
+        // Apply exponential gravity
+        if (_rigidbody.linearVelocity.y < 0) // Falling
         {
-            _rigidbody.linearVelocity -= Vector3.down * Physics.gravity.y * Time.fixedDeltaTime;
+            _rigidbody.linearVelocity += Vector3.up * Physics.gravity.y * 2 * Time.fixedDeltaTime;
         }
 
+        // Clamp velocity to prevent excessive speed
         Vector3 horizontalVelocity = _rigidbody.linearVelocity;
-        horizontalVelocity.y = 0f; // No need to y cuz no need for Vertically
+        horizontalVelocity.y = 0f;
+
         if (horizontalVelocity.sqrMagnitude > characterData.MaxSpeed * characterData.MaxSpeed)
         {
             _rigidbody.linearVelocity = horizontalVelocity.normalized * characterData.MaxSpeed + Vector3.up * _rigidbody.linearVelocity.y;
@@ -66,25 +57,16 @@ public class ThirdPersonController : MonoBehaviour
 
         LookAt();
     }
-
-    private void HandleMove(InputAction.CallbackContext context)
-    {
-        _moveInput = context.ReadValue<Vector2>();
-        _forceDirection += _moveInput.x * characterData.MovementForce * GetCameraRight(_mainCamera);
-        _forceDirection += _moveInput.y * characterData.MovementForce * GetCameraForward(_mainCamera);
-
-        _rigidbody.AddForce(_forceDirection, ForceMode.Impulse);
-        _forceDirection = Vector3.zero;
-    }
     private void HandleMove()
     {
+        _moveInput = _move.ReadValue<Vector2>();
+
         _forceDirection += _moveInput.x * characterData.MovementForce * GetCameraRight(_mainCamera);
         _forceDirection += _moveInput.y * characterData.MovementForce * GetCameraForward(_mainCamera);
 
         _rigidbody.AddForce(_forceDirection, ForceMode.Impulse);
         _forceDirection = Vector3.zero;
-    }
-
+    } 
 
     private Vector3 GetCameraForward(Camera mainCamera)
     {
@@ -105,7 +87,7 @@ public class ThirdPersonController : MonoBehaviour
     {
         if (IsGrounded())
         {
-            _forceDirection = Vector3.up * characterData.JumpForce;
+            _rigidbody.AddForce(Vector3.up * characterData.JumpForce, ForceMode.Impulse);
         }
     }
     private void DoPickUp(InputAction.CallbackContext context)
@@ -136,4 +118,10 @@ public class ThirdPersonController : MonoBehaviour
         else
             _rigidbody.angularVelocity = Vector3.zero;
     }
+
+    public void AddForce(Vector3 direction)
+    {
+        _rigidbody.AddForce(direction * 5, ForceMode.Impulse);
+    }
+    
 }
