@@ -2669,7 +2669,7 @@ MonoBehaviour:
   m_XAxis:
     Value: 0
     m_SpeedMode: 0
-    m_MaxSpeed: 300
+    m_MaxSpeed: 200
     m_AccelTime: 0.1
     m_DecelTime: 0.1
     m_InputAxisName: Mouse X
@@ -17121,7 +17121,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2025066462}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.05241442, y: 0.00000019457474, z: -0.000000081139774, w: 0.99862546}
+  m_LocalRotation: {x: -0.05241443, y: 0.00000019723593, z: -0.000000069866786, w: 0.99862546}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
