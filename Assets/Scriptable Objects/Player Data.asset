@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Player Data
   m_EditorClassIdentifier: 
   MovementForce: 1
-  JumpForce: 5
+  JumpForce: 30
   MaxSpeed: 15

@@ -28,7 +28,6 @@ public class Enemy : MonoBehaviour
         if(agent.remainingDistance <= 0.5f && !agent.isStopped)
         {
             SetNewDestination();
-            Debug.Log("Walking");
         }
     }
 
