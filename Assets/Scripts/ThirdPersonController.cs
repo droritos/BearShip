@@ -29,19 +29,12 @@ public class ThirdPersonController : MonoBehaviour
         _playerActionAssets.Player.Action.started += DoPickUp;
         _playerActionAssets.Player.Enable();
     }
-
-
     private void OnDisable()
     {
         // Unsubscribe from the Jump.started event
-        _playerActionAssets.Player.Move.performed -= OnMovePerformed;
         _playerActionAssets.Player.Jump.started -= DoJump;
         _playerActionAssets.Player.Action.started -= DoPickUp;
         _playerActionAssets.Player.Disable();
-    }
-    private void Update()
-    {
-        _moveInput = _move.ReadValue<Vector2>();
     }
     private void FixedUpdate()
     {
@@ -61,31 +54,16 @@ public class ThirdPersonController : MonoBehaviour
 
         LookAt();
     }
-
-    private void OnMovePerformed(InputAction.CallbackContext context)
-    {
-        _moveInput = context.ReadValue<Vector2>();
-        _forceDirection += _moveInput.x * characterData.MovementForce * GetCameraRight(_mainCamera);
-        _forceDirection += _moveInput.y * characterData.MovementForce * GetCameraForward(_mainCamera);
-
-        _rigidbody.AddForce(_forceDirection, ForceMode.Impulse);
-        _forceDirection = Vector3.zero;
-    }
-    private void OnMovCancled(InputAction.CallbackContext context)
-    {
-        //_rigidbody.AddForce(_forceDirection, ForceMode.Impulse);
-        _forceDirection = Vector3.zero;
-    }
-
     private void HandleMove()
     {
+        _moveInput = _move.ReadValue<Vector2>();
+
         _forceDirection += _moveInput.x * characterData.MovementForce * GetCameraRight(_mainCamera);
         _forceDirection += _moveInput.y * characterData.MovementForce * GetCameraForward(_mainCamera);
 
         _rigidbody.AddForce(_forceDirection, ForceMode.Impulse);
         _forceDirection = Vector3.zero;
-    } // WORKS
-
+    } 
 
     private Vector3 GetCameraForward(Camera mainCamera)
     {
