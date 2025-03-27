@@ -53,10 +53,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4150320106653184116, guid: d69a26039cfc576409dfe86cb9d58145, type: 3}
-      propertyPath: _rigidbody
-      value: 
-      objectReference: {fileID: 5382074975962889421}
-    - target: {fileID: 4150320106653184116, guid: d69a26039cfc576409dfe86cb9d58145, type: 3}
       propertyPath: characterData
       value: 
       objectReference: {fileID: 11400000, guid: eea83e8394d13ab4b8ee20f3904e5ea3, type: 2}
@@ -101,14 +97,47 @@ PrefabInstance:
       addedObject: {fileID: 3531760210269962591}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 212479747104148686, guid: d69a26039cfc576409dfe86cb9d58145, type: 3}
+      insertIndex: 1
+      addedObject: {fileID: 5307932094397070555}
+    - targetCorrespondingSourceObject: {fileID: 212479747104148686, guid: d69a26039cfc576409dfe86cb9d58145, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1158381590515615466}
+    - targetCorrespondingSourceObject: {fileID: 212479747104148686, guid: d69a26039cfc576409dfe86cb9d58145, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2140560094540447733}
   m_SourcePrefab: {fileID: 100100000, guid: d69a26039cfc576409dfe86cb9d58145, type: 3}
 --- !u!1 &2843169731455253490 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 212479747104148686, guid: d69a26039cfc576409dfe86cb9d58145, type: 3}
   m_PrefabInstance: {fileID: 2703873893031212860}
   m_PrefabAsset: {fileID: 0}
+--- !u!54 &5307932094397070555
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2843169731455253490}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 3.5
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 80
+  m_CollisionDetection: 0
 --- !u!114 &1158381590515615466
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -122,16 +151,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animator: {fileID: 5330483636555169011}
-  Rigidbody: {fileID: 5382074975962889421}
+  Rigidbody: {fileID: 5307932094397070555}
   characterData: {fileID: 11400000, guid: eea83e8394d13ab4b8ee20f3904e5ea3, type: 2}
+--- !u!114 &2140560094540447733
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2843169731455253490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SerializedVersion: 0
+  m_OverrideArea: 0
+  m_Area: 0
+  m_OverrideGenerateLinks: 0
+  m_GenerateLinks: 0
+  m_IgnoreFromBuild: 1
+  m_ApplyToChildren: 1
+  m_AffectedAgents: ffffffff
 --- !u!95 &5330483636555169011 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 7818170178221689807, guid: d69a26039cfc576409dfe86cb9d58145, type: 3}
-  m_PrefabInstance: {fileID: 2703873893031212860}
-  m_PrefabAsset: {fileID: 0}
---- !u!54 &5382074975962889421 stripped
-Rigidbody:
-  m_CorrespondingSourceObject: {fileID: 8013854640210349041, guid: d69a26039cfc576409dfe86cb9d58145, type: 3}
   m_PrefabInstance: {fileID: 2703873893031212860}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &8324661939260515794 stripped
