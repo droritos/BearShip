@@ -2,13 +2,14 @@ using System;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Artifacts : MonoBehaviour
+public class Artifact : MonoBehaviour
 {
     public event UnityAction OnPickUpActionEvent;
 
-    private void OnCollisionEnter(Collision other)
+    private void OnTriggerEnter(Collider other)
     {
+        Debug.Log("Interacted");
         OnPickUpActionEvent?.Invoke();
-        Destroy(this);
+        Destroy(this.gameObject);
     }
 }
