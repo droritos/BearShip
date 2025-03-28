@@ -11,13 +11,18 @@ public class CinemachineSensitivity : MonoBehaviour
     private CinemachineFreeLook _freeLookCamera; // Reference to CinemachineFreeLook
     private void Start()
     {   
-        _freeLookCamera = GameManager.Instance.FreeLookCamera;
+        _freeLookCamera = GameManager.Instance.FreeLookCamera; // Event Set the setting needed
 
         SetSliderValues();
         UpdateSensitivity(sensitivitySlider.value);
 
         // Listen for slider value changes
         sensitivitySlider.onValueChanged.AddListener(UpdateSensitivity);
+    }
+
+    public float GetSensitivity()
+    {
+        return _freeLookCamera.m_XAxis.m_MaxSpeed;
     }
 
     private void SetSliderValues()
@@ -33,4 +38,5 @@ public class CinemachineSensitivity : MonoBehaviour
         _freeLookCamera.m_XAxis.m_MaxSpeed = value; // Update X-axis speed
         valueText.text = Mathf.RoundToInt(value).ToString(); // Update UI text
     }
+
 }
