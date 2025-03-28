@@ -122,6 +122,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 853eac516f366e54f9f71d8a78f0d1f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  collectSound:
+  - {fileID: 8300000, guid: 94aa0b5373cfb264c90cc70ab7e0097e, type: 3}
+  - {fileID: 8300000, guid: 7859cfc6c0afdff49ae787e4896b14fe, type: 3}
+  - {fileID: 8300000, guid: bcfbe21be1136de45923a2d4dd556494, type: 3}
+  - {fileID: 8300000, guid: 049fca98f41513947b1fae499c76c9ff, type: 3}
+  - {fileID: 8300000, guid: aec27e1c960dc964aa0f1349feddeb32, type: 3}
+  - {fileID: 8300000, guid: 502edcb1ebb82014ebc096e6d7810d2d, type: 3}
 --- !u!1001 &8213320313669696286
 PrefabInstance:
   m_ObjectHideFlags: 0
