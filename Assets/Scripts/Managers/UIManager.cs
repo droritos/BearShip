@@ -10,6 +10,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject pauseMenu;
     [SerializeField] private TextMeshProUGUI levelName;
     
+    [SerializeField] private PopUpsHandler popUpsHandler;
 
     private ThirdPersonActionAsset _playerActionAssets;
 

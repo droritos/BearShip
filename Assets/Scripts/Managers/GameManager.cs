@@ -74,4 +74,8 @@ public class GameManager : MonoSingleton<GameManager>
         settings.SaveSettings();
     }
 
+    public void BackToMainMenu()
+    {
+        Debug.Log("Back to Main Menu");
+    }
 }
