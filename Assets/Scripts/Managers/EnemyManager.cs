@@ -4,6 +4,7 @@ using UnityEngine;
 public class EnemyManager : MonoBehaviour
 {
     [SerializeField] private List<EnemyBehavior> enemies;
+    [SerializeField] private List<Obstacle> Obstacles;
     
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -13,16 +14,15 @@ public class EnemyManager : MonoBehaviour
         {
             enemy.OnCollisionEventAction += PushPlayer;
         }
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        foreach (var obstacle in Obstacles)
+        {
+            obstacle.OnCollisionActionEvent += PushPlayer;
+        }
     }
 
     public void PushPlayer(Vector3 direction)
     {
-        GameManager.Instance.PlayerMovement.AddForce(direction * 100);
+        GameManager.Instance.PlayerMovement.AddForce(direction * 10);
     }
 }

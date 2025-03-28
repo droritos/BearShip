@@ -8,7 +8,6 @@ public class Artifact : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Interacted");
         OnPickUpActionEvent?.Invoke();
         Destroy(this.gameObject);
     }
