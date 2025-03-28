@@ -11,14 +11,14 @@ public class Enemy : MonoBehaviour
     [SerializeField] private EnemyDetection detection;
 
     private int currentPatrolPoint;
-    private bool isChasing;
+    private bool _isChasing;
     private Transform target;
     
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        isChasing = false;
+        _isChasing = false;
         currentPatrolPoint = 0;
         SetNewDestination();
         agent.speed = data.Speed;
@@ -32,11 +32,11 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(agent.remainingDistance <= 0.5f && !agent.isStopped && !isChasing)
+        if(agent.remainingDistance <= 0.5f && !agent.isStopped && !_isChasing)
         {
             SetNewDestination();
         }
-        else if (isChasing)
+        else if (_isChasing)
         {
             ChaseTarget(target);
         }
@@ -55,7 +55,7 @@ public class Enemy : MonoBehaviour
     private void ChaseTargetListener(Transform target)
     {
         this.target = target;
-        isChasing = true;
+        _isChasing = true;
     }
 
     private void ChaseTarget(Transform target)
@@ -66,7 +66,7 @@ public class Enemy : MonoBehaviour
 
     private void StopChasing()
     {
-        isChasing = false;
+        _isChasing = false;
         target = null;
         agent.speed = 5;
     }

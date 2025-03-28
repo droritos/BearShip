@@ -4,28 +4,22 @@ using UnityEngine;
 using Cinemachine;
 public class GameManager : MonoSingleton<GameManager>
 {
-    private static int _levelCounter;
-    
-    private Dictionary<int, string> _levelNames;
-    
+    [Header("UI")]
     [SerializeField] private UIManager uiManager;
-    
-    [SerializeField] private ThirdPersonController playerMovement;
-    [SerializeField] private CinemachineFreeLook freeLookCamera;
-    [SerializeField] private List<Artifact> artifacts;
+
+    [Header("Player Belongings")]
+    public CinemachineFreeLook FreeLookCamera;
+    [SerializeField] PlayerManager playerManager;
+    public PlayerManager PlayerManager { get { return playerManager; } }
     [SerializeField] Settings settings;
 
-    public ThirdPersonController PlayerMovement
-    {
-        get { return playerMovement;}
-    }
+    [Header("Scene Belongings")]
+    [SerializeField] SceneManager sceneManager;
+    [SerializeField] private List<Artifact> artifacts;
+    private Dictionary<int, string> _levelNames;
+    private static int _levelCounter;
 
-    public CinemachineFreeLook FreeLookCamera
-    {
-        get { return freeLookCamera; } 
-    }
-
-    protected override void Awake()
+    protected override void Awake() // Overriding cuz of MonoSingleton already using Awake
     {
         base.Awake();
         //Let's hold a scene manager that has a number for each level and that way we can get the name of it. We will pass these lines to him as well.
@@ -33,8 +27,10 @@ public class GameManager : MonoSingleton<GameManager>
         _levelNames[0] = "Floating Isles";
         _levelNames[1] = "Boom Boom Beach";
         _levelNames[2] = "Lazy Forest";
+
+        uiManager?.AssignActionAsset(PlayerManager.ThirdPersonController.PlayerActionAssets);
     }
-    
+
     private void Start()
     {
         LoadSettingsData();
@@ -43,13 +39,15 @@ public class GameManager : MonoSingleton<GameManager>
         {
             PlayerPrefs.SetInt("Score", 0);
         }
-        
-        uiManager.UpdateLevel(_levelNames[_levelCounter]);
+
+        uiManager?.UpdateLevel(_levelNames[_levelCounter]);
         
         foreach (Artifact artifact in artifacts)
         {
             artifact.OnPickUpActionEvent += AddScore;
         }
+
+        playerManager.FallingBehaviour.OnFallingFromWorld += ReturnToStartPoint;
     }
 
     private void AddScore()
@@ -66,7 +64,11 @@ public class GameManager : MonoSingleton<GameManager>
         FreeLookCamera.m_XAxis.m_MaxSpeed = settings.DataToSave.MouseSensitivity;
         // More setting can loaded here
     }
-
+    private void ReturnToStartPoint(GameObject playerObject)
+    {
+        playerManager.FallingBehaviour.OnFallingFromWorld += sceneManager.HandleFalling;
+        playerManager.FallingBehaviour.ResetFallingState();
+    }
     private void OnApplicationQuit()
     {
         settings.SaveSettings();
