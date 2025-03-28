@@ -4,7 +4,7 @@ public class Settings : MonoBehaviour
 {
     public SettingsData DataToSave { get ; private set; }
     public CinemachineSensitivity CinemachineSensitivity;
-    private void Start()
+    private void Awake()
     {
         DataToSave = SaveSystem.LoadData();
         Debug.Log($"Sen {DataToSave.MouseSensitivity}");
@@ -13,13 +13,10 @@ public class Settings : MonoBehaviour
     {
         DataToSave.MouseSensitivity = CinemachineSensitivity.GetSensitivity();
         SaveSystem.SaveSettings(DataToSave);
-
-        //SaveSystem.S
-        //return settingsData;
     }
 
-    //public void LoadSettings()
-    //{
-    //    DataToSave
-    //}
+    public void LoadSettings()
+    {
+        //DataToSave = SaveSystem.LoadData();
+    }
 }
