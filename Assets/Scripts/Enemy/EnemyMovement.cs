@@ -8,30 +8,41 @@ public class Enemy : MonoBehaviour
     [SerializeField] private EnemyData data;
     [SerializeField] private List<Transform> patrolPositions;
     [SerializeField] private NavMeshAgent agent;
+    [SerializeField] private EnemyDetection detection;
 
     private int currentPatrolPoint;
+    private bool isChasing;
+    private Transform target;
     
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        isChasing = false;
         currentPatrolPoint = 0;
         SetNewDestination();
         agent.speed = data.Speed;
         agent.acceleration = data.Acceleration;
         agent.angularSpeed = data.AngularSpeed;
+
+        detection.OnTargetDetectedEventAction += ChaseTargetListener;
+        detection.OnTargetEscapedEventAction += StopChasing;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(agent.remainingDistance <= 0.5f && !agent.isStopped)
+        if(agent.remainingDistance <= 0.5f && !agent.isStopped && !isChasing)
         {
             SetNewDestination();
         }
+        else if (isChasing)
+        {
+            ChaseTarget(target);
+        }
     }
 
-    public void SetNewDestination()
+    private void SetNewDestination()
     {
         if (currentPatrolPoint >= patrolPositions.Count)
         {
@@ -39,5 +50,24 @@ public class Enemy : MonoBehaviour
         }
         
         agent.SetDestination(patrolPositions[currentPatrolPoint++].position);
+    }
+
+    private void ChaseTargetListener(Transform target)
+    {
+        this.target = target;
+        isChasing = true;
+    }
+
+    private void ChaseTarget(Transform target)
+    {
+        agent.SetDestination(target.position);
+        agent.speed = 15;
+    }
+
+    private void StopChasing()
+    {
+        isChasing = false;
+        target = null;
+        agent.speed = 5;
     }
 }
