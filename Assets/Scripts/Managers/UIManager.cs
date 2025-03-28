@@ -9,6 +9,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI scoreCounter;
     [SerializeField] GameObject pauseMenu;
     [SerializeField] private TextMeshProUGUI levelName;
+    
 
     private ThirdPersonActionAsset _playerActionAssets;
 
