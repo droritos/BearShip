@@ -9,6 +9,8 @@ public class EnemyDetection : MonoBehaviour
     public event UnityAction OnTargetEscapedEventAction;
 
     [SerializeField] private string targetTag;
+
+    [SerializeField] private AudioClip detectionSound;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
     public void OnTriggerEnter(Collider other)
@@ -16,6 +18,7 @@ public class EnemyDetection : MonoBehaviour
         if (other.gameObject.CompareTag(targetTag))
         {
             OnTargetDetectedEventAction?.Invoke(other.transform);
+            SoundManager.Instance.PlaySfxSound(detectionSound, transform);
         }
     }
 

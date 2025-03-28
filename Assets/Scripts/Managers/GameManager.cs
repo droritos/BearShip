@@ -28,7 +28,7 @@ public class GameManager : MonoSingleton<GameManager>
         _levelNames[1] = "Boom Boom Beach";
         _levelNames[2] = "Lazy Forest";
 
-        uiManager?.AssignActionAsset(PlayerManager.ThirdPersonController.PlayerActionAssets);
+        //uiManager?.AssignActionAsset(PlayerManager.ThirdPersonController.PlayerActionAssets);
     }
 
     private void Start()
