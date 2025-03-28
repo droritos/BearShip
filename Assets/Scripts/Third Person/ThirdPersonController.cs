@@ -4,11 +4,10 @@ using UnityEngine.InputSystem;
 
 public class ThirdPersonController : MonoBehaviour
 {
-    public ThirdPersonActionAsset PlayerActionAssets {  get; private set; }
-
     [Header("Serialize Field")]
     [SerializeField] ThirdPersonAnimation animator;
     [SerializeField] Camera _mainCamera;
+    private ThirdPersonActionAsset _playerActionAssets;
     private InputAction _move;
 
     [Header("Movement")]
@@ -16,24 +15,29 @@ public class ThirdPersonController : MonoBehaviour
     [SerializeField] CharacterData characterData;
     private Vector3 _forceDirection = Vector3.zero;
     private Vector2 _moveInput;
+
+    [Header("Sounds")] 
+    [SerializeField] private AudioClip jumpSound;
+
+
     private void Awake()
     {
-        PlayerActionAssets = new ThirdPersonActionAsset();
+        _playerActionAssets = new ThirdPersonActionAsset();
     }
     private void OnEnable()
     {
         // Subscribe to the Jump.started event
-        _move = PlayerActionAssets.Player.Move;
-        PlayerActionAssets.Player.Jump.started += DoJump;
-        PlayerActionAssets.Player.Action.started += DoPickUp;
-        PlayerActionAssets.Player.Enable();
+        _move = _playerActionAssets.Player.Move;
+        _playerActionAssets.Player.Jump.started += DoJump;
+        _playerActionAssets.Player.Action.started += DoPickUp;
+        _playerActionAssets.Player.Enable();
     }
     private void OnDisable()
     {
         // Unsubscribe from the Jump.started event
-        PlayerActionAssets.Player.Jump.started -= DoJump;
-        PlayerActionAssets.Player.Action.started -= DoPickUp;
-        PlayerActionAssets.Player.Disable();
+        _playerActionAssets.Player.Jump.started -= DoJump;
+        _playerActionAssets.Player.Action.started -= DoPickUp;
+        _playerActionAssets.Player.Disable();
     }
     private void FixedUpdate()
     {
@@ -86,6 +90,7 @@ public class ThirdPersonController : MonoBehaviour
     {
         if (IsGrounded())
         {
+            SoundManager.Instance.PlaySfxSound(jumpSound, transform);
             _rigidbody.AddForce(Vector3.up * characterData.JumpForce, ForceMode.Impulse);
         }
     }
@@ -122,6 +127,5 @@ public class ThirdPersonController : MonoBehaviour
     {
         _rigidbody.AddForce(direction * 5, ForceMode.Impulse);
     }
-
-
+    
 }

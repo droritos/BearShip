@@ -238,7 +238,6 @@ GameObject:
   m_Component:
   - component: {fileID: 330585546}
   - component: {fileID: 330585545}
-  - component: {fileID: 330585544}
   - component: {fileID: 330585547}
   - component: {fileID: 330585548}
   - component: {fileID: 330585549}
@@ -250,14 +249,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &330585544
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 330585543}
-  m_Enabled: 1
 --- !u!20 &330585545
 Camera:
   m_ObjectHideFlags: 0
@@ -1506,6 +1497,7 @@ MonoBehaviour:
   _mainCamera: {fileID: 330585545}
   _rigidbody: {fileID: 1045218274}
   characterData: {fileID: 11400000, guid: eea83e8394d13ab4b8ee20f3904e5ea3, type: 2}
+  jumpSound: {fileID: 8300000, guid: 2088baa75b4dcb945b543ba9676fbc80, type: 3}
 --- !u!4 &1045218270 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4505045940607445873, guid: f94a05542a251904a9f19a4a6722cf87, type: 3}
@@ -1692,6 +1684,10 @@ PrefabInstance:
       propertyPath: agent
       value: 
       objectReference: {fileID: 1470881468}
+    - target: {fileID: 4596136978088284345, guid: 63a62b12e894ddf4ea2d822318daf555, type: 3}
+      propertyPath: attackSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 7556575df755c05439ed8ad348eb3f70, type: 3}
     - target: {fileID: 4918794124559957814, guid: 63a62b12e894ddf4ea2d822318daf555, type: 3}
       propertyPath: m_Name
       value: Enemy 1
