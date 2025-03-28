@@ -19,10 +19,17 @@ public class UIManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        _playerActionAssets.Player.Pause.started += menuHandler.OpenPauseMenu;
-        scoreCounter.text = PlayerPrefs.GetInt("Score").ToString();
-
-        _playerActionAssets.Enable();
+        //_playerActionAssets.Player.Pause.started += menuHandler.OpenPauseMenu;
+        if (PlayerPrefs.HasKey("Score"))
+        {
+            scoreCounter.text = PlayerPrefs.GetInt("Score").ToString();
+        }
+        else
+        {
+            PlayerPrefs.SetInt("Score", 0);
+            scoreCounter.text = PlayerPrefs.GetInt("Score").ToString();
+        }
+        //_playerActionAssets.Enable();
     }
 
     public void UpdateScore()
