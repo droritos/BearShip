@@ -602,8 +602,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c94596625222af4c870697e6c778ff2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  menuHandler: {fileID: 0}
   scoreCounter: {fileID: 8835735527213708230}
-  pauseMenu: {fileID: 326780680758319037}
   levelName: {fileID: 6227365682829864425}
   popUpsHandler: {fileID: 1873741723343894225}
 --- !u!114 &1873741723343894225
