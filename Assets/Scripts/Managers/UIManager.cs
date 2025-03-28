@@ -37,5 +37,6 @@ public class UIManager : MonoBehaviour
     public void OpenPauseMenu(InputAction.CallbackContext context)
     {
         pauseMenu.SetActive(!pauseMenu.activeSelf);
+        // Invoke!!
     }
 }
