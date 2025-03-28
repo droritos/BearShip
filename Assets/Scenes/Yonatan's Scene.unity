@@ -148,11 +148,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d54f48a6560dbe4682fc79165095069, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UIManager: {fileID: 1734993158}
+  uiManager: {fileID: 0}
   playerMovement: {fileID: 1045218267}
   freeLookCamera: {fileID: 330585549}
   artifacts:
   - {fileID: 970627047}
+  settings: {fileID: 0}
 --- !u!4 &118802300
 Transform:
   m_ObjectHideFlags: 0
@@ -417,7 +418,7 @@ MonoBehaviour:
     m_DecelTime: 0.1
     m_InputAxisName: Mouse X
     m_InputAxisValue: 0
-    m_InvertInput: 1
+    m_InvertInput: 0
     m_MinValue: -180
     m_MaxValue: 180
     m_Wrap: 1

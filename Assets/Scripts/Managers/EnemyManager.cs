@@ -23,6 +23,6 @@ public class EnemyManager : MonoBehaviour
 
     public void PushPlayer(Vector3 direction)
     {
-        GameManager.Instance.PlayerMovement.AddForce(direction * 10);
+        GameManager.Instance.PlayerManager.ThirdPersonController.AddForce(direction * 10);
     }
 }
