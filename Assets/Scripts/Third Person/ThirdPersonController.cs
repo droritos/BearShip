@@ -16,6 +16,9 @@ public class ThirdPersonController : MonoBehaviour
     private Vector3 _forceDirection = Vector3.zero;
     private Vector2 _moveInput;
 
+    [Header("Sounds")] 
+    [SerializeField] private AudioClip jumpSound;
+
 
     private void Awake()
     {
@@ -87,6 +90,7 @@ public class ThirdPersonController : MonoBehaviour
     {
         if (IsGrounded())
         {
+            SoundManager.Instance.PlaySfxSound(jumpSound, transform);
             _rigidbody.AddForce(Vector3.up * characterData.JumpForce, ForceMode.Impulse);
         }
     }
