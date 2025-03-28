@@ -15,8 +15,4 @@ public class Settings : MonoBehaviour
         SaveSystem.SaveSettings(DataToSave);
     }
 
-    public void LoadSettings()
-    {
-        //DataToSave = SaveSystem.LoadData();
-    }
 }

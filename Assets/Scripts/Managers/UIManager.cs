@@ -6,8 +6,10 @@ using UnityEngine.InputSystem;
 
 public class UIManager : MonoBehaviour
 {
+    [SerializeField] MenuHandler menuHandler;
+    
+
     [SerializeField] private TextMeshProUGUI scoreCounter;
-    [SerializeField] GameObject pauseMenu;
     [SerializeField] private TextMeshProUGUI levelName;
 
     private ThirdPersonActionAsset _playerActionAssets;
@@ -15,7 +17,7 @@ public class UIManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        _playerActionAssets.Player.Pause.started += OpenPauseMenu;
+        _playerActionAssets.Player.Pause.started += menuHandler.OpenPauseMenu;
         scoreCounter.text = PlayerPrefs.GetInt("Score").ToString();
 
         _playerActionAssets.Enable();
@@ -34,9 +36,15 @@ public class UIManager : MonoBehaviour
     {
         _playerActionAssets = inputActions;
     }
-    public void OpenPauseMenu(InputAction.CallbackContext context)
-    {
-        pauseMenu.SetActive(!pauseMenu.activeSelf);
-        // Invoke!!
-    }
+    //public void OpenPauseMenu(InputAction.CallbackContext context)
+    //{
+    //    menuHandler.OptionsMenu.SetActive(!menuHandler.OptionsMenu.activeSelf);
+
+    //    if (menuHandler.OptionsMenu.activeSelf)
+    //        Time.timeScale = 0f;
+    //    else
+    //        Time.timeScale = 1.0f;
+
+    //    // Invoke(bool activeSelf) ??
+    //}
 }

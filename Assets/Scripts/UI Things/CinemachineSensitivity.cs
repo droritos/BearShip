@@ -27,8 +27,8 @@ public class CinemachineSensitivity : MonoBehaviour
 
     private void SetSliderValues()
     {
-        sensitivitySlider.minValue = 0f;
-        sensitivitySlider.maxValue = 1000f;
+        sensitivitySlider.minValue = 1f;
+        sensitivitySlider.maxValue = 550f;
 
         sensitivitySlider.value = _freeLookCamera.m_XAxis.m_MaxSpeed;
     }
