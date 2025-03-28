@@ -4,6 +4,8 @@ using UnityEngine;
 using Cinemachine;
 public class GameManager : MonoSingleton<GameManager>
 {
+    [SerializeField] private UIManager UIManager;
+    
     [SerializeField] private ThirdPersonController playerMovement;
     [SerializeField] private CinemachineFreeLook freeLookCamera;
     [SerializeField] private List<Artifact> artifacts;
@@ -35,5 +37,6 @@ public class GameManager : MonoSingleton<GameManager>
     {
         PlayerPrefs.SetInt("Score", PlayerPrefs.GetInt("Score") + 1);
         Debug.Log(PlayerPrefs.GetInt("Score"));
+        UIManager.UpdateScore();
     }
 }
