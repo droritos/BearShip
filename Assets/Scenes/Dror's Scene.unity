@@ -1894,8 +1894,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d54f48a6560dbe4682fc79165095069, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  settings: {fileID: 1887362128}
+  playerMovement: {fileID: 1045218267}
   freeLookCamera: {fileID: 330585549}
+  artifacts: []
+  settings: {fileID: 1887362128}
 --- !u!114 &1887362128
 MonoBehaviour:
   m_ObjectHideFlags: 0

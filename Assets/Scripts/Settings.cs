@@ -7,6 +7,7 @@ public class Settings : MonoBehaviour
     private void Start()
     {
         DataToSave = SaveSystem.LoadData();
+        Debug.Log($"Sen {DataToSave.MouseSensitivity}");
     }
     public void SaveSettings()
     {

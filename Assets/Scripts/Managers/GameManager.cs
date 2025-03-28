@@ -7,7 +7,8 @@ public class GameManager : MonoSingleton<GameManager>
     [SerializeField] private ThirdPersonController playerMovement;
     [SerializeField] private CinemachineFreeLook freeLookCamera;
     [SerializeField] private List<Artifact> artifacts;
-    
+    [SerializeField] Settings settings;
+
     public ThirdPersonController PlayerMovement
     {
         get { return playerMovement;}
@@ -20,6 +21,8 @@ public class GameManager : MonoSingleton<GameManager>
 
     private void Start()
     {
+        LoadSettingsData();
+
         if (!PlayerPrefs.HasKey("Score"))
         {
             PlayerPrefs.SetInt("Score", 0);
@@ -36,4 +39,16 @@ public class GameManager : MonoSingleton<GameManager>
         PlayerPrefs.SetInt("Score", PlayerPrefs.GetInt("Score") + 1);
         Debug.Log(PlayerPrefs.GetInt("Score"));
     }
+
+    private void LoadSettingsData()
+    {
+        FreeLookCamera.m_XAxis.m_MaxSpeed = settings.DataToSave.MouseSensitivity;
+        // More setting can loaded here
+    }
+
+    private void OnApplicationQuit()
+    {
+        settings.SaveSettings();
+    }
+
 }
