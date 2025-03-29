@@ -24,11 +24,9 @@ public class OnAttack : StateMachineBehaviour
         if (enemyBehavior != null)
         {
             enemyBehavior.InvokeAttack();
-            Debug.Log("Finish Attack Animation Now Knockback");
+            Debug.Log("Finish Attack Animation --> Invoke Attack");
         }
         else
-        {
-            Debug.LogError("EnemyBehavior not found in any parent of: " + animator.gameObject.name);
-        }
+            Debug.Log("EnemyBehavior not found in any parent of: " + animator.gameObject.name);
     }
 }
