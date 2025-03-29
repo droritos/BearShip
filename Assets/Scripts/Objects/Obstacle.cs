@@ -41,7 +41,7 @@ public class Obstacle : MonoBehaviour
 
     public void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag(GlobalInfo.PlayerTag))
         {
             SoundManager.Instance.PlaySfxSound(hitSound, transform);
             OnCollisionActionEvent?.Invoke(other.transform.forward * -1 * 10 + new Vector3(0,1,0));

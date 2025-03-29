@@ -97,10 +97,8 @@ public class ThirdPersonController : MonoBehaviour
         else
         {
             _isWalking = false; // Stop tracking walking if movement stops
-            if (_walkingSoundCoroutine != null)
-            {
+            if(_walkingSoundCoroutine != null)
                 StopCoroutine(_walkingSoundCoroutine);
-            }
         }
     }
 

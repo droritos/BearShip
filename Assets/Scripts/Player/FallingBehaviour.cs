@@ -11,9 +11,14 @@ public class FallingBehaviour : MonoBehaviour
     private bool _hasFallen = false;
 
 
-    private void Start()
+    private void Update()
     {
-        InvokeRepeating(nameof(CheckFalling), checkInterval, checkInterval);
+        //InvokeRepeating(nameof(CheckFalling), checkInterval, checkInterval);
+        CheckFalling();
+    }
+    private void OnDisable()
+    {
+        CancelInvoke(nameof(CheckFalling));
     }
 
     private void CheckFalling()
@@ -21,7 +26,7 @@ public class FallingBehaviour : MonoBehaviour
         if (!_hasFallen && transform.position.y <= -fallingThreshold) // Only trigger once
         {
             _hasFallen = true;
-            Debug.Log($"I falling - {transform.position.y}");
+            //Debug.Log($"I falling - {transform.position.y}");
             OnFallingFromWorld?.Invoke(this);
         }
     }

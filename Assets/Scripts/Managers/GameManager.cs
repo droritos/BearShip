@@ -13,6 +13,7 @@ public class GameManager : MonoSingleton<GameManager>
     [SerializeField] PlayerManager playerManager;
     public PlayerManager PlayerManager { get { return playerManager; } }
     [SerializeField] Settings settings;
+    public Settings Settings { get { return settings; } }
 
     [Header("Scene Belongings")]
     [SerializeField] SceneHandler sceneManager;
