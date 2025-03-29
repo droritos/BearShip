@@ -44,6 +44,8 @@ public class Enemy : MonoBehaviour
 
     private void SetNewDestination()
     {
+        // Apply Walking Animation
+        
         if (currentPatrolPoint >= patrolPositions.Count)
         {
             currentPatrolPoint = 0;
