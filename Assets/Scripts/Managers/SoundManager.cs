@@ -19,7 +19,7 @@ public class SoundManager : MonoSingleton<SoundManager>
     
     public void PlayRandomSfxSound(List<AudioClip> clipArray, Transform newTransform)
     {
-        int selected = Random.Range(0, clipArray.Count);
+        int selected = Random.Range(0, clipArray.Count - 1);
         AudioSource newSfx = Instantiate(sfxSource, newTransform.position, Quaternion.identity);
         newSfx.clip = clipArray[selected];
         newSfx.Play();
@@ -40,7 +40,7 @@ public class SoundManager : MonoSingleton<SoundManager>
     
     public void PlayRandomUISound(List<AudioClip> clipArray, Transform newTransform)
     {
-        int selected = Random.Range(0, clipArray.Count);
+        int selected = Random.Range(0, clipArray.Count - 1);
         AudioSource newSfx = Instantiate(uiSource, newTransform.position, Quaternion.identity);
         newSfx.clip = clipArray[selected];
         newSfx.Play();

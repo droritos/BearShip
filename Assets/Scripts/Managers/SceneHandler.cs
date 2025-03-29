@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SceneHandler : MonoBehaviour
 {
@@ -51,5 +52,9 @@ public class SceneHandler : MonoBehaviour
     private void UpdateCurrentCheckpoint(Checkpoint checkpoint)
     {
         _currentCheckpoints = checkpoint;
+
+    private void SceneTransition()
+    {
+        SceneManager.LoadScene(1);
     }
 }
