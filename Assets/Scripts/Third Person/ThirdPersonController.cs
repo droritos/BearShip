@@ -7,7 +7,7 @@ public class ThirdPersonController : MonoBehaviour
     [Header("Serialize Field")]
     [SerializeField] ThirdPersonAnimation animator;
     [SerializeField] Camera _mainCamera;
-    private ThirdPersonActionAsset _playerActionAssets;
+    public ThirdPersonActionAsset PlayerActionAssets {  get; private set; }
     private InputAction _move;
 
     [Header("Movement")]
@@ -22,22 +22,22 @@ public class ThirdPersonController : MonoBehaviour
 
     private void Awake()
     {
-        _playerActionAssets = new ThirdPersonActionAsset();
+        PlayerActionAssets = new ThirdPersonActionAsset();
     }
     private void OnEnable()
     {
         // Subscribe to the Jump.started event
-        _move = _playerActionAssets.Player.Move;
-        _playerActionAssets.Player.Jump.started += DoJump;
-        _playerActionAssets.Player.Action.started += DoPickUp;
-        _playerActionAssets.Player.Enable();
+        _move = PlayerActionAssets.Player.Move;
+        PlayerActionAssets.Player.Jump.started += DoJump;
+        PlayerActionAssets.Player.Action.started += DoPickUp;
+        PlayerActionAssets.Player.Enable();
     }
     private void OnDisable()
     {
         // Unsubscribe from the Jump.started event
-        _playerActionAssets.Player.Jump.started -= DoJump;
-        _playerActionAssets.Player.Action.started -= DoPickUp;
-        _playerActionAssets.Player.Disable();
+        PlayerActionAssets.Player.Jump.started -= DoJump;
+        PlayerActionAssets.Player.Action.started -= DoPickUp;
+        PlayerActionAssets.Player.Disable();
     }
     private void FixedUpdate()
     {
@@ -90,8 +90,9 @@ public class ThirdPersonController : MonoBehaviour
     {
         if (IsGrounded())
         {
-            SoundManager.Instance.PlaySfxSound(jumpSound, transform);
             _rigidbody.AddForce(Vector3.up * characterData.JumpForce, ForceMode.Impulse);
+            if(jumpSound != null)
+                SoundManager.Instance.PlaySfxSound(jumpSound, transform);
         }
     }
     private void DoPickUp(InputAction.CallbackContext context)
