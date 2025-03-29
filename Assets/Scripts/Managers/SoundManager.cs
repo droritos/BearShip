@@ -6,6 +6,7 @@ public class SoundManager : MonoSingleton<SoundManager>
 {
     [SerializeField] private AudioSource sfxSource;
     [SerializeField] private AudioSource uiSource;
+    [SerializeField] private SoundSettings soundSettings;
 
     public void PlaySfxSound(AudioClip clip, Transform newTransform)
     {

@@ -15,4 +15,5 @@ public class Settings : MonoBehaviour
         SaveSystem.SaveSettings(DataToSave);
     }
 
+
 }
