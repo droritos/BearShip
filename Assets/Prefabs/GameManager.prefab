@@ -385,6 +385,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sfxSource: {fileID: 6509331110786112830, guid: 745ec2f078f1bcc45b0b282eed2ec058, type: 3}
   uiSource: {fileID: 6509331110786112830, guid: e43b09fde0ff20a4bb52f7d3c0848f39, type: 3}
+  soundSettings: {fileID: 0}
 --- !u!1001 &7193075940825683128
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -435,7 +436,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3819737816923316366, guid: 08db2d1e9eb73e4458607f355be54a6e, type: 3}
       propertyPath: m_Name
-      value: Checkpoint
+      value: Start Checkpoint
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

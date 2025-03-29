@@ -652,8 +652,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c7f7730fd37dd24dadeaa4c4033360a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sensitivitySlider: {fileID: 5462544577656820928}
+  SliderObject: {fileID: 5462544577656820928}
   valueText: {fileID: 8653924750312081411}
+  _maxValue: 550
 --- !u!1 &6872739184295222153
 GameObject:
   m_ObjectHideFlags: 0
