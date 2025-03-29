@@ -3,21 +3,19 @@ using UnityEngine.UI;
 using TMPro;
 using Cinemachine;
 
-public class CinemachineSensitivity : MonoBehaviour
+public class CinemachineSensitivity : SliderSetting
 {
-    [SerializeField] private Slider sensitivitySlider; // UI Slider
-    [SerializeField] private TextMeshProUGUI valueText; // Text to display value
-
-    private CinemachineFreeLook _freeLookCamera; 
-    private void Start()
+    private CinemachineFreeLook _freeLookCamera;
+    
+    protected override void Start()
     {   
         _freeLookCamera = GameManager.Instance.FreeLookCamera; 
 
-        SetSliderValues();
-        UpdateSensitivity(sensitivitySlider.value);
+        SetSliderValues(this._maxValue, _freeLookCamera.m_XAxis.m_MaxSpeed);
+        UpdateSentting(SliderObject.value);
 
         // Listen for slider value changes
-        sensitivitySlider.onValueChanged.AddListener(UpdateSensitivity);
+        SliderObject.onValueChanged.AddListener(UpdateSentting);
     }
 
     public float GetSensitivity()
@@ -32,15 +30,15 @@ public class CinemachineSensitivity : MonoBehaviour
         }
     }
 
-    private void SetSliderValues()
+    protected override void SetSliderValues(float maxValue, float valueSetting = 1)
     {
-        sensitivitySlider.minValue = 1f;
-        sensitivitySlider.maxValue = 550f;
+        SliderObject.minValue = 1f;
+        SliderObject.maxValue = maxValue;
 
-        sensitivitySlider.value = _freeLookCamera.m_XAxis.m_MaxSpeed;
+        SliderObject.value = valueSetting;
     }
 
-    private void UpdateSensitivity(float value)
+    protected override void UpdateSentting(float value)
     {
         _freeLookCamera.m_XAxis.m_MaxSpeed = value; // Update X-axis speed
         valueText.text = Mathf.RoundToInt(value).ToString(); // Update UI text
