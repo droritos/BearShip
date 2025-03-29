@@ -11,7 +11,7 @@ public class Checkpoint : MonoBehaviour
     {
         if (other.gameObject.CompareTag(GlobalInfo.PlayerTag))
         {
-            OnCheckpointEnter.Invoke(this);
+            OnCheckpointEnter?.Invoke(this);
         }
     }
     private void OnValidate() // Easy way to adjust the collider size though out the inspector
