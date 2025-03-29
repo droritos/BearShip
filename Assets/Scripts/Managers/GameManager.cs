@@ -48,6 +48,7 @@ public class GameManager : MonoSingleton<GameManager>
         foreach (Artifact artifact in artifacts)
         {
             artifact.OnPickUpActionEvent += AddScore;
+            artifact.OnPickUpActionEvent += playerManager.Followers.AddFollower;
         }
 
         playerManager.FallingBehaviour.OnFallingFromWorld += ReturnToStartPoint;
@@ -58,7 +59,7 @@ public class GameManager : MonoSingleton<GameManager>
         PlayerPrefs.SetInt("Score", PlayerPrefs.GetInt("Score") + 1);
         _uiManager.UpdateScore();
     }
-
+    
     private void LoadSettingsData()
     {
         if (!settings)
