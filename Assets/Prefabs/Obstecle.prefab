@@ -125,6 +125,7 @@ MonoBehaviour:
   speed: 5
   range: 10
   data: {fileID: 11400000, guid: ac21beea9086f9743b7e11585ca4b152, type: 2}
+  hitSound: {fileID: 8300000, guid: 0f9bf4f31d11ccc44b773224f44f8a6d, type: 3}
 --- !u!208 &5749626853062989667
 NavMeshObstacle:
   m_ObjectHideFlags: 0

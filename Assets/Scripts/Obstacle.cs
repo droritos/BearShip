@@ -11,6 +11,7 @@ public class Obstacle : MonoBehaviour
     [SerializeField] private float speed;
     [SerializeField] private float range;
     [SerializeField] private ObstacleData data;
+    [SerializeField] private AudioClip hitSound;
 
     public event UnityAction<Vector3> OnCollisionActionEvent; 
     
@@ -42,7 +43,8 @@ public class Obstacle : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            OnCollisionActionEvent?.Invoke(new Vector3(direction.x * 10,1,0));
+            SoundManager.Instance.PlaySfxSound(hitSound, transform);
+            OnCollisionActionEvent?.Invoke(other.transform.forward * -1 * 10 + new Vector3(0,1,0));
         }
     }
 }
