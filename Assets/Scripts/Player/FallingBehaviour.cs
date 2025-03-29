@@ -3,7 +3,7 @@ using UnityEngine.Events;
 
 public class FallingBehaviour : MonoBehaviour
 {
-    public event UnityAction<GameObject> OnFallingFromWorld; 
+    public event UnityAction<FallingBehaviour> OnFallingFromWorld; 
     
     [SerializeField] private float fallingThreshold = 15f;
     [SerializeField] private float checkInterval = 1f; 
@@ -21,10 +21,8 @@ public class FallingBehaviour : MonoBehaviour
         if (!_hasFallen && transform.position.y <= -fallingThreshold) // Only trigger once
         {
             _hasFallen = true;
-            //Debug.Log($"I falling - {transform.position.y}");
-            OnFallingFromWorld.Invoke(this.gameObject);
-            // Optional: Stop checking after falling
-            //CancelInvoke(nameof(CheckFalling));
+            Debug.Log($"I falling - {transform.position.y}");
+            OnFallingFromWorld?.Invoke(this);
         }
     }
 

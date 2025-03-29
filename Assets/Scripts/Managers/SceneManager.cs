@@ -7,13 +7,12 @@ public class SceneManager : MonoBehaviour
     [SerializeField] float fallingCooldown;
     [SerializeField] float yOffset;
 
-    public void HandleFalling(GameObject player)
+    public void HandleFalling(FallingBehaviour player)
     {
-        player.SetActive(false);
+        player.gameObject.SetActive(false);
         StartCoroutine(FallingCooldown(player, fallingCooldown));
     }
-
-    private IEnumerator FallingCooldown(GameObject player, float cd)
+    private IEnumerator FallingCooldown(FallingBehaviour player, float cd)
     {
         yield return new WaitForSeconds(cd);
 
@@ -21,6 +20,15 @@ public class SceneManager : MonoBehaviour
         returnPoint.y += yOffset;
 
         player.transform.position = returnPoint;
-        player.SetActive(true);
+        player.gameObject.SetActive(true);
+
+        StartCoroutine(ResetFallFlag(player, 1.5f));
     }
+
+    private IEnumerator ResetFallFlag(FallingBehaviour player,float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+        player.ResetFallingState();
+    }
+
 }

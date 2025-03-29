@@ -56,7 +56,6 @@ public class MenuHandler : MonoBehaviour
     {
         foreach (RectTransform child in transform)
         {
-            Debug.Log("Checking: " + child.gameObject.name + " | Active: " + child.gameObject.activeSelf);
             if (child.gameObject.activeSelf)
                 return true;
         }
