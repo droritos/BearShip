@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c1acc654996e044f931e868f7daf3cb, type: 3}
   m_Name: EnemyData
   m_EditorClassIdentifier: 
-  Speed: 4
+  Speed: 3
   AngularSpeed: 360
   Acceleration: 6
-  PushStreangth: 10
