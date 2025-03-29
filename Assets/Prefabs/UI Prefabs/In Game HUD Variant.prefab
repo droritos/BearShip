@@ -261,7 +261,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 8202228496747056596}
         m_TargetAssemblyTypeName: MenuHandler, Assembly-CSharp
-        m_MethodName: HandleOptionMenuState
+        m_MethodName: ToggleOptionsMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -328,6 +328,38 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 755845073194435047, guid: 0b282ddbc6e889641b48c12f3e59b4b3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 966642922896113247, guid: 0b282ddbc6e889641b48c12f3e59b4b3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 966642922896113247, guid: 0b282ddbc6e889641b48c12f3e59b4b3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 966642922896113247, guid: 0b282ddbc6e889641b48c12f3e59b4b3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 8202228496747056596}
+    - target: {fileID: 966642922896113247, guid: 0b282ddbc6e889641b48c12f3e59b4b3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 966642922896113247, guid: 0b282ddbc6e889641b48c12f3e59b4b3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: CloseOption
+      objectReference: {fileID: 0}
+    - target: {fileID: 966642922896113247, guid: 0b282ddbc6e889641b48c12f3e59b4b3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
+      value: MenuHandler, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 966642922896113247, guid: 0b282ddbc6e889641b48c12f3e59b4b3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 966642922896113247, guid: 0b282ddbc6e889641b48c12f3e59b4b3, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}

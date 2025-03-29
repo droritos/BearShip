@@ -108,7 +108,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba04a089c3ed6af41a6c62f8f0b71717, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 4000783669021078187}
+  thirdPersonAnimation: {fileID: 4000783669021078187}
   _mainCamera: {fileID: 0}
   _rigidbody: {fileID: 3703909948403990499}
   characterData: {fileID: 11400000, guid: eea83e8394d13ab4b8ee20f3904e5ea3, type: 2}

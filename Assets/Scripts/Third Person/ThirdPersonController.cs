@@ -1,11 +1,12 @@
 using System;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 public class ThirdPersonController : MonoBehaviour
 {
     [Header("Serialize Field")]
-    [SerializeField] ThirdPersonAnimation animator;
+    [SerializeField] ThirdPersonAnimation thirdPersonAnimation;
     [SerializeField] Camera _mainCamera;
     public ThirdPersonActionAsset PlayerActionAssets {  get; private set; }
     private InputAction _move;
@@ -47,6 +48,7 @@ public class ThirdPersonController : MonoBehaviour
         if (_rigidbody.linearVelocity.y < 0) // Falling
         {
             _rigidbody.linearVelocity += Vector3.up * Physics.gravity.y * 2 * Time.fixedDeltaTime;
+            //IsAboutToLand();
         }
 
         // Clamp velocity to prevent excessive speed
@@ -59,6 +61,10 @@ public class ThirdPersonController : MonoBehaviour
         }
 
         LookAt();
+    }
+    public void AddForce(Vector3 direction)
+    {
+        _rigidbody.AddForce(direction * 5, ForceMode.Impulse);
     }
     private void HandleMove()
     {
@@ -88,6 +94,8 @@ public class ThirdPersonController : MonoBehaviour
     // Updated DoJump method to accept CallbackContext
     private void DoJump(InputAction.CallbackContext context)
     {
+        thirdPersonAnimation.Animator.SetTrigger("Jump");
+
         if (IsGrounded())
         {
             _rigidbody.AddForce(Vector3.up * characterData.JumpForce, ForceMode.Impulse);
@@ -98,7 +106,7 @@ public class ThirdPersonController : MonoBehaviour
     private void DoPickUp(InputAction.CallbackContext context)
     {
         //Debug.Log("DoAttack");
-        animator.Animator.SetTrigger("PickUp");
+        thirdPersonAnimation.Animator.SetTrigger("PickUp");
     }
 
     private bool IsGrounded()
@@ -123,10 +131,13 @@ public class ThirdPersonController : MonoBehaviour
         else
             _rigidbody.angularVelocity = Vector3.zero;
     }
-
-    public void AddForce(Vector3 direction)
+    private void IsAboutToLand()
     {
-        _rigidbody.AddForce(direction * 5, ForceMode.Impulse);
+        // Check if falling and close to the ground
+        if (!IsGrounded() && Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, 1.0f))
+        {
+            thirdPersonAnimation.Animator.SetTrigger("Land");
+        }
     }
-    
+
 }
