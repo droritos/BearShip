@@ -5,8 +5,8 @@ public class FallingBehaviour : MonoBehaviour
 {
     public event UnityAction<GameObject> OnFallingFromWorld; 
     
-    [SerializeField] private float fallingThreshold = 10.0f;
-    [SerializeField] private float checkInterval = 0.5f; 
+    [SerializeField] private float fallingThreshold = 15f;
+    [SerializeField] private float checkInterval = 1f; 
 
     private bool _hasFallen = false;
 

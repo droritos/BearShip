@@ -9,13 +9,13 @@ public class MenuHandler : MonoBehaviour
 
     [Header("Buttons Managemnet")]
     [SerializeField] GameObject menuFirstButton;
-    [SerializeField] GameObject settingsFirstButton;
+    [SerializeField] GameObject settingsFirstObject;
     [SerializeField] GameObject optionCloseButton;
 
 
     public void SettingsMenu()
     {
-        SetCurrentSelectedObject(settingsFirstButton);
+        SetCurrentSelectedObject(settingsFirstObject); // The first opbject is the slider 
     }
     public void CloseOption()
     {
@@ -31,17 +31,35 @@ public class MenuHandler : MonoBehaviour
 
     public void OpenPauseMenu(InputAction.CallbackContext context)
     {
-        OptionsMenu.SetActive(!OptionsMenu.activeSelf);
-
-        if (OptionsMenu.activeSelf)
-        {
-            SetCurrentSelectedObject(menuFirstButton);
-            Time.timeScale = 0f;
-        }
-        else
-            Time.timeScale = 1.0f;
-
+        ToggleOptionsMenu();
     }
 
+    private void ToggleOptionsMenu()
+    {
+        bool isActive = !OptionsMenu.activeSelf;
+        OptionsMenu.SetActive(isActive);
 
+        if (isActive)
+        {
+            SetCurrentSelectedObject(menuFirstButton);
+        }
+
+        UpdateTimeScale();
+    }
+
+    private void UpdateTimeScale()
+    {
+        Time.timeScale = HasAnyMenuActive() ? 0f : 1f;
+    }
+
+    private bool HasAnyMenuActive()
+    {
+        foreach (RectTransform child in transform)
+        {
+            Debug.Log("Checking: " + child.gameObject.name + " | Active: " + child.gameObject.activeSelf);
+            if (child.gameObject.activeSelf)
+                return true;
+        }
+        return false;
+    }
 }

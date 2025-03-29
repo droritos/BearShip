@@ -22,6 +22,11 @@ public class CinemachineSensitivity : MonoBehaviour
 
     public float GetSensitivity()
     {
+        if (_freeLookCamera == null)
+        {
+            Debug.Log("Free Look Camera Is Null");
+            return -1f;
+        }
         return _freeLookCamera.m_XAxis.m_MaxSpeed;
     }
 

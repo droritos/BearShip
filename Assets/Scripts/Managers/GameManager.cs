@@ -5,7 +5,8 @@ using Cinemachine;
 public class GameManager : MonoSingleton<GameManager>
 {
     [Header("UI")]
-    [SerializeField] private UIManager uiManager;
+    //[SerializeField] private UIManager uiManagerPrefab;
+    [SerializeField] UIManager _uiManager;
 
     [Header("Player Belongings")]
     public CinemachineFreeLook FreeLookCamera;
@@ -28,7 +29,9 @@ public class GameManager : MonoSingleton<GameManager>
         _levelNames[1] = "Boom Boom Beach";
         _levelNames[2] = "Lazy Forest";
 
-        //uiManager?.AssignActionAsset(PlayerManager.ThirdPersonController.PlayerActionAssets);
+
+        //_uiManager = Instantiate(uiManagerPrefab);
+        _uiManager.AssignActionAsset(PlayerManager.ThirdPersonController.PlayerActionAssets);
     }
 
     private void Start()
@@ -40,7 +43,7 @@ public class GameManager : MonoSingleton<GameManager>
             PlayerPrefs.SetInt("Score", 0);
         }
 
-        uiManager?.UpdateLevel(_levelNames[_levelCounter]);
+        _uiManager?.UpdateLevel(_levelNames[_levelCounter]);
         
         foreach (Artifact artifact in artifacts)
         {
@@ -53,7 +56,7 @@ public class GameManager : MonoSingleton<GameManager>
     private void AddScore()
     {
         PlayerPrefs.SetInt("Score", PlayerPrefs.GetInt("Score") + 1);
-        uiManager.UpdateScore();
+        _uiManager.UpdateScore();
     }
 
     private void LoadSettingsData()
