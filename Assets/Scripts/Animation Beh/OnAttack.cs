@@ -23,7 +23,7 @@ public class OnAttack : StateMachineBehaviour
 
         if (enemyBehavior != null)
         {
-            enemyBehavior.InvokeAttack();
+            //enemyBehavior.InvokeAttack();
             Debug.Log("Finish Attack Animation --> Invoke Attack");
         }
         else

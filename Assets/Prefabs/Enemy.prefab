@@ -151,7 +151,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: -2765639428920411087, guid: 859618878db30424aac3c01fd5b1d758, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 859618878db30424aac3c01fd5b1d758, type: 3}
@@ -331,7 +332,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 7751717350151257345}
   agent: {fileID: 1923363711853946941}
-  attackSound: {fileID: 0}
+  attackSound: {fileID: 8300000, guid: 7556575df755c05439ed8ad348eb3f70, type: 3}
 --- !u!136 &1442748931579912868
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -352,9 +353,9 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.7381525
-  m_Height: 3.2276988
+  m_Height: 2.7299767
   m_Direction: 1
-  m_Center: {x: 0, y: 1.1138494, z: 0.2381525}
+  m_Center: {x: 0, y: 1.3627105, z: 0.2381525}
 --- !u!4 &6751676041977933749 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1946458360122121293, guid: d69a26039cfc576409dfe86cb9d58145, type: 3}

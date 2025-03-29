@@ -15,16 +15,22 @@ public class EnemyBehavior : MonoBehaviour
     //Add force to the player when colliding with him
     public void OnCollisionEnter(Collision other)
     {
-        //if (other.gameObject.CompareTag("Player"))
-        SoundManager.Instance.PlaySfxSound(attackSound, transform);
-        //InvokeAttack();
-        animator.SetTrigger("Attack");
+        if (other.gameObject.CompareTag("Player"))
+        {
+            SoundManager.Instance.PlaySfxSound(attackSound, transform);
+            animator.SetTrigger("Attack");
+            
+            Vector3 destinationDirection = new Vector3(agent.destination.x - transform.position.x, 1, agent.destination.z - transform.position.z);
+            destinationDirection.Normalize();
+            OnCollisionEventAction?.Invoke(new Vector3(destinationDirection.x * 10, 1, destinationDirection.z * 10));
+        }
+        // InvokeAttack();
     }
 
-    public void InvokeAttack()
-    {
-        Vector3 destinationDirection = new Vector3(agent.destination.x - transform.position.x, 1, agent.destination.z - transform.position.z);
-        destinationDirection.Normalize();
-        OnCollisionEventAction?.Invoke(new Vector3(destinationDirection.x * 10, 1, destinationDirection.z * 10));
-    }
+    // public void InvokeAttack()
+    // {
+    //     Vector3 destinationDirection = new Vector3(agent.destination.x - transform.position.x, 1, agent.destination.z - transform.position.z);
+    //     destinationDirection.Normalize();
+    //     OnCollisionEventAction?.Invoke(new Vector3(destinationDirection.x * 10, 1, destinationDirection.z * 10));
+    // }
 }
