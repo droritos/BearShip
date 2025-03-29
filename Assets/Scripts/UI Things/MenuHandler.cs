@@ -34,7 +34,7 @@ public class MenuHandler : MonoBehaviour
         ToggleOptionsMenu();
     }
 
-    private void ToggleOptionsMenu()
+    public void ToggleOptionsMenu()
     {
         bool isActive = !OptionsMenu.activeSelf;
         OptionsMenu.SetActive(isActive);
