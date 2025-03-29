@@ -13,8 +13,6 @@ public class SliderSetting : MonoBehaviour
 
     private delegate void SliderValueChangedDelegate(float value);
 
-
-
     protected virtual void Start()
     {
         SetSliderValues(_maxValue, valueSetting);

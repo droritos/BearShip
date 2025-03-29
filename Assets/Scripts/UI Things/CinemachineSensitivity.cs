@@ -9,13 +9,9 @@ public class CinemachineSensitivity : SliderSetting
     
     protected override void Start()
     {   
-        _freeLookCamera = GameManager.Instance.FreeLookCamera; 
+        _freeLookCamera = GameManager.Instance.FreeLookCamera;
 
-        SetSliderValues(this._maxValue, _freeLookCamera.m_XAxis.m_MaxSpeed);
-        UpdateSentting(SliderObject.value);
-
-        // Listen for slider value changes
-        SliderObject.onValueChanged.AddListener(UpdateSentting);
+        base.Start();
     }
 
     public float GetSensitivity()

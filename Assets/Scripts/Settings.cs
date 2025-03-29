@@ -4,6 +4,8 @@ public class Settings : MonoBehaviour
 {
     public SettingsData DataToSave { get ; private set; }
     public CinemachineSensitivity SensitivitySetting;
+    public SoundSettings SoundSettings;
+
     private void Awake()
     {
         DataToSave = SaveSystem.LoadData();
