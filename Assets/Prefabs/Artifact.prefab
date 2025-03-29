@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 1595147600570438234}
   - component: {fileID: 4099311671515959481}
   - component: {fileID: 769529715902163902}
+  - component: {fileID: 5805334985973864253}
   m_Layer: 0
   m_Name: Artifact
   m_TagString: Untagged
@@ -129,6 +130,29 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 049fca98f41513947b1fae499c76c9ff, type: 3}
   - {fileID: 8300000, guid: aec27e1c960dc964aa0f1349feddeb32, type: 3}
   - {fileID: 8300000, guid: 502edcb1ebb82014ebc096e6d7810d2d, type: 3}
+  animator: {fileID: 5805334985973864253}
+--- !u!95 &5805334985973864253
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5887727337826938474}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 71dbb98fb360f5841957fc2bfc9c3d2a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &8213320313669696286
 PrefabInstance:
   m_ObjectHideFlags: 0
