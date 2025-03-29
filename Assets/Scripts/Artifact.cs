@@ -16,7 +16,7 @@ public class Artifact : MonoBehaviour
     {
         OnPickUpActionEvent?.Invoke();
         SoundManager.Instance.PlayRandomSfxSound(collectSound,transform);
-        animator.SetBool("PickUp", true);
+        animator.SetBool(triggerName, true);
         Destroy(this.gameObject, 0.25f);
     }
 }
