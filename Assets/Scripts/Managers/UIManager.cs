@@ -22,7 +22,7 @@ public class UIManager : MonoBehaviour
         if (_playerActionAssets == null)
         {
             _playerActionAssets = GameManager.Instance.PlayerManager.ThirdPersonController.PlayerActionAssets;
-            Debug.Log("Getting Action From GameManager");
+            //Debug.Log("Getting Action From GameManager");
         }
         if (PlayerPrefs.HasKey("Score"))
         {
@@ -33,7 +33,7 @@ public class UIManager : MonoBehaviour
             PlayerPrefs.SetInt("Score", 0);
             scoreCounter.text = PlayerPrefs.GetInt("Score").ToString();
         }
-        Debug.Log("Debug");
+        //Debug.Log("Debug");
         SubscribeToPauseStarted();
         _playerActionAssets.Enable();
     }

@@ -15,7 +15,7 @@ public class EnemyBehavior : MonoBehaviour
     //Add force to the player when colliding with him
     public void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag(GlobalInfo.PlayerTag))
         {
             SoundManager.Instance.PlaySfxSound(attackSound, transform);
             animator.SetTrigger("Attack");

@@ -7,4 +7,10 @@ public class MainMenu : MonoBehaviour
     {
         SceneManager.LoadScene(levelIndex);
     }
+    public void QuitGame()
+    {
+        Debug.Log("Quit Game And Save Setttings");
+        GameManager.Instance.Settings.SaveSettings();
+        Application.Quit();
+    }
 }
