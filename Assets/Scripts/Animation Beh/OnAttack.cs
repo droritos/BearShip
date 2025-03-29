@@ -3,52 +3,32 @@ using UnityEngine;
 public class OnAttack : StateMachineBehaviour
 {
     EnemyBehavior enemyBehavior;
-    // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
-    //override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    enemyBehavior = animator.GetComponent<EnemyBehavior>();
-    //}
+    private EnemyBehavior FindEnemyBehaviorInParents(Transform child)
+    {
+        while (child != null) // Keep moving up until no parent exists
+        {
+            EnemyBehavior enemy = child.GetComponent<EnemyBehavior>();
+            if (enemy != null)
+            {
+                return enemy; // Found it, return immediately
+            }
+            child = child.parent; // Move to the next parent
+        }
+        return null; // No EnemyBehavior found in any parent
+    }
 
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        enemyBehavior = animator.transform.root.GetComponent<EnemyBehavior>(); // Reaching the main Parent component
+        enemyBehavior = FindEnemyBehaviorInParents(animator.transform); // Find EnemyBehavior in parents
 
         if (enemyBehavior != null)
         {
             enemyBehavior.InvokeAttack();
             Debug.Log("Finish Attack Animation Now Knockback");
         }
+        else
+        {
+            Debug.LogError("EnemyBehavior not found in any parent of: " + animator.gameObject.name);
+        }
     }
-
-    // OnStateMove is called right after Animator.OnAnimatorMove()
-    //override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    // Implement code that processes and affects root motion
-    //}
-
-    // OnStateIK is called right after Animator.OnAnimatorIK()
-    //override public void OnStateIK(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    // Implement code that sets up animation IK (inverse kinematics)
-
-    //}
-
-
-    //override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    _toucanEnemy = animator.GetComponentInParent<ToucanEnemy>();
-
-    //    if (_toucanEnemy != null)
-    //    {
-    //        _toucanEnemy.TryAttack(_toucanEnemy.MyFeets.CurrentEdgedAttached, _damage);
-    //        Debug.Log($"ToucanEnemy Damage Done {_damage}");
-    //        _counterAttacks++;
-
-    //    }
-    //    else
-    //    {
-    //        Debug.LogWarning("ToucanEnemy component not found on Animator's GameObject!");
-    //    }
-    //}
-
 }
