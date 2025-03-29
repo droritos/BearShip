@@ -52,6 +52,7 @@ public class SceneHandler : MonoBehaviour
     private void UpdateCurrentCheckpoint(Checkpoint checkpoint)
     {
         _currentCheckpoints = checkpoint;
+    }
 
     private void SceneTransition()
     {
