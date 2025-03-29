@@ -45,7 +45,7 @@ public class UIManager : MonoBehaviour
     private void SubscribeToPauseStarted()
     {
         _playerActionAssets.Player.Pause.started += menuHandler.OpenPauseMenu;
-        Debug.Log($"{_playerActionAssets} {menuHandler.gameObject}");
+        //Debug.Log($"{_playerActionAssets} {menuHandler.gameObject}");
     }
 
     public void UpdateScore()

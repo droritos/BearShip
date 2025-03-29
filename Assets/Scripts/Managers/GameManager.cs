@@ -37,6 +37,7 @@ public class GameManager : MonoSingleton<GameManager>
     private void Start()
     {
         LoadSettingsData();
+        playerManager.FallingBehaviour.OnFallingFromWorld += sceneManager.HandleFalling;
 
         if (!PlayerPrefs.HasKey("Score"))
         {
@@ -51,7 +52,6 @@ public class GameManager : MonoSingleton<GameManager>
             artifact.OnPickUpActionEvent += playerManager.Followers.AddFollower;
         }
 
-        playerManager.FallingBehaviour.OnFallingFromWorld += ReturnToStartPoint;
     }
 
     private void AddScore()
@@ -68,11 +68,11 @@ public class GameManager : MonoSingleton<GameManager>
         FreeLookCamera.m_XAxis.m_MaxSpeed = settings.DataToSave.MouseSensitivity;
         // More setting can loaded here
     }
-    private void ReturnToStartPoint(GameObject playerObject)
-    {
-        playerManager.FallingBehaviour.OnFallingFromWorld += sceneManager.HandleFalling;
-        playerManager.FallingBehaviour.ResetFallingState();
-    }
+    //private void ReturnToStartPoint()
+    //{
+    //    playerManager.FallingBehaviour.OnFallingFromWorld += sceneManager.HandleFalling;
+    //    //playerManager.FallingBehaviour.ResetFallingState();
+    //}
     private void OnApplicationQuit()
     {
         settings.SaveSettings();

@@ -8,10 +8,10 @@ public class CinemachineSensitivity : MonoBehaviour
     [SerializeField] private Slider sensitivitySlider; // UI Slider
     [SerializeField] private TextMeshProUGUI valueText; // Text to display value
 
-    private CinemachineFreeLook _freeLookCamera; // Reference to CinemachineFreeLook
+    private CinemachineFreeLook _freeLookCamera; 
     private void Start()
     {   
-        _freeLookCamera = GameManager.Instance.FreeLookCamera; // Event Set the setting needed
+        _freeLookCamera = GameManager.Instance.FreeLookCamera; 
 
         SetSliderValues();
         UpdateSensitivity(sensitivitySlider.value);
@@ -22,12 +22,14 @@ public class CinemachineSensitivity : MonoBehaviour
 
     public float GetSensitivity()
     {
-        if (_freeLookCamera == null)
+        if (_freeLookCamera != null)
         {
-            Debug.Log("Free Look Camera Is Null");
-            return -1f;
+            return _freeLookCamera.m_XAxis.m_MaxSpeed; 
         }
-        return _freeLookCamera.m_XAxis.m_MaxSpeed;
+        else
+        {
+            return GameManager.Instance.FreeLookCamera.m_XAxis.m_MaxSpeed;
+        }
     }
 
     private void SetSliderValues()
