@@ -12,6 +12,8 @@ public class MenuHandler : MonoBehaviour
     [SerializeField] GameObject settingsFirstObject;
     [SerializeField] GameObject optionCloseButton;
 
+    [SerializeField] AudioClip pauseClip;
+
 
     public void SettingsMenu()
     {
@@ -43,6 +45,8 @@ public class MenuHandler : MonoBehaviour
         {
             SetCurrentSelectedObject(menuFirstButton);
         }
+
+        SoundManager.Instance.PlayUISound(pauseClip, transform); // Do Pause / Unpause SFX
 
         UpdateTimeScale();
     }
