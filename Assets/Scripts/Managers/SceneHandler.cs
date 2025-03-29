@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class SceneManager : MonoBehaviour
+public class SceneHandler : MonoBehaviour
 {
     [SerializeField] Transform startingPoint;
     [SerializeField] float fallingCooldown;
