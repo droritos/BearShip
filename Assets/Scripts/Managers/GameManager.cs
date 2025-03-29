@@ -15,7 +15,7 @@ public class GameManager : MonoSingleton<GameManager>
     [SerializeField] Settings settings;
 
     [Header("Scene Belongings")]
-    [SerializeField] SceneManager sceneManager;
+    [SerializeField] SceneHandler sceneManager;
     [SerializeField] private List<Artifact> artifacts;
     private Dictionary<int, string> _levelNames;
     private static int _levelCounter;
@@ -68,11 +68,6 @@ public class GameManager : MonoSingleton<GameManager>
         FreeLookCamera.m_XAxis.m_MaxSpeed = settings.DataToSave.MouseSensitivity;
         // More setting can loaded here
     }
-    //private void ReturnToStartPoint()
-    //{
-    //    playerManager.FallingBehaviour.OnFallingFromWorld += sceneManager.HandleFalling;
-    //    //playerManager.FallingBehaviour.ResetFallingState();
-    //}
     private void OnApplicationQuit()
     {
         settings.SaveSettings();
