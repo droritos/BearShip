@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SceneHandler : MonoBehaviour
 {
@@ -31,4 +32,8 @@ public class SceneHandler : MonoBehaviour
         player.ResetFallingState();
     }
 
+    private void SceneTransition()
+    {
+        SceneManager.LoadScene(1);
+    }
 }
