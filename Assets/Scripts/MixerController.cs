@@ -41,6 +41,7 @@ public class MixerController : MonoBehaviour
         }
 
         myAudioMixer.GetFloat(parameterName, out dbValue);
+
         // Convert dB back to linear value (0-1)
         return dbValue > -80f ? Mathf.Pow(10, dbValue / 20f) : 0f;
     }
