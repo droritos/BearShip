@@ -34,7 +34,7 @@ public class CinemachineSensitivity : SliderSetting
         SliderObject.value = valueSetting;
     }
 
-    protected override void UpdateSentting(float value)
+    public override void UpdateDisplay(float value)
     {
         _freeLookCamera.m_XAxis.m_MaxSpeed = value; // Update X-axis speed
         valueText.text = Mathf.RoundToInt(value).ToString(); // Update UI text

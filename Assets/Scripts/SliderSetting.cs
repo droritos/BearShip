@@ -16,11 +16,17 @@ public class SliderSetting : MonoBehaviour
     protected virtual void Start()
     {
         SetSliderValues(_maxValue, valueSetting);
-        UpdateSentting(valueSetting);
+        UpdateDisplay(valueSetting);
 
         // Listen for slider value changes
-        SliderObject.onValueChanged.AddListener(UpdateSentting);
+        SliderObject.onValueChanged.AddListener(UpdateDisplay);
     }
+    public virtual void UpdateDisplay(float settingValue)
+    {
+        settingValue = SliderObject.value; // Update X-axis speed
+        valueText.text = Mathf.RoundToInt(SliderObject.value).ToString(); // Update UI text
+    }
+
     protected virtual void SetSliderValues(float maxValue, float valueSetting = 1)
     {
         SliderObject.minValue = 1f;
@@ -29,10 +35,5 @@ public class SliderSetting : MonoBehaviour
         SliderObject.value = valueSetting;
     }
 
-    protected virtual void UpdateSentting(float settingValue)
-    {
-        settingValue = SliderObject.value; // Update X-axis speed
-        valueText.text = Mathf.RoundToInt(SliderObject.value).ToString(); // Update UI text
-    }
 
 }

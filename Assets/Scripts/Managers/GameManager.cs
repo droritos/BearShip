@@ -67,6 +67,7 @@ public class GameManager : MonoSingleton<GameManager>
             Debug.Log("Settings Script Is Null!!");
 
         FreeLookCamera.m_XAxis.m_MaxSpeed = settings.DataToSave.MouseSensitivity;
+        settings.SensitivitySetting.UpdateDisplay(FreeLookCamera.m_XAxis.m_MaxSpeed);
         settings.LoadVolumes();
 
         // More setting can loaded here
