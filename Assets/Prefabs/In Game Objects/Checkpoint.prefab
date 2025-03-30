@@ -69,6 +69,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wantedSize: 30
   boxCollider: {fileID: 3803524794476024033}
+  sound: {fileID: 8300000, guid: 56d4b078b0af11446ac4d66a92a964d4, type: 3}
 --- !u!1001 &1472539699063478177
 PrefabInstance:
   m_ObjectHideFlags: 0

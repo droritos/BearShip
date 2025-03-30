@@ -26,13 +26,14 @@ public class UIManager : MonoBehaviour
         }
         if (PlayerPrefs.HasKey("Score"))
         {
-            scoreCounter.text = PlayerPrefs.GetInt("Score").ToString();
+            UpdateScore();
         }
         else
         {
             PlayerPrefs.SetInt("Score", 0);
-            scoreCounter.text = PlayerPrefs.GetInt("Score").ToString();
+            UpdateScore();
         }
+        Debug.Log(PlayerPrefs.GetInt("Score"));
         //Debug.Log("Debug");
         SubscribeToPauseStarted();
         _playerActionAssets.Enable();

@@ -5,13 +5,21 @@ public class Checkpoint : MonoBehaviour
 {
     public event UnityAction<Checkpoint> OnCheckpointEnter;
 
+    private bool entered;
+    
     [SerializeField] float wantedSize = 30f;
     [SerializeField] BoxCollider boxCollider;
+    [SerializeField] private AudioClip sound;
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag(GlobalInfo.PlayerTag))
         {
-            OnCheckpointEnter.Invoke(this);
+            OnCheckpointEnter?.Invoke(this);
+            if (!entered)
+            {
+                SoundManager.Instance.PlaySfxSound(sound,other.transform);
+            }
+            entered = true;
         }
     }
     private void OnValidate() // Easy way to adjust the collider size though out the inspector
