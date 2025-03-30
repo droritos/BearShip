@@ -1,30 +1,50 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.Mathematics;
 using UnityEngine;
 using Random = UnityEngine.Random;
+using UnityEngine.EventSystems;
 
 public class WinningScene : MonoBehaviour
 {
     private int bearsAmount;
     private Bounds bounds;
     private quaternion rotation;
-    
+
+    [SerializeField] private GameObject firstButton;
     [SerializeField] private GameObject bear;
     [SerializeField] private Collider collider;
     [SerializeField] private UIManager UIManager;
+    [SerializeField] TextMeshProUGUI bearText;
+
+    private const string _score = "Score";
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         bounds = collider.bounds;
-        if (PlayerPrefs.HasKey("Score"))
-        {
-            bearsAmount = PlayerPrefs.GetInt("Score");
-            StartCoroutine(SpawnBear());
-        }
-    }
 
+        if (PlayerPrefs.HasKey(_score))
+        {
+            bearsAmount = PlayerPrefs.GetInt(_score);
+
+            bearText.text = bearsAmount.ToString();
+
+            StartCoroutine(SpawnBear());
+
+        }
+        else
+        {
+            Debug.Log("Player Pref " + _score + " Not found");
+        }
+
+    }
+    private void Update()
+    {
+        EnsureButtonSelected();
+
+    }
     private IEnumerator SpawnBear()
     {
         yield return new WaitForSeconds(0.2f);
@@ -35,6 +55,21 @@ public class WinningScene : MonoBehaviour
         {
             bearsAmount--;
             StartCoroutine(SpawnBear());
+            
+            bearText.text = bearsAmount.ToString();
         }
     }
+
+    private void EnsureButtonSelected()
+    {
+        if (firstButton != null && EventSystem.current != null)
+        {
+            if (EventSystem.current.currentSelectedGameObject == null)
+            {
+                EventSystem.current.SetSelectedGameObject(firstButton);
+                Debug.Log("startButton has been re-selected.");
+            }
+        }
+    }
+
 }
