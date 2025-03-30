@@ -131,6 +131,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SmallForestBlock
       objectReference: {fileID: 0}
+    - target: {fileID: 5023857271002901289, guid: 2854251624a5c3341a897f2b5ca6693f, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 5689035059073675667, guid: 2854251624a5c3341a897f2b5ca6693f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.7563317
@@ -192,6 +196,10 @@ PrefabInstance:
     - target: {fileID: 3730928968957918359, guid: 396285338bcd9bb43981eb8e85e323b5, type: 3}
       propertyPath: m_Name
       value: LargeForestFlat
+      objectReference: {fileID: 0}
+    - target: {fileID: 3730928968957918359, guid: 396285338bcd9bb43981eb8e85e323b5, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 4074979817857164845, guid: 396285338bcd9bb43981eb8e85e323b5, type: 3}
       propertyPath: m_LocalScale.x
@@ -266,6 +274,10 @@ PrefabInstance:
     - target: {fileID: 1370874871906019908, guid: e5295e3b142854549a8b266bf6b38eb4, type: 3}
       propertyPath: m_Name
       value: MediumDesertFloor
+      objectReference: {fileID: 0}
+    - target: {fileID: 1370874871906019908, guid: e5295e3b142854549a8b266bf6b38eb4, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 1751200700735942910, guid: e5295e3b142854549a8b266bf6b38eb4, type: 3}
       propertyPath: m_LocalPosition.x
@@ -448,6 +460,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: flag_teamBlue
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: a39c81a05a72aea49ad0ce6cd3632819, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -472,7 +488,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &279296223
 Transform:
@@ -559,6 +575,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MediumForestFloor (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 3246687358376923494, guid: 961bc6c60be0c3a429db83541fe0101f, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -580,6 +600,10 @@ PrefabInstance:
     - target: {fileID: 5023857271002901289, guid: 2854251624a5c3341a897f2b5ca6693f, type: 3}
       propertyPath: m_Name
       value: SmallForestBlock (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5023857271002901289, guid: 2854251624a5c3341a897f2b5ca6693f, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 5689035059073675667, guid: 2854251624a5c3341a897f2b5ca6693f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -680,6 +704,10 @@ PrefabInstance:
     - target: {fileID: 6074900059998927755, guid: bd22a31544ed5da47babdf462928cd8c, type: 3}
       propertyPath: m_Name
       value: LargeDesertFloor
+      objectReference: {fileID: 0}
+    - target: {fileID: 6074900059998927755, guid: bd22a31544ed5da47babdf462928cd8c, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6847074278899999025, guid: bd22a31544ed5da47babdf462928cd8c, type: 3}
       propertyPath: m_LocalScale.y
@@ -926,6 +954,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 899ccbf40b943a04e9130eaac3ae4ee4, type: 3}
       propertyPath: m_Name
       value: plantA_forest
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 899ccbf40b943a04e9130eaac3ae4ee4, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1451,6 +1483,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LargeDesertFlat
       objectReference: {fileID: 0}
+    - target: {fileID: 113078310654725649, guid: 6e0002a258b03fa4e83499c60e1ab622, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 782057002444526763, guid: 6e0002a258b03fa4e83499c60e1ab622, type: 3}
       propertyPath: m_LocalPosition.x
       value: 7.430254
@@ -1686,6 +1722,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: tree_desert
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 3105f0cf76346194e8836261f25d9979, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1712,7 +1752,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!108 &1388168666
 Light:
@@ -1869,6 +1909,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MediumForestFloor
       objectReference: {fileID: 0}
+    - target: {fileID: 3246687358376923494, guid: 961bc6c60be0c3a429db83541fe0101f, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1930,6 +1974,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: e8eed0bc98a92b942b85593414614c1d, type: 3}
       propertyPath: m_Name
       value: plantB_forest
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e8eed0bc98a92b942b85593414614c1d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1993,6 +2041,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: rocksB_forest
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ba5e4f7ef833a2e42bd5e8db7be6429d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2054,6 +2106,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 899ccbf40b943a04e9130eaac3ae4ee4, type: 3}
       propertyPath: m_Name
       value: plantA_forest (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 899ccbf40b943a04e9130eaac3ae4ee4, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2117,6 +2173,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SmallDesertBlock (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1025984921640903049, guid: e20cb37cf32453a46b4345aa52315466, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2179,6 +2239,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SmallDesertBlock
       objectReference: {fileID: 0}
+    - target: {fileID: 1025984921640903049, guid: e20cb37cf32453a46b4345aa52315466, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2240,6 +2304,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 0207fb27da96ac04fa72bbd73ff3fc0f, type: 3}
       propertyPath: m_Name
       value: tree_forest
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 0207fb27da96ac04fa72bbd73ff3fc0f, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2514,6 +2582,10 @@ PrefabInstance:
     - target: {fileID: 1370874871906019908, guid: e5295e3b142854549a8b266bf6b38eb4, type: 3}
       propertyPath: m_Name
       value: MediumDesertFloor (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1370874871906019908, guid: e5295e3b142854549a8b266bf6b38eb4, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 1751200700735942910, guid: e5295e3b142854549a8b266bf6b38eb4, type: 3}
       propertyPath: m_LocalPosition.x
