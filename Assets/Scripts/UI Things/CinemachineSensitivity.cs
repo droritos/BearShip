@@ -10,7 +10,7 @@ public class CinemachineSensitivity : SliderSetting
     protected override void Start()
     {   
         _freeLookCamera = GameManager.Instance.FreeLookCamera;
-
+        valueSetting = GetSensitivity();
         base.Start();
     }
 
@@ -31,12 +31,17 @@ public class CinemachineSensitivity : SliderSetting
         SliderObject.minValue = 1f;
         SliderObject.maxValue = maxValue;
 
-        SliderObject.value = valueSetting;
+        //SliderObject.value = valueSetting;
+        UpdateDisplay(valueSetting);
     }
 
     public override void UpdateDisplay(float value)
     {
-        _freeLookCamera.m_XAxis.m_MaxSpeed = value; // Update X-axis speed
+        if (_freeLookCamera != null)
+        {
+            _freeLookCamera.m_XAxis.m_MaxSpeed = value; // Update X-axis speed
+        }
+        SliderObject.value = value;
         valueText.text = Mathf.RoundToInt(value).ToString(); // Update UI text
     }
 

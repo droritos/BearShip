@@ -20,6 +20,7 @@ public class Settings : MonoBehaviour
         DataToSave.SFXVolume = SoundSettings.SfxGroupSlider.GetAudioVolume();
         DataToSave.UIVolume = SoundSettings.UiGroupSlider.GetAudioVolume();
         DataToSave.SoundTrackVolume = SoundSettings.SoundTrackGroupSlider.GetAudioVolume();
+
         SaveSystem.SaveSettings(DataToSave);
     }
 

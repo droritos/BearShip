@@ -8,9 +8,9 @@ public class MixerController : MonoBehaviour
 {
     [SerializeField] AudioMixer myAudioMixer;
     [SerializeField] TextMeshProUGUI valueText;
-
     private float _currentVolume;
-    //public int AudioVolume { get { return myAudioMixer.vol; } }
+    [SerializeField] private SoundMixerType myMixerType;
+
     public const string SFX = "MA_SFX";
     public const string SoundTrack = "MA_SoundTrack";
     public const string UI = "MA_UI";
@@ -20,44 +20,103 @@ public class MixerController : MonoBehaviour
     private void Start()
     {
         valueText.text = "50%";
+        _currentVolume = 50f; // Set default to 50%
+
+        // Initialize the mixer with 50% volume (0.5 in slider value)
+        float initialSliderValue = 0.5f;
+        SetVolumeBasedOnType(initialSliderValue);
     }
+
     public float GetAudioVolume()
     {
-        return _currentVolume;
+        float dbValue = 0f;
+        string parameterName = "";
+
+        switch (myMixerType)
+        {
+            case SoundMixerType.Master:
+                parameterName = MasterVolume;
+                break;
+            case SoundMixerType.SFX:
+                parameterName = SFX;
+                break;
+            case SoundMixerType.SoundTrack:
+                parameterName = SoundTrack;
+                break;
+            case SoundMixerType.UI:
+                parameterName = UI;
+                break;
+        }
+
+        myAudioMixer.GetFloat(parameterName, out dbValue);
+        // Convert dB back to linear value (0-1)
+        return dbValue > -80f ? Mathf.Pow(10, dbValue / 20f) : 0f;
     }
+
+
     public void SetMasterVolume(float sliderValue)
     {
-        myAudioMixer.SetFloat(MasterVolume, (MathF.Log10(sliderValue) * 20));
+        myMixerType = SoundMixerType.Master;
+
+        // Handle edge case where sliderValue is 0 to avoid -Infinity from Log10(0)
+        float dbValue = sliderValue > 0.0001f ? (Mathf.Log10(sliderValue) * 20) : -80f;
+        myAudioMixer.SetFloat(MasterVolume, dbValue);
 
         // Update UI text to show percentage
         _currentVolume = (sliderValue * 100);
         string percentage = _currentVolume.ToString("F2") + "%";
         valueText.text = percentage;
     }
+
     public void SetSFXVolume(float sliderValue)
     {
-        myAudioMixer.SetFloat(SFX, (MathF.Log10(sliderValue) * 20));
+        myMixerType = SoundMixerType.SFX;
+        float dbValue = sliderValue > 0.0001f ? (Mathf.Log10(sliderValue) * 20) : -80f;
+        myAudioMixer.SetFloat(SFX, dbValue);
 
         _currentVolume = (sliderValue * 100);
         string percentage = _currentVolume.ToString("F2") + "%";
         valueText.text = percentage;
     }
+
     public void SetUIVolume(float sliderValue)
     {
-        myAudioMixer.SetFloat(UI, (MathF.Log10(sliderValue) * 20));
+        myMixerType = SoundMixerType.UI;
+        float dbValue = sliderValue > 0.0001f ? (Mathf.Log10(sliderValue) * 20) : -80f;
+        myAudioMixer.SetFloat(UI, dbValue);
 
         _currentVolume = (sliderValue * 100);
         string percentage = _currentVolume.ToString("F2") + "%";
         valueText.text = percentage;
     }
+
     public void SetSoundTrackVolume(float sliderValue)
     {
-        myAudioMixer.SetFloat(SoundTrack, (MathF.Log10(sliderValue) * 20));
+        myMixerType = SoundMixerType.SoundTrack;
+        float dbValue = sliderValue > 0.0001f ? (Mathf.Log10(sliderValue) * 20) : -80f;
+        myAudioMixer.SetFloat(SoundTrack, dbValue);
 
         _currentVolume = (sliderValue * 100);
         string percentage = _currentVolume.ToString("F2") + "%";
         valueText.text = percentage;
     }
-
+    private void SetVolumeBasedOnType(float sliderValue)
+    {
+        switch (myMixerType)
+        {
+            case SoundMixerType.Master:
+                SetMasterVolume(sliderValue);
+                break;
+            case SoundMixerType.SFX:
+                SetSFXVolume(sliderValue);
+                break;
+            case SoundMixerType.SoundTrack:
+                SetSoundTrackVolume(sliderValue);
+                break;
+            case SoundMixerType.UI:
+                SetUIVolume(sliderValue);
+                break;
+        }
+    }
 
 }
