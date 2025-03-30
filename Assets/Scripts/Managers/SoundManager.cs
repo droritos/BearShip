@@ -5,6 +5,7 @@ using UnityEngine;
 public class SoundManager : MonoSingleton<SoundManager>
 {
     [SerializeField] private SoundSettings soundSettings;
+    public SoundSettings SoundSettings { get { return soundSettings; } }
 
     [SerializeField] private AudioSource sfxSource;
     [SerializeField] private AudioSource uiSource;
