@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections.Generic;
@@ -91,14 +92,17 @@ public class ThirdPersonController : MonoBehaviour
             if (!_isWalking) // Play sound only when starting to walk
             {
                 _isWalking = true;
-                _walkingSoundCoroutine = SoundManager.Instance.LoopSound(walkSounds, _isWalking, this.transform, 0.5f);
+                _walkingSoundCoroutine = StartCoroutine(PlayWalkingSound(walkSounds, transform, 0.5f));
             }
         }
         else
         {
             _isWalking = false; // Stop tracking walking if movement stops
-            if(_walkingSoundCoroutine != null)
+            if (_walkingSoundCoroutine != null)
+            {
                 StopCoroutine(_walkingSoundCoroutine);
+                _walkingSoundCoroutine = null;
+            }
         }
     }
 
@@ -156,6 +160,15 @@ public class ThirdPersonController : MonoBehaviour
             this._rigidbody.rotation = Quaternion.LookRotation(direction, Vector3.up);
         else
             _rigidbody.angularVelocity = Vector3.zero;
+    }
+    
+    private IEnumerator PlayWalkingSound(List<AudioClip> clipArray,Transform pos,float interval)
+    {
+        while (_isWalking)
+        {
+            SoundManager.Instance.PlayRandomSfxSound(clipArray, pos);
+            yield return new WaitForSeconds(interval); // Wait before playing next step sound
+        }
     }
 
 }

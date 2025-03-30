@@ -51,18 +51,4 @@ public class SoundManager : MonoSingleton<SoundManager>
         float clipLength = newSfx.clip.length;
         Destroy(newSfx.gameObject, clipLength);
     }
-
-    public Coroutine LoopSound(List<AudioClip> clipArray,  bool state, Transform transform, float interval)
-    {
-        return StartCoroutine(PlayWalkingSound(clipArray, state, transform, interval));
-    }
-
-    private IEnumerator PlayWalkingSound(List<AudioClip> clipArray, bool state,Transform transform,float interval)
-    {
-        while (state)
-        {
-            PlayRandomSfxSound(clipArray, transform);
-            yield return new WaitForSeconds(interval); // Wait before playing next step sound
-        }
-    }
 }
