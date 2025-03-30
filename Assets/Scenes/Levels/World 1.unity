@@ -1167,8 +1167,8 @@ MonoBehaviour:
   audioMixer: {fileID: 24100000, guid: 808d3af6b0127d641a8476bec633ce25, type: 2}
   MasterSound: {fileID: 458073940}
   SfxGroupSlider: {fileID: 1593266618}
-  UiGroupSlider: {fileID: 52831341}
-  SoundTrackGroupSlider: {fileID: 316728276}
+  UiGroupSlider: {fileID: 316728276}
+  SoundTrackGroupSlider: {fileID: 52831341}
 --- !u!1 &145383424
 GameObject:
   m_ObjectHideFlags: 0
