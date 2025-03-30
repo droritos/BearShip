@@ -32,13 +32,23 @@ public class GameManager : MonoSingleton<GameManager>
 
 
         //_uiManager = Instantiate(uiManagerPrefab);
-        _uiManager.AssignActionAsset(PlayerManager.ThirdPersonController.PlayerActionAssets);
+        if (playerManager != null)
+        {
+            _uiManager.AssignActionAsset(PlayerManager.ThirdPersonController.PlayerActionAssets);
+        }
     }
 
     private void Start()
     {
-        LoadSettingsData();
-        playerManager.FallingBehaviour.OnFallingFromWorld += sceneManager.HandleFalling;
+        if (settings != null)
+        {
+            LoadSettingsData();
+        }
+
+        if (playerManager != null)
+        {
+            playerManager.FallingBehaviour.OnFallingFromWorld += sceneManager.HandleFalling;
+        }
 
         if (!PlayerPrefs.HasKey("Score"))
         {
@@ -46,13 +56,15 @@ public class GameManager : MonoSingleton<GameManager>
         }
 
         _uiManager?.UpdateLevel(_levelNames[_levelCounter]);
-        
-        foreach (Artifact artifact in artifacts)
-        {
-            artifact.OnPickUpActionEvent += AddScore;
-            artifact.OnPickUpActionEvent += playerManager.Followers.AddFollower;
-        }
 
+        if (artifacts.Count > 0)
+        {
+            foreach (Artifact artifact in artifacts)
+            {
+                artifact.OnPickUpActionEvent += AddScore;
+                artifact.OnPickUpActionEvent += playerManager.Followers.AddFollower;
+            }   
+        }
     }
 
     private void AddScore()
@@ -63,13 +75,15 @@ public class GameManager : MonoSingleton<GameManager>
     
     private void LoadSettingsData()
     {
-        if (!settings)
-            Debug.Log("Settings Script Is Null!!");
-
-        settings.LoadVolumes();
-        FreeLookCamera.m_XAxis.m_MaxSpeed = settings.DataToSave.MouseSensitivity;
-        settings.SensitivitySetting.UpdateDisplay(settings.DataToSave.MouseSensitivity);
-
+        if (settings != null)
+        {
+            settings.LoadVolumes();
+            FreeLookCamera.m_XAxis.m_MaxSpeed = settings.DataToSave.MouseSensitivity;
+            if (settings.SensitivitySetting != null)
+            {
+                settings.SensitivitySetting.UpdateDisplay(settings.DataToSave.MouseSensitivity);   
+            }
+        }
         // More setting can loaded here
     }
     private void OnApplicationQuit()
