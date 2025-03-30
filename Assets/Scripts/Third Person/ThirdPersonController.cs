@@ -57,7 +57,6 @@ public class ThirdPersonController : MonoBehaviour
         if (_rigidbody.linearVelocity.y < 0) // Falling
         {
             _rigidbody.linearVelocity += Vector3.up * Physics.gravity.y * 2 * Time.fixedDeltaTime;
-            //IsAboutToLand();
         }
 
         // Clamp velocity to prevent excessive speed
