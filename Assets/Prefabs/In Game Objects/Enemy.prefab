@@ -333,6 +333,9 @@ MonoBehaviour:
   animator: {fileID: 7751717350151257345}
   agent: {fileID: 1923363711853946941}
   attackSound: {fileID: 8300000, guid: 7556575df755c05439ed8ad348eb3f70, type: 3}
+  knockbackStrength: 1
+  knockbackYAxis: 20
+  horizontalMultiplier: 99
 --- !u!136 &1442748931579912868
 CapsuleCollider:
   m_ObjectHideFlags: 0

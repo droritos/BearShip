@@ -1,15 +1,11 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using Unity.UI;
-using UnityEngine.UI;
-using UnityEngine.InputSystem;
 
 public class UIManager : MonoBehaviour
 {
     [SerializeField] MenuHandler menuHandler;
     
-
     [SerializeField] private TextMeshProUGUI scoreCounter;
     [SerializeField] private TextMeshProUGUI levelName;
     
