@@ -48,6 +48,7 @@ public class GameManager : MonoSingleton<GameManager>
         if (playerManager != null)
         {
             playerManager.FallingBehaviour.OnFallingFromWorld += sceneManager.HandleFalling;
+            playerManager.Followers.OnThreeBearsCollected += AddJumps;
         }
 
         if (!PlayerPrefs.HasKey("Score"))
@@ -89,6 +90,11 @@ public class GameManager : MonoSingleton<GameManager>
     private void OnDisable()
     {
         settings.SaveSettings();
+    }
+
+    private void AddJumps()
+    {
+        playerManager.ThirdPersonController.JumpCount++;
     }
 
     public void BackToMainMenu()

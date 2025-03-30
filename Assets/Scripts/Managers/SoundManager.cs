@@ -13,6 +13,7 @@ public class SoundManager : MonoSingleton<SoundManager>
     public void PlaySfxSound(AudioClip clip, Transform newTransform)
     {
         AudioSource newSfx = Instantiate(sfxSource, newTransform.position, Quaternion.identity);
+        newSfx.outputAudioMixerGroup = sfxSource.outputAudioMixerGroup;
         newSfx.clip = clip;
         newSfx.Play();
         
@@ -24,6 +25,7 @@ public class SoundManager : MonoSingleton<SoundManager>
     {
         int selected = Random.Range(0, clipArray.Count - 1);
         AudioSource newSfx = Instantiate(sfxSource, newTransform.position, Quaternion.identity);
+        newSfx.outputAudioMixerGroup = sfxSource.outputAudioMixerGroup;
         newSfx.clip = clipArray[selected];
         newSfx.Play();
         
@@ -34,6 +36,7 @@ public class SoundManager : MonoSingleton<SoundManager>
     public void PlayUISound(AudioClip clip, Transform newTransform)
     {
         AudioSource newSfx = Instantiate(uiSource, newTransform.position, Quaternion.identity);
+        newSfx.outputAudioMixerGroup = uiSource.outputAudioMixerGroup;
         newSfx.clip = clip;
         newSfx.Play();
         
@@ -45,6 +48,7 @@ public class SoundManager : MonoSingleton<SoundManager>
     {
         int selected = Random.Range(0, clipArray.Count - 1);
         AudioSource newSfx = Instantiate(uiSource, newTransform.position, Quaternion.identity);
+        newSfx.outputAudioMixerGroup = uiSource.outputAudioMixerGroup;
         newSfx.clip = clipArray[selected];
         newSfx.Play();
         

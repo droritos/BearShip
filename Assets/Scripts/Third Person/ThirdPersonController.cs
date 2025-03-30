@@ -6,8 +6,12 @@ using System.Collections.Generic;
 
 public class ThirdPersonController : MonoBehaviour
 {
-
     public ThirdPersonActionAsset PlayerActionAssets {  get; private set; }
+    public int JumpCount
+    {
+        get => _jumpCount;
+        set => _jumpCount = value;
+    }
 
     [Header("Serialize Field")]
     [SerializeField] ThirdPersonAnimation thirdPersonAnimation;
@@ -20,6 +24,8 @@ public class ThirdPersonController : MonoBehaviour
     private Vector3 _forceDirection = Vector3.zero;
     private Vector2 _moveInput;
     private bool _isWalking = false;
+    private int _jumpCount;
+    private int _currentJumpCount;
 
     [Header("Sounds")] 
     [SerializeField] private AudioClip jumpSound;
@@ -29,6 +35,7 @@ public class ThirdPersonController : MonoBehaviour
 
     private void Awake()
     {
+        _jumpCount = 1;
         PlayerActionAssets = new ThirdPersonActionAsset();
     }
     private void OnEnable()
@@ -36,14 +43,12 @@ public class ThirdPersonController : MonoBehaviour
         // Subscribe to the Jump.started event
         _move = PlayerActionAssets.Player.Move;
         PlayerActionAssets.Player.Jump.started += DoJump;
-        PlayerActionAssets.Player.Action.started += DoPickUp;
         PlayerActionAssets.Player.Enable();
     }
     private void OnDisable()
     {
         // Unsubscribe from the Jump.started event
         PlayerActionAssets.Player.Jump.started -= DoJump;
-        PlayerActionAssets.Player.Action.started -= DoPickUp;
         PlayerActionAssets.Player.Disable();
     }
     private void FixedUpdate()
@@ -110,9 +115,9 @@ public class ThirdPersonController : MonoBehaviour
 
     private Vector3 GetCameraForward(Camera mainCamera)
     {
-        Vector3 foward = mainCamera.transform.forward;
-        foward.y = 0;
-        return foward.normalized;
+        Vector3 forward = mainCamera.transform.forward;
+        forward.y = 0;
+        return forward.normalized;
     }
 
     private Vector3 GetCameraRight(Camera mainCamera)
@@ -125,19 +130,18 @@ public class ThirdPersonController : MonoBehaviour
     // Updated DoJump method to accept CallbackContext
     private void DoJump(InputAction.CallbackContext context)
     {
-        thirdPersonAnimation.Animator.SetTrigger("Jump");
-
-        if (IsGrounded())
+        if (IsGrounded() && _currentJumpCount == 0)
         {
+            _currentJumpCount = _jumpCount;
+        }
+        if (IsGrounded() || _currentJumpCount > 0)
+        {
+            thirdPersonAnimation.Animator.SetTrigger("Jump");
             _rigidbody.AddForce(Vector3.up * characterData.JumpForce, ForceMode.Impulse);
             if(jumpSound != null)
                 SoundManager.Instance.PlaySfxSound(jumpSound, transform);
+            _currentJumpCount--;
         }
-    }
-    private void DoPickUp(InputAction.CallbackContext context)
-    {
-        //Debug.Log("DoAttack");
-        thirdPersonAnimation.Animator.SetTrigger("PickUp");
     }
 
     private bool IsGrounded()
@@ -145,13 +149,9 @@ public class ThirdPersonController : MonoBehaviour
         Ray ray = new Ray(this.transform.position + Vector3.up * 0.25f, Vector3.down);
         if (Physics.Raycast(ray, out RaycastHit hit, 0.3f))
         {
-
             return true;
         }
-        else
-        {
-            return false;
-        }
+        return false;
     }
     private void LookAt()
     {
