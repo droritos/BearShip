@@ -1081,6 +1081,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 639012696681659899, guid: 0d19d917b1345104a8f910da85d8e51e, type: 3}
+      propertyPath: m_XAxis.m_MaxSpeed
+      value: 300
+      objectReference: {fileID: 0}
     - target: {fileID: 1489985626212666755, guid: 0d19d917b1345104a8f910da85d8e51e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1120,6 +1124,14 @@ PrefabInstance:
     - target: {fileID: 1489985626212666755, guid: 0d19d917b1345104a8f910da85d8e51e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1866793089777301104, guid: 0d19d917b1345104a8f910da85d8e51e, type: 3}
+      propertyPath: m_FollowOffset.y
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1866793089777301104, guid: 0d19d917b1345104a8f910da85d8e51e, type: 3}
+      propertyPath: m_FollowOffset.z
+      value: -9
       objectReference: {fileID: 0}
     - target: {fileID: 2589418971250286131, guid: 0d19d917b1345104a8f910da85d8e51e, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1196,6 +1208,22 @@ PrefabInstance:
     - target: {fileID: 7606237749018711317, guid: 0d19d917b1345104a8f910da85d8e51e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 13.201
+      objectReference: {fileID: 0}
+    - target: {fileID: 8048361618935576264, guid: 0d19d917b1345104a8f910da85d8e51e, type: 3}
+      propertyPath: m_FollowOffset.y
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8048361618935576264, guid: 0d19d917b1345104a8f910da85d8e51e, type: 3}
+      propertyPath: m_FollowOffset.z
+      value: -9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8597161774745885999, guid: 0d19d917b1345104a8f910da85d8e51e, type: 3}
+      propertyPath: m_FollowOffset.y
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8597161774745885999, guid: 0d19d917b1345104a8f910da85d8e51e, type: 3}
+      propertyPath: m_FollowOffset.z
+      value: -9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
