@@ -38,6 +38,15 @@ public class GameManager : MonoSingleton<GameManager>
         {
             _uiManager.AssignActionAsset(PlayerManager.ThirdPersonController.PlayerActionAssets);
         }
+
+        ApplyVSync();
+    }
+
+    private static void ApplyVSync()
+    {
+        Application.targetFrameRate = 60;
+        QualitySettings.vSyncCount = 1;
+        Time.fixedDeltaTime = 0.01667f; 
     }
 
     private void Start()
