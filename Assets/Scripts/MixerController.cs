@@ -19,16 +19,6 @@ public class MixerController : MonoBehaviour
     public const string MasterVolume = "MA_Master";
     public const string FF = "F2";
 
-    private void Start()
-    {
-        valueText.text = "50%";
-        _currentVolume = 50f; // Set default to 50%
-
-        // Initialize the mixer with 50% volume (0.5 in slider value)
-        float initialSliderValue = 0.5f;
-        SetVolumeBasedOnType(initialSliderValue);
-    }
-
     public float GetAudioVolume()
     {
         float dbValue = 0f;
@@ -51,6 +41,7 @@ public class MixerController : MonoBehaviour
         }
 
         myAudioMixer.GetFloat(parameterName, out dbValue);
+
         // Convert dB back to linear value (0-1)
         return dbValue > -80f ? Mathf.Pow(10, dbValue / 20f) : 0f;
     }
