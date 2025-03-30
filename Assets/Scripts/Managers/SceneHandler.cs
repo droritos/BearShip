@@ -53,9 +53,4 @@ public class SceneHandler : MonoBehaviour
     {
         _currentCheckpoints = checkpoint;
     }
-
-    private void SceneTransition()
-    {
-        SceneManager.LoadScene(1);
-    }
 }

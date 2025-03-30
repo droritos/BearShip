@@ -24,4 +24,9 @@ public class Portal : MonoBehaviour
             SceneManager.LoadScene(currentLevel - 1);
         }
     }
+    
+    public void BackToMainMenu()
+    {
+        SceneManager.LoadScene(0);
+    }
 }

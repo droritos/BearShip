@@ -321,6 +321,7 @@ GameObject:
   - component: {fileID: 4874477307512173919}
   - component: {fileID: 2669360025461833909}
   - component: {fileID: 3528389758137453894}
+  - component: {fileID: 6114487214545515600}
   m_Layer: 5
   m_Name: Back To Start
   m_TagString: Untagged
@@ -429,7 +430,32 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2669360025461833909}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6114487214545515600}
+        m_TargetAssemblyTypeName: Portal, Assembly-CSharp
+        m_MethodName: BackToMainMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &6114487214545515600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6335793592722718907}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60855564304178c4a913f74786eabcc4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isBack: 0
 --- !u!1 &9146389363389705225
 GameObject:
   m_ObjectHideFlags: 0
