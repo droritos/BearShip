@@ -2,12 +2,14 @@ using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Audio;
 
 public class MixerController : MonoBehaviour
 {
     [SerializeField] AudioMixer myAudioMixer;
     [SerializeField] TextMeshProUGUI valueText;
+    [SerializeField] Slider slider;
     private float _currentVolume;
     [SerializeField] private SoundMixerType myMixerType;
 
@@ -57,6 +59,7 @@ public class MixerController : MonoBehaviour
     public void SetMasterVolume(float sliderValue)
     {
         myMixerType = SoundMixerType.Master;
+        slider.value = sliderValue;
 
         // Handle edge case where sliderValue is 0 to avoid -Infinity from Log10(0)
         float dbValue = sliderValue > 0.0001f ? (Mathf.Log10(sliderValue) * 20) : -80f;
@@ -71,6 +74,8 @@ public class MixerController : MonoBehaviour
     public void SetSFXVolume(float sliderValue)
     {
         myMixerType = SoundMixerType.SFX;
+        slider.value = sliderValue;
+
         float dbValue = sliderValue > 0.0001f ? (Mathf.Log10(sliderValue) * 20) : -80f;
         myAudioMixer.SetFloat(SFX, dbValue);
 
@@ -82,6 +87,8 @@ public class MixerController : MonoBehaviour
     public void SetUIVolume(float sliderValue)
     {
         myMixerType = SoundMixerType.UI;
+        slider.value = sliderValue;
+
         float dbValue = sliderValue > 0.0001f ? (Mathf.Log10(sliderValue) * 20) : -80f;
         myAudioMixer.SetFloat(UI, dbValue);
 
@@ -93,6 +100,8 @@ public class MixerController : MonoBehaviour
     public void SetSoundTrackVolume(float sliderValue)
     {
         myMixerType = SoundMixerType.SoundTrack;
+        slider.value = sliderValue;
+
         float dbValue = sliderValue > 0.0001f ? (Mathf.Log10(sliderValue) * 20) : -80f;
         myAudioMixer.SetFloat(SoundTrack, dbValue);
 
