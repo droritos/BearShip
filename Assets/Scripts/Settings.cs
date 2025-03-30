@@ -24,10 +24,13 @@ public class Settings : MonoBehaviour
 
     public void LoadVolumes()
     {
-        SoundSettings.MasterSound.SetMasterVolume(DataToSave.MasterVolume);
-        SoundSettings.SfxGroupSlider.SetMasterVolume(DataToSave.SFXVolume);
-        SoundSettings.UiGroupSlider.SetMasterVolume(DataToSave.UIVolume);
-        SoundSettings.SoundTrackGroupSlider.SetMasterVolume(DataToSave.SoundTrackVolume);
+        if (SoundSettings != null)
+        {
+            SoundSettings.MasterSound.SetMasterVolume(DataToSave.MasterVolume);
+            SoundSettings.SfxGroupSlider.SetMasterVolume(DataToSave.SFXVolume);
+            SoundSettings.UiGroupSlider.SetMasterVolume(DataToSave.UIVolume);
+            SoundSettings.SoundTrackGroupSlider.SetMasterVolume(DataToSave.SoundTrackVolume);     
+        }
     }
 
     //private void OnValidate()
