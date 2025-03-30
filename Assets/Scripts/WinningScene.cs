@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -19,19 +21,20 @@ public class WinningScene : MonoBehaviour
         if (PlayerPrefs.HasKey("Score"))
         {
             bearsAmount = PlayerPrefs.GetInt("Score");
-            SpawnBear();
+            StartCoroutine(SpawnBear());
         }
     }
 
-    private void SpawnBear()
+    private IEnumerator SpawnBear()
     {
-        Vector3 pos = new Vector3(Random.Range(bounds.min.x, bounds.max.x), bounds.center.y + 0.5f, Random.Range(bounds.min.z, bounds.max.z));
+        yield return new WaitForSeconds(0.2f);
+        Vector3 pos = new Vector3(Random.Range(bounds.min.x, bounds.max.x), bounds.center.y - 0.6f, Random.Range(bounds.min.z, bounds.max.z));
         rotation = Quaternion.Euler(0, Random.Range(120,235), 0);
         Instantiate(bear, pos, rotation);
         if (bearsAmount > 0)
         {
             bearsAmount--;
-            SpawnBear();
+            StartCoroutine(SpawnBear());
         }
     }
 }
