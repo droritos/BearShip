@@ -44,11 +44,15 @@ public class MenuHandler : MonoBehaviour
         if (isActive)
         {
             SetCurrentSelectedObject(menuFirstButton);
+            Time.timeScale = 0f;
+        }
+        else
+        {
+            Time.timeScale = 1.0f;
         }
 
         SoundManager.Instance.PlayUISound(pauseClip, transform); // Do Pause / Unpause SFX
 
-        UpdateTimeScale();
     }
 
     private void UpdateTimeScale()
