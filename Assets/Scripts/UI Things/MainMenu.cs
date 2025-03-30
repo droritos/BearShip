@@ -9,8 +9,7 @@ public class MainMenu : MonoBehaviour
     }
     public void QuitGame()
     {
-        Debug.Log("Quit Game And Save Setttings");
-        GameManager.Instance.Settings.SaveSettings();
+        Debug.Log("Quit Game");
         Application.Quit();
     }
 }

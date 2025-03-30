@@ -86,7 +86,7 @@ public class GameManager : MonoSingleton<GameManager>
         }
         // More setting can loaded here
     }
-    private void OnApplicationQuit()
+    private void OnDisable()
     {
         settings.SaveSettings();
     }
