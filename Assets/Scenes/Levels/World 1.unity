@@ -972,6 +972,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 222190987}
     - target: {fileID: 1958282085342866983, guid: 71b2c86b9d6d8004387a7da7a316fabc, type: 3}
+      propertyPath: sceneHandler
+      value: 
+      objectReference: {fileID: 1330477807}
+    - target: {fileID: 1958282085342866983, guid: 71b2c86b9d6d8004387a7da7a316fabc, type: 3}
       propertyPath: playerManager
       value: 
       objectReference: {fileID: 941781194}
@@ -8633,6 +8637,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 67.73, y: -116.762, z: -64.334}
+--- !u!114 &1330477807 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8449914146579366593, guid: 71b2c86b9d6d8004387a7da7a316fabc, type: 3}
+  m_PrefabInstance: {fileID: 140066567}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 662fc0c6950917e47a4197404ed7d276, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1343750105
 GameObject:
   m_ObjectHideFlags: 0

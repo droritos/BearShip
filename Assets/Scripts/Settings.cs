@@ -9,7 +9,7 @@ public class Settings : MonoBehaviour
     private void Awake()
     {
         DataToSave = SaveSystem.LoadData();
-        Debug.Log($"Sen {DataToSave.MouseSensitivity}");
+        //Debug.Log($"Sen {DataToSave.MouseSensitivity}");
     }
     public void SaveSettings()
     {

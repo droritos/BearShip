@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+using UnityEngine.SceneManagement;
+
 public class GameManager : MonoSingleton<GameManager>
 {
     [Header("UI")]
@@ -16,7 +18,7 @@ public class GameManager : MonoSingleton<GameManager>
     public Settings Settings { get { return settings; } }
 
     [Header("Scene Belongings")]
-    [SerializeField] SceneHandler sceneManager;
+    [SerializeField] SceneHandler sceneHandler;
     [SerializeField] private List<Artifact> artifacts;
     private Dictionary<int, string> _levelNames;
     private static int _levelCounter;
@@ -47,7 +49,7 @@ public class GameManager : MonoSingleton<GameManager>
 
         if (playerManager != null)
         {
-            playerManager.FallingBehaviour.OnFallingFromWorld += sceneManager.HandleFalling;
+            playerManager.FallingBehaviour.OnFallingFromWorld += sceneHandler.HandleFalling;
             playerManager.Followers.OnThreeBearsCollected += AddJumps;
         }
 
@@ -67,7 +69,14 @@ public class GameManager : MonoSingleton<GameManager>
             }   
         }
     }
-
+    private void Update()
+    {
+        GoToEndScene();
+    }
+    public void BackToMainMenu()
+    {
+        Debug.Log("Back to Main Menu");
+    }
     private void AddScore()
     {
         PlayerPrefs.SetInt("Score", PlayerPrefs.GetInt("Score") + 1);
@@ -96,9 +105,12 @@ public class GameManager : MonoSingleton<GameManager>
     {
         playerManager.ThirdPersonController.JumpCount++;
     }
-
-    public void BackToMainMenu()
+    private void GoToEndScene()
     {
-        Debug.Log("Back to Main Menu");
+        if (Input.GetKeyDown(KeyCode.F12))
+        {
+            PlayerPrefs.SetInt(GlobalInfo.Score, 55);
+            SceneManager.LoadScene(SceneManager.sceneCountInBuildSettings - 1);
+        }
     }
 }

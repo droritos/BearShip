@@ -18,16 +18,17 @@ public class WinningScene : MonoBehaviour
     [SerializeField] private UIManager UIManager;
     [SerializeField] TextMeshProUGUI bearText;
 
-    private const string _score = "Score";
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         bounds = collider.bounds;
 
-        if (PlayerPrefs.HasKey(_score))
+        Debug.Log($"Bears Amount {PlayerPrefs.GetInt(GlobalInfo.Score)}");
+
+        if (PlayerPrefs.HasKey(GlobalInfo.Score))
         {
-            bearsAmount = PlayerPrefs.GetInt(_score);
+            bearsAmount = PlayerPrefs.GetInt(GlobalInfo.Score);
 
             bearText.text = bearsAmount.ToString();
 
@@ -36,7 +37,7 @@ public class WinningScene : MonoBehaviour
         }
         else
         {
-            Debug.Log("Player Pref " + _score + " Not found");
+            Debug.Log("Player Pref " + GlobalInfo.Score + " Not found");
         }
 
     }
