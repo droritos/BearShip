@@ -10,8 +10,6 @@ public class Settings : MonoBehaviour
     {
         DataToSave = SaveSystem.LoadData();
         Debug.Log($"Sen {DataToSave.MouseSensitivity}");
-
-        
     }
     public void SaveSettings()
     {
@@ -32,9 +30,9 @@ public class Settings : MonoBehaviour
         SoundSettings.SoundTrackGroupSlider.SetMasterVolume(DataToSave.SoundTrackVolume);
     }
 
-    private void OnValidate()
-    {
-        if (SoundSettings == null)
-            SoundSettings = SoundManager.Instance.SoundSettings;
-    }
+    //private void OnValidate()
+    //{
+    //    if (SoundSettings == null)
+    //        SoundSettings = SoundManager.Instance.SoundSettings;
+    //}
 }
