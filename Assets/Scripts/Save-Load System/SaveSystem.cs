@@ -3,11 +3,11 @@ using UnityEngine;
 
 public static class SaveSystem
 {
-    public static string SavePath = Application.persistentDataPath + "/savefile.json";
+    public static string SavePath = Application.persistentDataPath + GlobalInfo.SavePath;
 
     public static void SaveSettings(SettingsData settingsData)
     {
-        string json = JsonUtility.ToJson(settingsData, true); // `true` makes it pretty-printed
+        string json = JsonUtility.ToJson(settingsData, true);
         File.WriteAllText(SavePath, json);
         Debug.Log("Setting Saved to: " + SavePath);
     }

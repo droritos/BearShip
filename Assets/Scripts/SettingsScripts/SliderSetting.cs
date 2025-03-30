@@ -34,6 +34,4 @@ public class SliderSetting : MonoBehaviour
 
         SliderObject.value = valueSetting;
     }
-
-
 }

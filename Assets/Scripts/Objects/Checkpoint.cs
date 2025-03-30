@@ -26,7 +26,7 @@ public class Checkpoint : MonoBehaviour
     {
         if (boxCollider != null && boxCollider.size.x != wantedSize || boxCollider.size.z != wantedSize || boxCollider.size.y != 1)
         {
-            boxCollider.size = new Vector3(wantedSize, 1, wantedSize); // For 3D colliders
+            boxCollider.size = new Vector3(wantedSize, 1, wantedSize); 
         }
     }
 }

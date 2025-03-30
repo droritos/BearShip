@@ -9,6 +9,6 @@ public class ThirdPersonAnimation : MonoBehaviour
     [SerializeField] CharacterData characterData;
     void Update()
     {
-        _animator.SetFloat("Speed", Rigidbody.linearVelocity.magnitude / characterData.MaxSpeed);
+        _animator.SetFloat(GlobalInfo.SpeedAnimation, Rigidbody.linearVelocity.magnitude / characterData.MaxSpeed);
     }
 }

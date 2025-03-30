@@ -13,24 +13,21 @@ public class UIManager : MonoBehaviour
 
     private ThirdPersonActionAsset _playerActionAssets;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         if (_playerActionAssets == null)
         {
             _playerActionAssets = GameManager.Instance.PlayerManager.ThirdPersonController.PlayerActionAssets;
-            //Debug.Log("Getting Action From GameManager");
         }
-        if (PlayerPrefs.HasKey("Score"))
+        if (PlayerPrefs.HasKey(GlobalInfo.Score))
         {
             UpdateScore();
         }
         else
         {
-            PlayerPrefs.SetInt("Score", 0);
+            PlayerPrefs.SetInt(GlobalInfo.Score, 0);
             UpdateScore();
         }
-        //Debug.Log(PlayerPrefs.GetInt("Score"));
         SubscribeToPauseStarted();
         _playerActionAssets.Enable();
     }
@@ -42,7 +39,6 @@ public class UIManager : MonoBehaviour
     private void SubscribeToPauseStarted()
     {
         _playerActionAssets.Player.Pause.started += menuHandler.OpenPauseMenu;
-        //Debug.Log($"{_playerActionAssets} {menuHandler.gameObject}");
     }
 
     public void UpdateScore()

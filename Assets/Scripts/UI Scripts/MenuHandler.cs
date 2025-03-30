@@ -54,19 +54,4 @@ public class MenuHandler : MonoBehaviour
         SoundManager.Instance.PlayUISound(pauseClip, transform); // Do Pause / Unpause SFX
 
     }
-
-    private void UpdateTimeScale()
-    {
-        Time.timeScale = HasAnyMenuActive() ? 0f : 1f;
-    }
-
-    private bool HasAnyMenuActive()
-    {
-        foreach (RectTransform child in transform)
-        {
-            if (child.gameObject.activeSelf)
-                return true;
-        }
-        return false;
-    }
 }

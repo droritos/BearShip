@@ -31,7 +31,6 @@ public class CinemachineSensitivity : SliderSetting
         SliderObject.minValue = 1f;
         SliderObject.maxValue = maxValue;
 
-        //SliderObject.value = valueSetting;
         UpdateDisplay(valueSetting);
     }
 

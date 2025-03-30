@@ -23,7 +23,7 @@ public class EnemyBehavior : MonoBehaviour
         if (other.gameObject.CompareTag(GlobalInfo.PlayerTag))
         {
             SoundManager.Instance.PlaySfxSound(attackSound, transform);
-            animator.SetTrigger("Attack");
+            animator.SetTrigger(GlobalInfo.AttackAnimation);
 
             // Get direction directly from enemy to player
             Vector3 knockbackDirection = other.transform.position - transform.position;

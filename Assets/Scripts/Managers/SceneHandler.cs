@@ -25,7 +25,7 @@ public class SceneHandler : MonoBehaviour
     }
     private IEnumerator FallingCooldown(FallingBehaviour player, float cd)
     {
-        Debug.Log("I am falling");
+        //Debug.Log("I am falling");
         yield return new WaitForSeconds(cd);
 
         Vector3 returnPoint = _currentCheckpoints.transform.position;

@@ -13,7 +13,6 @@ public class FallingBehaviour : MonoBehaviour
 
     private void Update()
     {
-        //InvokeRepeating(nameof(CheckFalling), checkInterval, checkInterval);
         CheckFalling();
     }
     private void OnDisable()
@@ -26,12 +25,11 @@ public class FallingBehaviour : MonoBehaviour
         if (!_hasFallen && transform.position.y <= -fallingThreshold) // Only trigger once
         {
             _hasFallen = true;
-            //Debug.Log($"I falling - {transform.position.y}");
             OnFallingFromWorld?.Invoke(this);
         }
     }
 
-    public void ResetFallingState() // May not be used
+    public void ResetFallingState() 
     {
         _hasFallen = false;
     }

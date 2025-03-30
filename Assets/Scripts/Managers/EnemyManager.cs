@@ -7,7 +7,6 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] private List<Obstacle> Obstacles;
     
     
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         foreach (EnemyBehavior enemy in enemies)

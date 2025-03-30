@@ -40,14 +40,12 @@ public class ThirdPersonController : MonoBehaviour
     }
     private void OnEnable()
     {
-        // Subscribe to the Jump.started event
         _move = PlayerActionAssets.Player.Move;
         PlayerActionAssets.Player.Jump.started += DoJump;
         PlayerActionAssets.Player.Enable();
     }
     private void OnDisable()
     {
-        // Unsubscribe from the Jump.started event
         PlayerActionAssets.Player.Jump.started -= DoJump;
         PlayerActionAssets.Player.Disable();
     }
@@ -55,7 +53,7 @@ public class ThirdPersonController : MonoBehaviour
     {
         HandleMove();
 
-        // Apply exponential gravity
+        // Apply exponential gravity 
         if (_rigidbody.linearVelocity.y < 0) // Falling
         {
             _rigidbody.linearVelocity += Vector3.up * Physics.gravity.y * 2 * Time.fixedDeltaTime;
@@ -123,18 +121,17 @@ public class ThirdPersonController : MonoBehaviour
     private Vector3 GetCameraRight(Camera mainCamera)
     {
         Vector3 right = mainCamera.transform.right;
-        right.y = 0;    // Should be X? 
+        right.y = 0; 
         return right.normalized;
     }
 
-    // Updated DoJump method to accept CallbackContext
     private void DoJump(InputAction.CallbackContext context)
     {
         if (IsGrounded())
             _currentJumpCount = _jumpCount;
         if (_currentJumpCount > 0)
         {
-            thirdPersonAnimation.Animator.SetTrigger("Jump");
+            thirdPersonAnimation.Animator.SetTrigger(GlobalInfo.JumpAnimation); // 
             _rigidbody.AddForce(Vector3.up * characterData.JumpForce, ForceMode.Impulse);
             if(jumpSound != null)
                 SoundManager.Instance.PlaySfxSound(jumpSound, transform);

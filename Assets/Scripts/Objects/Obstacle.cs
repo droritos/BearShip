@@ -14,8 +14,6 @@ public class Obstacle : MonoBehaviour
     [SerializeField] private AudioClip hitSound;
 
     public event UnityAction<Vector3> OnCollisionActionEvent; 
-    
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         this.speed = data.Speed;
@@ -24,8 +22,6 @@ public class Obstacle : MonoBehaviour
         direction = new Vector3(1, 0, 0);
         
     }
-
-    // Update is called once per frame
     void Update()
     {
         if ((exitPos - transform.position).magnitude < range)

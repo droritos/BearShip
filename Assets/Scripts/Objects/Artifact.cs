@@ -5,7 +5,6 @@ using UnityEngine.Events;
 
 public class Artifact : MonoBehaviour
 {
-    private const string triggerName = "PickUp";
     
     [SerializeField] private List<AudioClip> collectSound;
     [SerializeField] private Animator animator;
@@ -16,7 +15,7 @@ public class Artifact : MonoBehaviour
     {
         OnPickUpActionEvent?.Invoke();
         SoundManager.Instance.PlayRandomSfxSound(collectSound,transform);
-        animator.SetBool(triggerName, true);
+        animator.SetBool(GlobalInfo.TriggerName, true);
         Destroy(this.gameObject, 0.25f);
     }
 }

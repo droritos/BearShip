@@ -14,8 +14,6 @@ public class Enemy : MonoBehaviour
     private bool _isChasing;
     private Transform target;
     
-    
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         _isChasing = false;
@@ -28,8 +26,6 @@ public class Enemy : MonoBehaviour
         detection.OnTargetDetectedEventAction += ChaseTargetListener;
         detection.OnTargetEscapedEventAction += StopChasing;
     }
-
-    // Update is called once per frame
     void Update()
     {
         if(agent.remainingDistance <= 0.5f && !agent.isStopped && !_isChasing)

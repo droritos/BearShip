@@ -7,7 +7,6 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoSingleton<GameManager>
 {
     [Header("UI")]
-    //[SerializeField] private UIManager uiManagerPrefab;
     [SerializeField] UIManager _uiManager;
 
     [Header("Player Belongings")]
@@ -26,14 +25,13 @@ public class GameManager : MonoSingleton<GameManager>
     protected override void Awake() // Overriding cuz of MonoSingleton already using Awake
     {
         base.Awake();
-        //Let's hold a scene manager that has a number for each level and that way we can get the name of it. We will pass these lines to him as well.
+
+        // Note : Let's hold a scene manager that has a number for each level and that way we can get the name of it. We will pass these lines to him as well.
         _levelNames = new Dictionary<int, string>();
-        _levelNames[0] = "Floating Isles";
-        _levelNames[1] = "Boom Boom Beach";
-        _levelNames[2] = "Lazy Forest";
+        _levelNames[0] = GlobalInfo.Level1Name;
+        _levelNames[1] = GlobalInfo.Level2Name;
+        _levelNames[2] = GlobalInfo.Level3Name;
 
-
-        //_uiManager = Instantiate(uiManagerPrefab);
         if (playerManager != null)
         {
             _uiManager.AssignActionAsset(PlayerManager.ThirdPersonController.PlayerActionAssets);
@@ -62,9 +60,9 @@ public class GameManager : MonoSingleton<GameManager>
             playerManager.Followers.OnThreeBearsCollected += AddJumps;
         }
 
-        if (!PlayerPrefs.HasKey("Score"))
+        if (!PlayerPrefs.HasKey(GlobalInfo.Score))
         {
-            PlayerPrefs.SetInt("Score", 0);
+            PlayerPrefs.SetInt(GlobalInfo.Score, 0);
         }
 
         _uiManager?.UpdateLevel(_levelNames[_levelCounter]);
@@ -84,11 +82,11 @@ public class GameManager : MonoSingleton<GameManager>
     }
     public void BackToMainMenu()
     {
-        Debug.Log("Back to Main Menu");
+        SceneManager.LoadScene(0);
     }
     private void AddScore()
     {
-        PlayerPrefs.SetInt("Score", PlayerPrefs.GetInt("Score") + 1);
+        PlayerPrefs.SetInt(GlobalInfo.Score, PlayerPrefs.GetInt(GlobalInfo.Score) + 1);
         _uiManager.UpdateScore();
     }
     
@@ -103,7 +101,7 @@ public class GameManager : MonoSingleton<GameManager>
                 settings.SensitivitySetting.UpdateDisplay(settings.DataToSave.MouseSensitivity);   
             }
         }
-        // More setting can loaded here
+
     }
     private void OnDisable()
     {
