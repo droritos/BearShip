@@ -75,7 +75,9 @@ public class ThirdPersonController : MonoBehaviour
     }
     public void AddForce(Vector3 direction)
     {
-        _rigidbody.AddForce(direction * 5, ForceMode.Impulse);
+        _rigidbody.linearVelocity = Vector3.zero;
+
+        StartCoroutine(ApplyKnockbackForce(direction));
     }
     private void HandleMove()
     {
@@ -170,5 +172,18 @@ public class ThirdPersonController : MonoBehaviour
             yield return new WaitForSeconds(interval); // Wait before playing next step sound
         }
     }
+    private IEnumerator ApplyKnockbackForce(Vector3 direction)
+    {
+        // Store original drag
+        float originalDrag = _rigidbody.linearDamping;
 
+        _rigidbody.linearDamping = 0.2f;
+
+        _rigidbody.AddForce(direction, ForceMode.Impulse);
+
+        yield return new WaitForSeconds(0.3f);
+
+        // Restore original drag
+        _rigidbody.linearDamping = originalDrag;
+    }
 }
