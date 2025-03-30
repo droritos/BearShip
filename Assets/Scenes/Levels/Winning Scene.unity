@@ -148,7 +148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3dc476412a22f9e4180c1d3b856e1a6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bear: {fileID: 4624876186570260454, guid: 66ade8ec3a0b9db4eaceccf49a853a8f, type: 3}
+  bear: {fileID: 3974974586313730689, guid: b600f5e37bb158b4994d75d0edc78de5, type: 3}
   collider: {fileID: 1389314704}
   UIManager: {fileID: 0}
 --- !u!4 &304967935
