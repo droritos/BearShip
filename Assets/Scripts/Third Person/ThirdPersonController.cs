@@ -130,11 +130,9 @@ public class ThirdPersonController : MonoBehaviour
     // Updated DoJump method to accept CallbackContext
     private void DoJump(InputAction.CallbackContext context)
     {
-        if (IsGrounded() && _currentJumpCount == 0)
-        {
+        if (IsGrounded())
             _currentJumpCount = _jumpCount;
-        }
-        if (IsGrounded() || _currentJumpCount > 0)
+        if (_currentJumpCount > 0)
         {
             thirdPersonAnimation.Animator.SetTrigger("Jump");
             _rigidbody.AddForce(Vector3.up * characterData.JumpForce, ForceMode.Impulse);
