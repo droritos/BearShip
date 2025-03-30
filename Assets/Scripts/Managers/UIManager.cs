@@ -33,8 +33,7 @@ public class UIManager : MonoBehaviour
             PlayerPrefs.SetInt("Score", 0);
             UpdateScore();
         }
-        Debug.Log(PlayerPrefs.GetInt("Score"));
-        //Debug.Log("Debug");
+        //Debug.Log(PlayerPrefs.GetInt("Score"));
         SubscribeToPauseStarted();
         _playerActionAssets.Enable();
     }

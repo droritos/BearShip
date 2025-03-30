@@ -10,8 +10,6 @@ public class Settings : MonoBehaviour
     {
         DataToSave = SaveSystem.LoadData();
         Debug.Log($"Sen {DataToSave.MouseSensitivity}");
-
-        
     }
     public void SaveSettings()
     {
@@ -20,6 +18,7 @@ public class Settings : MonoBehaviour
         DataToSave.SFXVolume = SoundSettings.SfxGroupSlider.GetAudioVolume();
         DataToSave.UIVolume = SoundSettings.UiGroupSlider.GetAudioVolume();
         DataToSave.SoundTrackVolume = SoundSettings.SoundTrackGroupSlider.GetAudioVolume();
+
         SaveSystem.SaveSettings(DataToSave);
     }
 
@@ -31,9 +30,9 @@ public class Settings : MonoBehaviour
         SoundSettings.SoundTrackGroupSlider.SetMasterVolume(DataToSave.SoundTrackVolume);
     }
 
-    private void OnValidate()
-    {
-        if (SoundSettings == null)
-            SoundSettings = SoundManager.Instance.SoundSettings;
-    }
+    //private void OnValidate()
+    //{
+    //    if (SoundSettings == null)
+    //        SoundSettings = SoundManager.Instance.SoundSettings;
+    //}
 }
