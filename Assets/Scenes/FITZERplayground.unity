@@ -9034,17 +9034,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 393738915856546611, guid: e20cb37cf32453a46b4345aa52315466, type: 3}
   m_PrefabInstance: {fileID: 1043021767}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1045218266 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1158381590515615466, guid: f94a05542a251904a9f19a4a6722cf87, type: 3}
-  m_PrefabInstance: {fileID: 913175691}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 913175692}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4af20338c854ec44d8637c3825f17bb7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1045218267
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9057,18 +9046,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba04a089c3ed6af41a6c62f8f0b71717, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 1045218266}
+  thirdPersonAnimation: {fileID: 0}
   _mainCamera: {fileID: 330585545}
-  _rigidbody: {fileID: 1045218274}
+  _rigidbody: {fileID: 0}
   characterData: {fileID: 11400000, guid: eea83e8394d13ab4b8ee20f3904e5ea3, type: 2}
+  jumpSound: {fileID: 0}
+  walkSounds: []
 --- !u!4 &1045218270 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4505045940607445873, guid: f94a05542a251904a9f19a4a6722cf87, type: 3}
-  m_PrefabInstance: {fileID: 913175691}
-  m_PrefabAsset: {fileID: 0}
---- !u!54 &1045218274 stripped
-Rigidbody:
-  m_CorrespondingSourceObject: {fileID: 5307932094397070555, guid: f94a05542a251904a9f19a4a6722cf87, type: 3}
   m_PrefabInstance: {fileID: 913175691}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1055081726

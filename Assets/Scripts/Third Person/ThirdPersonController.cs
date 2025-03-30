@@ -10,7 +10,6 @@ public class ThirdPersonController : MonoBehaviour
     public ThirdPersonActionAsset PlayerActionAssets {  get; private set; }
 
     [Header("Serialize Field")]
-    [SerializeField] Collider collider;
     [SerializeField] ThirdPersonAnimation thirdPersonAnimation;
     [SerializeField] Camera _mainCamera;
     private InputAction _move;
@@ -71,11 +70,10 @@ public class ThirdPersonController : MonoBehaviour
     }
     public void AddForce(Vector3 direction)
     {
-        _rigidbody.linearVelocity = new Vector3(0, _rigidbody.linearVelocity.y, 0);
+        _rigidbody.linearVelocity = Vector3.zero;
 
         StartCoroutine(ApplyKnockbackForce(direction));
     }
-
     private void HandleMove()
     {
         _moveInput = _move.ReadValue<Vector2>();
@@ -176,25 +174,16 @@ public class ThirdPersonController : MonoBehaviour
     }
     private IEnumerator ApplyKnockbackForce(Vector3 direction)
     {
-        // Store original values
+        // Store original drag
         float originalDrag = _rigidbody.linearDamping;
 
-        PhysicsMaterial originalMaterial = collider.material;
+        _rigidbody.linearDamping = 0.2f;
 
-        //PhysicsMaterial slipperyMaterial = new PhysicsMaterial("Knockback");
-        //slipperyMaterial.dynamicFriction = 0.05f;
-
-        // Apply temporary physics changes
-        _rigidbody.linearDamping = 0.1f; // Lower drag = more sliding
-        collider.material = characterData.SlipperyMaterial;
-
-        // Apply force
         _rigidbody.AddForce(direction, ForceMode.Impulse);
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.3f);
 
-        // Restore original values
+        // Restore original drag
         _rigidbody.linearDamping = originalDrag;
-        collider.material = originalMaterial;
     }
 }
