@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 public class ThirdPersonController : MonoBehaviour
 {
-    public ThirdPersonActionAsset PlayerActionAssets {  get; private set; }
+    public ThirdPersonActionAsset PlayerActionAssets { get; private set; }
     public int JumpCount
     {
         get => _jumpCount;
@@ -16,16 +16,18 @@ public class ThirdPersonController : MonoBehaviour
     [Header("Serialize Field")]
     [SerializeField] ThirdPersonAnimation thirdPersonAnimation;
     [SerializeField] Camera _mainCamera;
-    private InputAction _move;
 
     [Header("Movement")]
     [SerializeField] Rigidbody _rigidbody;
+    public Rigidbody Rigidbody { get { return _rigidbody; } }
+
     [SerializeField] CharacterData characterData;
     private Vector3 _forceDirection = Vector3.zero;
     private Vector2 _moveInput;
     private bool _isWalking = false;
     private int _jumpCount;
     private int _currentJumpCount;
+    private InputAction _move;
 
     [Header("Sounds")] 
     [SerializeField] private AudioClip jumpSound;
@@ -141,7 +143,7 @@ public class ThirdPersonController : MonoBehaviour
     private bool IsGrounded()
     {
         Ray ray = new Ray(this.transform.position + Vector3.up * 0.25f, Vector3.down);
-        if (Physics.Raycast(ray, out RaycastHit hit, 0.3f))
+        if (Physics.Raycast(ray, out RaycastHit hit, 0.8f))
         {
             return true;
         }

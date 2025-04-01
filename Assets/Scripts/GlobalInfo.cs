@@ -9,6 +9,7 @@ public static class GlobalInfo
     public const string TriggerName = "PickUp";
     public const string SavePath = "/savefile.json";
     public const string SpeedAnimation = "Speed";
+    public const string WorldMeshes = "Mesh";
 
     #region << Level Names >>
     public const string Level1Name = "Floating Isles";
