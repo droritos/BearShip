@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1958282085342866983}
   - component: {fileID: 5943972269804033211}
   - component: {fileID: 8449914146579366593}
+  - component: {fileID: 5119830211148396698}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -53,7 +54,7 @@ MonoBehaviour:
   FreeLookCamera: {fileID: 0}
   playerManager: {fileID: 0}
   settings: {fileID: 5943972269804033211}
-  sceneManager: {fileID: 8449914146579366593}
+  sceneHandler: {fileID: 0}
   artifacts:
   - {fileID: 0}
   - {fileID: 0}
@@ -70,6 +71,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SensitivitySetting: {fileID: 0}
+  SoundSettings: {fileID: 0}
 --- !u!114 &8449914146579366593
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -86,6 +88,18 @@ MonoBehaviour:
   checkpoints: []
   fallingCooldown: 2
   yOffset: 15
+--- !u!114 &5119830211148396698
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1951177629168449981}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b75b22aab0638464992c72a15800109f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2323002749363485377
 GameObject:
   m_ObjectHideFlags: 0
@@ -383,9 +397,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51ca8f2c2bfa0b34e8b87025decf4636, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  soundSettings: {fileID: 0}
   sfxSource: {fileID: 6509331110786112830, guid: 745ec2f078f1bcc45b0b282eed2ec058, type: 3}
   uiSource: {fileID: 6509331110786112830, guid: e43b09fde0ff20a4bb52f7d3c0848f39, type: 3}
-  soundSettings: {fileID: 0}
 --- !u!1001 &7193075940825683128
 PrefabInstance:
   m_ObjectHideFlags: 0

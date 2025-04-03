@@ -22,6 +22,7 @@ public class EnemyManager : MonoBehaviour
 
     public void PushPlayer(Vector3 direction)
     {
+        RumbleManager.Instance.RumblePulse(0.5f,2f,0.25f);
         GameManager.Instance.PlayerManager.ThirdPersonController.AddForce(direction);
     }
 }
