@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public static class GlobalInfo
 {
@@ -16,6 +17,10 @@ public static class GlobalInfo
     public const string Level2Name = "Boom Boom Beach";
     public const string Level3Name = "Lazy Forest";
     #endregion
+
+
+
+
 }
 public enum SoundMixerType
 {

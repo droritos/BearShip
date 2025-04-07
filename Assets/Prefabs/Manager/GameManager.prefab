@@ -51,6 +51,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _uiManager: {fileID: 0}
+  _controllerManagerPrefab: {fileID: 5882982408385885288, guid: 00cda1d78c22d624ca9930527c155189, type: 3}
   FreeLookCamera: {fileID: 0}
   playerManager: {fileID: 0}
   settings: {fileID: 5943972269804033211}

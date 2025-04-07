@@ -6,8 +6,9 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoSingleton<GameManager>
 {
-    [Header("UI")]
+    [Header("Managers")]
     [SerializeField] UIManager _uiManager;
+    [SerializeField] ControllerManager _controllerManagerPrefab;
 
     [Header("Player Belongings")]
     public CinemachineFreeLook FreeLookCamera;
@@ -24,6 +25,8 @@ public class GameManager : MonoSingleton<GameManager>
 
     protected override void Awake() // Overriding cuz of MonoSingleton already using Awake
     {
+        //CreateControllerManager();
+
         base.Awake();
 
         // Note : Let's hold a scene manager that has a number for each level and that way we can get the name of it. We will pass these lines to him as well.
@@ -118,6 +121,16 @@ public class GameManager : MonoSingleton<GameManager>
         {
             PlayerPrefs.SetInt(GlobalInfo.Score, 55);
             SceneManager.LoadScene(SceneManager.sceneCountInBuildSettings - 1);
+        }
+    }
+
+    private void CreateControllerManager()
+    {
+        // Check if a ControllerManager exists in the scene
+        if (FindAnyObjectByType<ControllerManager>() == null)
+        {
+            // Instantiate a new ControllerManager from the prefab
+            Instantiate(_controllerManagerPrefab);
         }
     }
 }
