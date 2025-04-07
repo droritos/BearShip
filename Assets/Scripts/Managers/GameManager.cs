@@ -25,10 +25,9 @@ public class GameManager : MonoSingleton<GameManager>
 
     protected override void Awake() // Overriding cuz of MonoSingleton already using Awake
     {
-        //CreateControllerManager();
-
         base.Awake();
 
+        CreateControllerManager();
         // Note : Let's hold a scene manager that has a number for each level and that way we can get the name of it. We will pass these lines to him as well.
         _levelNames = new Dictionary<int, string>();
         _levelNames[0] = GlobalInfo.Level1Name;
