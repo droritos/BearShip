@@ -16,20 +16,18 @@ public class ThirdPersonController : MonoBehaviour
     [Header("Serialize Field")]
     [SerializeField] ThirdPersonAnimation thirdPersonAnimation;
     [SerializeField] Camera _mainCamera;
+    private InputAction _move;
 
     [Header("Movement")]
     [SerializeField] Rigidbody _rigidbody;
-    public Rigidbody Rigidbody { get { return _rigidbody; } }
-
     [SerializeField] CharacterData characterData;
     private Vector3 _forceDirection = Vector3.zero;
     private Vector2 _moveInput;
     private bool _isWalking = false;
     private int _jumpCount;
     private int _currentJumpCount;
-    private InputAction _move;
 
-    [Header("Sounds")] 
+    [Header("Sounds")]
     [SerializeField] private AudioClip jumpSound;
     [SerializeField] private List<AudioClip> walkSounds;
     private Coroutine _walkingSoundCoroutine;
@@ -122,7 +120,7 @@ public class ThirdPersonController : MonoBehaviour
     private Vector3 GetCameraRight(Camera mainCamera)
     {
         Vector3 right = mainCamera.transform.right;
-        right.y = 0; 
+        right.y = 0;
         return right.normalized;
     }
 
@@ -134,7 +132,7 @@ public class ThirdPersonController : MonoBehaviour
         {
             thirdPersonAnimation.Animator.SetTrigger(GlobalInfo.JumpAnimation); // 
             _rigidbody.AddForce(Vector3.up * characterData.JumpForce, ForceMode.Impulse);
-            if(jumpSound != null)
+            if (jumpSound != null)
                 SoundManager.Instance.PlaySfxSound(jumpSound, transform);
             _currentJumpCount--;
         }
@@ -143,7 +141,7 @@ public class ThirdPersonController : MonoBehaviour
     private bool IsGrounded()
     {
         Ray ray = new Ray(this.transform.position + Vector3.up * 0.25f, Vector3.down);
-        if (Physics.Raycast(ray, out RaycastHit hit, 0.8f))
+        if (Physics.Raycast(ray, out RaycastHit hit, 0.3f))
         {
             return true;
         }
@@ -159,8 +157,8 @@ public class ThirdPersonController : MonoBehaviour
         else
             _rigidbody.angularVelocity = Vector3.zero;
     }
-    
-    private IEnumerator PlayWalkingSound(List<AudioClip> clipArray,Transform pos,float interval)
+
+    private IEnumerator PlayWalkingSound(List<AudioClip> clipArray, Transform pos, float interval)
     {
         while (_isWalking)
         {
