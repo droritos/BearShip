@@ -12,6 +12,11 @@ public class PlayerManager : MonoBehaviour
     public FallingBehaviour FallingBehaviour { get { return _fallingBehaviour; } }
     public ThirdPersonAnimation ThirdPersonAnimation { get { return _thirdPersonAnimation; } }
     public Followers Followers { get { return followers; } }
-    
+
+    public void PauseState(bool isPaused)
+    {
+        _thirdPersonController.Pause = isPaused;
+    }
+
 
 }

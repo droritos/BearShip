@@ -33,6 +33,8 @@ public class ThirdPersonController : MonoBehaviour
     private Coroutine _walkingSoundCoroutine;
 
 
+    public bool Pause {  get;  set; }
+
     private void Awake()
     {
         _jumpCount = 1;
@@ -51,6 +53,8 @@ public class ThirdPersonController : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        if (Pause) return;
+
         HandleMove();
 
         // Apply exponential gravity 
@@ -126,6 +130,9 @@ public class ThirdPersonController : MonoBehaviour
 
     private void DoJump(InputAction.CallbackContext context)
     {
+
+        if(Pause) return;
+
         if (IsGrounded())
             _currentJumpCount = _jumpCount;
         if (_currentJumpCount > 0)
@@ -180,4 +187,5 @@ public class ThirdPersonController : MonoBehaviour
         // Restore original drag
         _rigidbody.linearDamping = originalDrag;
     }
+
 }

@@ -1,9 +1,12 @@
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 public class MenuHandler : MonoBehaviour
 {
+    public event UnityAction<bool> OnPause;
+
     [Header("Menus")]
     public GameObject OptionsMenu;
 
@@ -50,6 +53,7 @@ public class MenuHandler : MonoBehaviour
         {
             //Time.timeScale = 1.0f;
         }
+        OnPause?.Invoke(OptionsMenu.activeSelf);
 
         SoundManager.Instance.PlayUISound(pauseClip, transform); // Do Pause / Unpause SFX
 

@@ -3,16 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 using UnityEngine.SceneManagement;
+using System.Linq;
 
 public class GameManager : MonoSingleton<GameManager>
 {
     [Header("Managers")]
     [SerializeField] UIManager _uiManager;
     [SerializeField] ControllerManager _controllerManagerPrefab;
+    [SerializeField] EnemiesManager _enemiesManager;
 
     [Header("Player Belongings")]
-    public CinemachineFreeLook FreeLookCamera;
     [SerializeField] PlayerManager playerManager;
+    public CinemachineFreeLook FreeLookCamera;
     public PlayerManager PlayerManager { get { return playerManager; } }
     [SerializeField] Settings settings;
     public Settings Settings { get { return settings; } }
@@ -20,6 +22,9 @@ public class GameManager : MonoSingleton<GameManager>
     [Header("Scene Belongings")]
     [SerializeField] SceneHandler sceneHandler;
     [SerializeField] private List<Artifact> artifacts;
+    [SerializeField] List<IPausable> pausableObjects;
+    private bool isPaused = false;
+
     private Dictionary<int, string> _levelNames;
     private static int _levelCounter;
 
@@ -39,7 +44,11 @@ public class GameManager : MonoSingleton<GameManager>
             _uiManager.AssignActionAsset(PlayerManager.ThirdPersonController.PlayerActionAssets);
         }
 
+        _uiManager.OnPause += HandlePause;
+
         ApplyVSync();
+
+        //HandlePause();
     }
 
     private static void ApplyVSync()
@@ -82,6 +91,12 @@ public class GameManager : MonoSingleton<GameManager>
     {
         GoToEndScene();
     }
+    private void OnDisable()
+    {
+        settings.SaveSettings();
+        _uiManager.OnPause -= HandlePause;
+    }
+
     public void BackToMainMenu()
     {
         SceneManager.LoadScene(0);
@@ -91,7 +106,6 @@ public class GameManager : MonoSingleton<GameManager>
         PlayerPrefs.SetInt(GlobalInfo.Score, PlayerPrefs.GetInt(GlobalInfo.Score) + 1);
         _uiManager.UpdateScore();
     }
-    
     private void LoadSettingsData()
     {
         if (settings != null)
@@ -103,11 +117,6 @@ public class GameManager : MonoSingleton<GameManager>
                 settings.SensitivitySetting.UpdateDisplay(settings.DataToSave.MouseSensitivity);   
             }
         }
-
-    }
-    private void OnDisable()
-    {
-        settings.SaveSettings();
     }
 
     private void AddJumps()
@@ -122,7 +131,6 @@ public class GameManager : MonoSingleton<GameManager>
             SceneManager.LoadScene(SceneManager.sceneCountInBuildSettings - 1);
         }
     }
-
     private void CreateControllerManager()
     {
         // Check if a ControllerManager exists in the scene
@@ -131,5 +139,19 @@ public class GameManager : MonoSingleton<GameManager>
             // Instantiate a new ControllerManager from the prefab
             Instantiate(_controllerManagerPrefab);
         }
+    }
+    private void HandlePause(bool pauseState)
+    {
+        // Apply pause state on player elements : camare , movement
+        PlayerManager.PauseState(pauseState);
+        FreeLookCamera.enabled = !pauseState;
+
+        _enemiesManager.Pause = pauseState;
+    }
+
+    private void OnValidate()
+    {
+        if(!_enemiesManager)
+            _enemiesManager = GetComponentInChildren<EnemiesManager>();
     }
 }

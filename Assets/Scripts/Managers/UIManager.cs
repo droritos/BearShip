@@ -1,12 +1,15 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
     [SerializeField] MenuHandler menuHandler;
-    
+    public event UnityAction<bool> OnPause { add { menuHandler.OnPause += value; }
+                                             remove { menuHandler.OnPause -= value; } }
+
     [SerializeField] private TextMeshProUGUI scoreCounter;
     [SerializeField] private TextMeshProUGUI levelName;
     

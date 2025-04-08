@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Enemy : MonoBehaviour
+public class Enemy : MonoBehaviour, IPausable
 {
     [SerializeField] private EnemyData data;
     [SerializeField] private List<Transform> patrolPositions;
@@ -13,6 +13,8 @@ public class Enemy : MonoBehaviour
     private int currentPatrolPoint;
     private bool _isChasing;
     private Transform target;
+
+    private bool _pause;
     
     void Start()
     {
@@ -26,8 +28,10 @@ public class Enemy : MonoBehaviour
         detection.OnTargetDetectedEventAction += ChaseTargetListener;
         detection.OnTargetEscapedEventAction += StopChasing;
     }
-    void Update()
+    public void EnemyUpdate()
     {
+        if(_pause) return;
+
         if(agent.remainingDistance <= 0.5f && !agent.isStopped && !_isChasing)
         {
             SetNewDestination();
@@ -67,5 +71,11 @@ public class Enemy : MonoBehaviour
         _isChasing = false;
         target = null;
         agent.speed = 5;
+    }
+
+    public bool PauseState(bool isPaused)
+    {
+        _pause = isPaused;
+        return _pause;
     }
 }
