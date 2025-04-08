@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
@@ -33,6 +32,7 @@ public class GameManager : MonoSingleton<GameManager>
         base.Awake();
 
         CreateControllerManager();
+
         // Note : Let's hold a scene manager that has a number for each level and that way we can get the name of it. We will pass these lines to him as well.
         _levelNames = new Dictionary<int, string>();
         _levelNames[0] = GlobalInfo.Level1Name;
@@ -47,8 +47,6 @@ public class GameManager : MonoSingleton<GameManager>
         _uiManager.OnPause += HandlePause;
 
         ApplyVSync();
-
-        //HandlePause();
     }
 
     private static void ApplyVSync()
@@ -101,9 +99,13 @@ public class GameManager : MonoSingleton<GameManager>
     {
         SceneManager.LoadScene(0);
     }
+    public void ChangeThreshold()
+    {
+        PlayerManager.FallingBehaviour.ChangeThreshold(PlayerManager.transform.position.y);
+    }
     private void AddScore()
     {
-        PlayerPrefs.SetInt(GlobalInfo.Score, PlayerPrefs.GetInt(GlobalInfo.Score) + 1);
+        PlayerPrefs.SetInt(GlobalInfo.Score, PlayerPrefs.GetInt(GlobalInfo.Score) + Random.Range(3,12));
         _uiManager.UpdateScore();
     }
     private void LoadSettingsData()

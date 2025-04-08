@@ -52,5 +52,6 @@ public class SceneHandler : MonoBehaviour
     private void UpdateCurrentCheckpoint(Checkpoint checkpoint)
     {
         _currentCheckpoints = checkpoint;
+        GameManager.Instance.ChangeThreshold();
     }
 }
