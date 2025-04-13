@@ -101,7 +101,7 @@ public class GameManager : MonoSingleton<GameManager>
     }
     public void ChangeThreshold()
     {
-        PlayerManager.FallingBehaviour.ChangeThreshold(PlayerManager.transform.position.y);
+        //PlayerManager.FallingBehaviour.ChangeThreshold(PlayerManager.transform.position.y);
     }
     private void AddScore()
     {

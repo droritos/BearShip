@@ -3,12 +3,13 @@ using UnityEngine.Events;
 
 public class FallingBehaviour : MonoBehaviour
 {
-    public event UnityAction<FallingBehaviour> OnFallingFromWorld; 
+    public event UnityAction<FallingBehaviour> OnFallingFromWorld;
+    private bool _hasFallen = false;
+    /*
     
     [SerializeField] private float fallingThreshold = 15f;
     [SerializeField] private float checkInterval = 1f;
 
-    private bool _hasFallen = false;
 
 
     private void Update()
@@ -20,10 +21,6 @@ public class FallingBehaviour : MonoBehaviour
         CancelInvoke(nameof(CheckFalling));
     }
 
-    public void ResetFallingState()
-    {
-        _hasFallen = false;
-    }
 
     public void ChangeThreshold(float playerYPosition , float newThreshold = 15)
     {
@@ -40,4 +37,20 @@ public class FallingBehaviour : MonoBehaviour
             OnFallingFromWorld?.Invoke(this); // Trigger the event
         }
     }
+    */
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag(GlobalInfo.FallBoxTag) && !_hasFallen)
+        {
+            _hasFallen = true;
+            OnFallingFromWorld.Invoke(this);
+        }
+
+    }
+    public void ResetFallingState()
+    {
+        _hasFallen = false;
+    }
+
 }

@@ -4,6 +4,7 @@ using UnityEngine.EventSystems;
 public static class GlobalInfo
 {
     public const string PlayerTag = "Player";
+    public const string FallBoxTag = "FallBox";
     public const string Score = "Score";
     public const string JumpAnimation = "Jump";
     public const string AttackAnimation = "Attack";
