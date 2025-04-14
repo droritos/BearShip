@@ -21,7 +21,7 @@ public static class GlobalInfo
 
 
 
-
+    public static readonly string VersionDisplayText = $"v{Application.version}";
 }
 public enum SoundMixerType
 {
