@@ -3,6 +3,8 @@ using UnityEngine;
 using Cinemachine;
 using UnityEngine.SceneManagement;
 using System.Linq;
+using System.Net.Sockets;
+using System.Threading;
 
 public class GameManager : MonoSingleton<GameManager>
 {
@@ -154,4 +156,10 @@ public class GameManager : MonoSingleton<GameManager>
         if(!_enemiesManager)
             _enemiesManager = GetComponentInChildren<EnemiesManager>();
     }
+    void OnApplicationQuit()
+    {
+        // Stop any background services or coroutines
+        StopAllCoroutines();
+    }
+
 }
