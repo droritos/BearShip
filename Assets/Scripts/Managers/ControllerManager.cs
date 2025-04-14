@@ -1,17 +1,28 @@
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 public class ControllerManager : MonoBehaviour
 {
+    public event UnityAction OnGamepadDisconected;
     void OnEnable()
     {
-        // Subscribe to device change events
         InputSystem.onDeviceChange += OnDeviceChange;
+
+        // Handle already connected devices
+        if (Gamepad.current != null)
+        {
+            Debug.Log("Controller already connected at startup");
+            Cursor.visible = false;
+        }
+        else
+        {
+            Cursor.visible = true;
+        }
     }
 
     void OnDisable()
     {
-        // Unsubscribe to avoid potential errors
         InputSystem.onDeviceChange -= OnDeviceChange;
     }
 
@@ -23,11 +34,12 @@ public class ControllerManager : MonoBehaviour
             {
                 case InputDeviceChange.Added:
                     Debug.Log("Controller connected");
-                    Cursor.visible = false; // Hide the cursor if needed
+                    Cursor.visible = false;
                     break;
                 case InputDeviceChange.Removed:
                     Debug.Log("Controller disconnected");
-                    Cursor.visible = true; // Show the cursor
+                    Cursor.visible = true;
+                    OnGamepadDisconected.Invoke(); // Subscribe a Pause event
                     break;
             }
         }

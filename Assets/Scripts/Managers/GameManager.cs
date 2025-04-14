@@ -22,7 +22,6 @@ public class GameManager : MonoSingleton<GameManager>
     [SerializeField] SceneHandler sceneHandler;
     [SerializeField] private List<Artifact> artifacts;
     [SerializeField] List<IPausable> pausableObjects;
-    private bool isPaused = false;
 
     private Dictionary<int, string> _levelNames;
     private static int _levelCounter;
@@ -44,16 +43,9 @@ public class GameManager : MonoSingleton<GameManager>
             _uiManager.AssignActionAsset(PlayerManager.ThirdPersonController.PlayerActionAssets);
         }
 
-        _uiManager.OnPause += HandlePause;
+        _uiManager.OnPausedMenu += HandlePause;
 
-        ApplyVSync();
-    }
-
-    private static void ApplyVSync()
-    {
-        Application.targetFrameRate = 60;
-        QualitySettings.vSyncCount = 1;
-        Time.fixedDeltaTime = 0.01667f; 
+        Settings.ApplyVSync();
     }
 
     private void Start()
@@ -74,6 +66,7 @@ public class GameManager : MonoSingleton<GameManager>
             PlayerPrefs.SetInt(GlobalInfo.Score, 0);
         }
 
+        _uiManager.OnCheckpointClicked += Checkpoint;
         _uiManager?.UpdateLevel(_levelNames[_levelCounter]);
 
         if (artifacts.Count > 0)
@@ -92,7 +85,7 @@ public class GameManager : MonoSingleton<GameManager>
     private void OnDisable()
     {
         settings.SaveSettings();
-        _uiManager.OnPause -= HandlePause;
+        _uiManager.OnPausedMenu -= HandlePause;
     }
 
     public void BackToMainMenu()
@@ -120,7 +113,6 @@ public class GameManager : MonoSingleton<GameManager>
             }
         }
     }
-
     private void AddJumps()
     {
         playerManager.ThirdPersonController.JumpCount++;
@@ -139,7 +131,9 @@ public class GameManager : MonoSingleton<GameManager>
         if (FindAnyObjectByType<ControllerManager>() == null)
         {
             // Instantiate a new ControllerManager from the prefab
-            Instantiate(_controllerManagerPrefab);
+            ControllerManager controllerManager = Instantiate(_controllerManagerPrefab);
+
+            controllerManager.OnGamepadDisconected += _uiManager.GamepadDisconnected;
         }
     }
     private void HandlePause(bool pauseState)
@@ -149,6 +143,10 @@ public class GameManager : MonoSingleton<GameManager>
         FreeLookCamera.enabled = !pauseState;
 
         _enemiesManager.Pause = pauseState;
+    }
+    private void Checkpoint()
+    {
+        sceneHandler.HandleFalling(PlayerManager.FallingBehaviour);
     }
 
     private void OnValidate()

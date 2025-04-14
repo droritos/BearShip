@@ -45,8 +45,13 @@ public class FallingBehaviour : MonoBehaviour
         {
             _hasFallen = true;
             OnFallingFromWorld.Invoke(this);
+            // InvokeFalling();
         }
 
+    }
+    public void InvokeFalling()
+    {
+        OnFallingFromWorld.Invoke(this);
     }
     public void ResetFallingState()
     {

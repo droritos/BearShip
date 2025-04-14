@@ -3,17 +3,20 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
     [SerializeField] MenuHandler menuHandler;
-    public event UnityAction<bool> OnPause { add { menuHandler.OnPause += value; }
-                                             remove { menuHandler.OnPause -= value; } }
+    public event UnityAction<bool> OnPausedMenu { add { menuHandler.OnPausedMenu += value; }
+                                             remove { menuHandler.OnPausedMenu -= value; } }
+
+    public event UnityAction OnCheckpointClicked;
 
     [SerializeField] private TextMeshProUGUI scoreCounter;
     [SerializeField] private TextMeshProUGUI levelName;
-    
     [SerializeField] private PopUpsHandler popUpsHandler;
+    [SerializeField] private ControllersPopup controllersPopup;
 
     private ThirdPersonActionAsset _playerActionAssets;
 
@@ -62,4 +65,25 @@ public class UIManager : MonoBehaviour
     {
         SceneManager.LoadScene(0);
     }
+
+    public void GamepadDisconnected()
+    {
+        //bool isActive = !controllersPopup.activeSelf;
+        //controllersPopup.SetActive(isActive);
+
+        controllersPopup.uiPopupNotice.SetActive(true);
+        menuHandler.SetCurrentSelectedObject(controllersPopup.ReturnToGameButton.gameObject);
+    }
+    public void GoToCheckpoint()
+    {
+        menuHandler.ToggleOptionsMenu();
+        OnCheckpointClicked.Invoke();
+    }
+}
+
+[System.Serializable]
+public class ControllersPopup
+{
+    public GameObject uiPopupNotice;
+    public Button ReturnToGameButton;
 }
