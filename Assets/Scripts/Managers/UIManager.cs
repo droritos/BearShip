@@ -68,9 +68,6 @@ public class UIManager : MonoBehaviour
 
     public void GamepadDisconnected()
     {
-        //bool isActive = !controllersPopup.activeSelf;
-        //controllersPopup.SetActive(isActive);
-
         controllersPopup.uiPopupNotice.SetActive(true);
         menuHandler.SetCurrentSelectedObject(controllersPopup.ReturnToGameButton.gameObject);
     }

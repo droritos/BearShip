@@ -144,7 +144,7 @@ public class GameManager : MonoSingleton<GameManager>
 
         _enemiesManager.Pause = pauseState;
     }
-    private void Checkpoint()
+    private void Checkpoint() // Go To check point button telling the scnene loade to call the checkpoint
     {
         sceneHandler.HandleFalling(PlayerManager.FallingBehaviour);
     }
