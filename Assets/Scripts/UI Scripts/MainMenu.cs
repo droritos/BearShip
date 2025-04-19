@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
@@ -6,6 +7,12 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
     [SerializeField] GameObject startButton;
+    [SerializeField] TextMeshProUGUI verstionText;
+
+    private void Start()
+    {
+        verstionText.text = GlobalInfo.VersionDisplayText;
+    }
     public void GoToLevel(int levelIndex = 1) // Main Menu Scene is index 0
     {
         SceneManager.LoadScene(levelIndex);
@@ -30,5 +37,7 @@ public class MainMenu : MonoBehaviour
             }
         }
     }
+
+
 
 }

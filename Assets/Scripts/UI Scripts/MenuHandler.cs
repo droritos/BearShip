@@ -1,9 +1,12 @@
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 public class MenuHandler : MonoBehaviour
 {
+    public event UnityAction<bool> OnPausedMenu;
+
     [Header("Menus")]
     public GameObject OptionsMenu;
 
@@ -23,7 +26,7 @@ public class MenuHandler : MonoBehaviour
     {
         SetCurrentSelectedObject(optionCloseButton);
     }
-    private void SetCurrentSelectedObject(GameObject wantedGameObject)
+    public void SetCurrentSelectedObject(GameObject wantedGameObject)
     {
         // Clear Selected Object
         EventSystem.current.SetSelectedGameObject(null);
@@ -44,12 +47,9 @@ public class MenuHandler : MonoBehaviour
         if (isActive)
         {
             SetCurrentSelectedObject(menuFirstButton);
-            Time.timeScale = 0f;
         }
-        else
-        {
-            Time.timeScale = 1.0f;
-        }
+
+        OnPausedMenu?.Invoke(OptionsMenu.activeSelf);
 
         SoundManager.Instance.PlayUISound(pauseClip, transform); // Do Pause / Unpause SFX
 

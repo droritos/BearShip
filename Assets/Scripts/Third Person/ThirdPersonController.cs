@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 public class ThirdPersonController : MonoBehaviour
 {
-    public ThirdPersonActionAsset PlayerActionAssets {  get; private set; }
+    public ThirdPersonActionAsset PlayerActionAssets { get; private set; }
     public int JumpCount
     {
         get => _jumpCount;
@@ -27,11 +27,13 @@ public class ThirdPersonController : MonoBehaviour
     private int _jumpCount;
     private int _currentJumpCount;
 
-    [Header("Sounds")] 
+    [Header("Sounds")]
     [SerializeField] private AudioClip jumpSound;
     [SerializeField] private List<AudioClip> walkSounds;
     private Coroutine _walkingSoundCoroutine;
 
+
+    public bool Pause {  get;  set; }
 
     private void Awake()
     {
@@ -51,6 +53,8 @@ public class ThirdPersonController : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        if (Pause) return;
+
         HandleMove();
 
         // Apply exponential gravity 
@@ -120,19 +124,22 @@ public class ThirdPersonController : MonoBehaviour
     private Vector3 GetCameraRight(Camera mainCamera)
     {
         Vector3 right = mainCamera.transform.right;
-        right.y = 0; 
+        right.y = 0;
         return right.normalized;
     }
 
     private void DoJump(InputAction.CallbackContext context)
     {
+
+        if(Pause) return;
+
         if (IsGrounded())
             _currentJumpCount = _jumpCount;
         if (_currentJumpCount > 0)
         {
             thirdPersonAnimation.Animator.SetTrigger(GlobalInfo.JumpAnimation); // 
             _rigidbody.AddForce(Vector3.up * characterData.JumpForce, ForceMode.Impulse);
-            if(jumpSound != null)
+            if (jumpSound != null)
                 SoundManager.Instance.PlaySfxSound(jumpSound, transform);
             _currentJumpCount--;
         }
@@ -157,8 +164,8 @@ public class ThirdPersonController : MonoBehaviour
         else
             _rigidbody.angularVelocity = Vector3.zero;
     }
-    
-    private IEnumerator PlayWalkingSound(List<AudioClip> clipArray,Transform pos,float interval)
+
+    private IEnumerator PlayWalkingSound(List<AudioClip> clipArray, Transform pos, float interval)
     {
         while (_isWalking)
         {
@@ -180,4 +187,5 @@ public class ThirdPersonController : MonoBehaviour
         // Restore original drag
         _rigidbody.linearDamping = originalDrag;
     }
+
 }

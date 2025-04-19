@@ -10,9 +10,12 @@ EditorBuildSettings:
     guid: d7e43ed247be07549935cfa23990653f
   - enabled: 1
     path: Assets/Scenes/Levels/World 1.unity
-    guid: 49e93abdee0269044a823928343cd6ee
+    guid: ab8125c2348a8e046b1f8aaeea25feac
   - enabled: 1
     path: Assets/Scenes/Levels/World 2.unity
+    guid: 49e93abdee0269044a823928343cd6ee
+  - enabled: 1
+    path: Assets/Scenes/Levels/World 3.unity
     guid: 8ea2cd386f298be41a1777ff1a71a5ba
   - enabled: 1
     path: Assets/Scenes/Levels/Winning Scene.unity

@@ -31,4 +31,11 @@ public class Settings : MonoBehaviour
             SoundSettings.SoundTrackGroupSlider.SetMasterVolume(DataToSave.SoundTrackVolume);     
         }
     }
+    public static void ApplyVSync()
+    {
+        Application.targetFrameRate = 60;
+        QualitySettings.vSyncCount = 1;
+        Time.fixedDeltaTime = 0.01667f;
+    }
+
 }
